@@ -1,10 +1,10 @@
-import {classNames} from "../../shared/lib/classNames/classNames";
+import {classNames} from "@/shared/lib/classNames/classNames";
 
 interface MainPageProps {
     className?: string
 }
 
-export const MainPage = (props: MainPageProps) => {
+const MainPage = (props: MainPageProps) => {
     const {
         className
     } = props
@@ -15,3 +15,5 @@ export const MainPage = (props: MainPageProps) => {
         </div>
     )
 }
+
+export default MainPage
