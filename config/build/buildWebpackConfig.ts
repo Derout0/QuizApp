@@ -14,13 +14,13 @@ export function buildWebpackConfig (options: BuildOptions): webpack.Configuratio
             clean: true
         },
         plugins: buildPlugins(options),
-        resolve: buildResolvers(),
+        resolve: buildResolvers(options),
         module: {
             rules: buildLoaders(options)
         },
 
         // Dev Server
         devServer: isDev ? buildDevServer(options) : undefined,
-        devtool: isDev ? 'inline-source-map' : undefined
+        devtool: isDev ? 'eval-cheap-module-source-map' : undefined
     }
 }
