@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import {BuildOptions} from "config/build/types/config";
 
 export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstance[] {
-    const { paths, isProd } = options
+    const { paths, isProd, isDev } = options
     let productionPlugins: webpack.WebpackPluginInstance[] = []
 
     const basePlugins = [
@@ -13,6 +13,10 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
             template: paths.html
         }),
         new webpack.ProgressPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.DefinePlugin({ // For global project variables
+            __IS_DEV__: JSON.stringify(isDev)
+        }),
     ]
 
     if (isProd) {
