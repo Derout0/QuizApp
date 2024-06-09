@@ -1,1 +1,9 @@
 @import 'reset.scss';
+@import 'themes/default.scss';
+@import 'themes/dark.scss';
+
+body {
+  color: var(--primary-color);
+  font-size: var(--font-size-xs);
+  background: var(--surface-color);
+}
