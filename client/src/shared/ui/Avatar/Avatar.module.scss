@@ -1,0 +1,33 @@
+.Avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: 0 0 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+  }
+
+  // Размеры
+  &.small {
+    width: 1.875rem;
+    height: 1.875rem;
+    flex: 0 0 1.875rem;
+  }
+
+  &.medium {
+    width: 2.5rem;
+    height: 2.5rem;
+    flex: 0 0 2.5rem;
+  }
+
+  &.large {
+    width: 3.125rem;
+    height: 3.125rem;
+    flex: 0 0 3.125rem;
+  }
+}

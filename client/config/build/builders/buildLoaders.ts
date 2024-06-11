@@ -13,15 +13,17 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
     const fileLoader = buildFileLoader()
     const babelLoader = buildBabelLoader()
 
+    const typescriptLoader = {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+    }
+
     return [
         svgLoader,
         fileLoader,
         babelLoader,
-        {
-            test: /\.tsx?$/,
-            use: 'ts-loader',
-            exclude: /node_modules/,
-        },
+        typescriptLoader,
         cssLoader,
     ]
 }

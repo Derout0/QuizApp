@@ -1,4 +1,8 @@
 @import 'reset.scss';
+@import 'mixins/mixins.scss';
+@import 'variables/global';
+@import 'variables/typography';
+@import 'variables/dimensions';
 @import 'themes/default.scss';
 @import 'themes/dark.scss';
 
@@ -6,4 +10,16 @@ body {
   color: var(--primary-color);
   font-size: var(--font-size-xs);
   background: var(--surface-color);
+}
+
+.App {
+
+}
+
+.AppInner {
+
+}
+
+.AppMain {
+
 }
