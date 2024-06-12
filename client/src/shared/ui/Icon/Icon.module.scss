@@ -1,0 +1,10 @@
+.Icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  path {
+    fill: var(--primary-color);
+    transition: fill .2s ease 0s;
+  }
+}

@@ -1,0 +1,77 @@
+:root {
+
+  /*
+    "on" - для текста или значков на фоне основного цвета заливки.
+    "container" - менее акцентный.
+    "variant" - альтернативный вариант, менее акцентный.
+    "dim" - самый тусклый.
+    "bright" - самый яркий.
+    "inverse" - инвертированный цвет.
+  */
+
+  // Поверхность.
+  --surface-color: #FEF7FF;
+  --surface-color-dim: #DED8E1;
+  --surface-color-bright: #FEF7FF;
+
+  --surface-container-color-low: #F7F2FA;
+  --surface-container-color: #F3EDF7;
+  --surface-container-color-high: #ECE6F0;
+  --surface-container-color-highest: #E6E0;
+
+  // Основные цвета над поверхностью.
+  --on-surface-color: #1D1B20;
+  --on-surface-color-variant: #49454F;
+
+  // Основные цвета.
+  --primary-color: #6750A4;
+  --on-primary-color: #FFFFFF;
+
+  --primary-container-color: #EADDFF;
+  --on-primary-container-color: #21005D;
+
+  // Вторичные цвета. (менее заметные компоненты)
+  --secondary-color: #625B71;
+  --on-secondary-color: #FFFFFF;
+
+  --secondary-container-color: #E8DEF8;
+  --on-secondary-container-color: #1D192B;
+
+  // Третичные цвета. (акцентный промежуток между 1-ым и 2-ым цветом)
+  --tertiary-color: #7D5260;
+  --on-tertiary-color: #FFFFFF;
+
+  --tertiary-container-color: #FFD8E4;
+  --on-tertiary-container-color: #31111D;
+
+  // Фиксированные цвета. (не изменяются при смене темы)
+  --primary-fixed-color: #EADDFF;
+  --primary-fixed-color-dim: #EADDFF;
+  --on-primary-fixed-color: #21005D;
+  --on-primary-fixed-color-variant: #4F378B;
+
+  --secondary-fixed-color: #E8DEF8;
+  --secondary-fixed-color-dim: #CCC2DC;
+  --on-secondary-fixed-color: #1D192B;
+  --on-secondary-fixed-color-variant: #4A4458;
+
+  --tertiary-fixed-color: #FFD8E4;
+  --tertiary-fixed-color-dim: #EFB8C8;
+  --on-tertiary-fixed-color: #31111D;
+  --on-tertiary-fixed-color-variant: #633B48;
+
+  // Ошибки.
+  --error-color: #B3261E;
+  --on-error-color: #FFFFFF;
+
+  --error-container-color: #F9DEDC;
+  --on-error-container-color: #410E0B;
+
+  // Контур.
+  --outline-color: #79747E;
+  --outline-color-variant: #CAC4D0;
+
+  // Инвертированные цвета.
+  --surface-color-inverse: #322F35;
+  --on-surface-color-inverse: #F5EFF7;
+}

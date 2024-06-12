@@ -1,0 +1,6 @@
+/client/build
+/server/build
+/reports
+/storybook-static
+node_modules
+.idea
