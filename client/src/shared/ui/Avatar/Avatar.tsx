@@ -28,8 +28,8 @@ export const Avatar = (props: AvatarProps) => {
 
     const additional: string[] = [
         className,
-        cls[color],
-        cls[theme],
+        (color ? cls[color] : null),
+        (theme ? cls[theme] : null),
         cls[size],
     ]
 

@@ -25,16 +25,22 @@
 
   // Основные цвета.
   --primary-color: #6750A4;
+  --primary-color-hov: #735EAB;
+  --primary-color-opacity-12: rgba(103, 80, 164, 0.12);
   --on-primary-color: #FFFFFF;
 
   --primary-container-color: #EADDFF;
+  --primary-container-color-hov: #DCCDF5;
+  --primary-container-color-opacity-12: rgba(232, 221, 255, 0.12);
   --on-primary-container-color: #21005D;
 
   // Вторичные цвета. (менее заметные компоненты)
   --secondary-color: #625B71;
+  --secondary-color-hov: #4E475C;
   --on-secondary-color: #FFFFFF;
 
   --secondary-container-color: #E8DEF8;
+  --secondary-container-color-hov: #E8DEF8;
   --on-secondary-container-color: #1D192B;
 
   // Третичные цвета. (акцентный промежуток между 1-ым и 2-ым цветом)
@@ -62,9 +68,11 @@
 
   // Ошибки.
   --error-color: #B3261E;
+  --error-color-opacity-12: rgba(179, 38, 30, 0.12);
   --on-error-color: #FFFFFF;
 
   --error-container-color: #F9DEDC;
+  --error-container-color-opacity-12: rgba(249, 222, 220, 0.12);
   --on-error-container-color: #410E0B;
 
   // Контур.
@@ -74,4 +82,20 @@
   // Инвертированные цвета.
   --surface-color-inverse: #322F35;
   --on-surface-color-inverse: #F5EFF7;
+
+  // Нетральные
+  --neutral-color: #1D1B20;
+  --neutral-color-opacity-12: rgba(29, 27, 32, 0.12);
+  --neutral-color-opacity-38: rgba(29, 27, 32, 0.38);
+
+  // Disabled Color
+  --disabled-color: var(--neutral-color-opacity-12);
+  --on-disabled-color: var(--neutral-color-opacity-38);
+
+  // Тени (от 1 высоты до 5)
+  --base-shadow-1: 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --base-shadow-2: 0 2px 6px 2px rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --base-shadow-3: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --base-shadow-4: 0 2px 3px 0 rgba(0, 0, 0, 0.3), 0 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --base-shadow-5: 0 4px 4px 0 rgba(0, 0, 0, 0.3), 0 8px 12px 6px rgba(0, 0, 0, 0.15);
 }

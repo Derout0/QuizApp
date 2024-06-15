@@ -23,7 +23,9 @@ export const AppImage = (props: ImageProps) => {
 
     useLayoutEffect(() => {
         const image = new Image()
-        image.src = src
+        if (src) {
+            image.src = src
+        }
         image.onload = () => setIsLoading(false)
         image.onerror = () => {
             setIsLoading(false)
@@ -41,7 +43,7 @@ export const AppImage = (props: ImageProps) => {
 
     return (
         <img
-            className={classNames(cls.Image, {}, [className])}
+            className={classNames(cls.AppImage, {}, [className])}
             src={src}
             alt={alt}
             {...restProps}

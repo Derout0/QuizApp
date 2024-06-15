@@ -4,7 +4,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 
 interface IconProps extends SVGProps<SVGSVGElement> {
     className?: string
-    SVG: FC<SVGProps<SVGElement>>
+    SVG: FC<SVGProps<SVGSVGElement>>
 }
 
 export const Icon = (props: IconProps) => {
