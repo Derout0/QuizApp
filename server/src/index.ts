@@ -1,7 +1,22 @@
 import express from 'express'
 
-const app = express()
+export const app = express()
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000')
+interface ProductsInterface {
+    id: number
+    title: string
+}
+
+interface DB {
+    products: ProductsInterface[]
+}
+
+const testDB: DB = {
+    products: [
+        { id: 1, title: 'Some Name' },
+    ],
+}
+
+app.get('/products', (req, res) => {
+    res.json(testDB).send()
 })
