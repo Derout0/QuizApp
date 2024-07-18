@@ -1,10 +1,10 @@
-@import 'reset.scss';
-@import 'mixins/mixins.scss';
+@import 'reset';
+@import 'mixins/mixins';
 @import 'variables/global';
 @import 'variables/typography';
 @import 'variables/dimensions';
-@import 'themes/default.scss';
-@import 'themes/dark.scss';
+@import 'themes/default';
+@import 'themes/dark';
 
 body {
   color: var(--primary-color);
