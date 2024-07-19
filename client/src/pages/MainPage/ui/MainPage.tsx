@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/ui/Button/Button'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
+import { Loader } from '@/shared/ui/Loader/Loader'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
@@ -38,7 +39,7 @@ const MainPage = () => {
                     <Button disabled theme="elevated" color="primary">Elevated</Button>
                 </VStack>
             </HStack>
-
+            <Loader />
             {t('Тестовое предложение')}
         </div>
     )

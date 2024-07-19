@@ -1,6 +1,6 @@
 import { memo, Suspense, useCallback } from 'react'
 import { Route, RouteProps, Routes } from 'react-router-dom'
-
+import { PageLoader } from '@/widgets/PageLoader'
 import { routeConfig } from '../config/routeConfig'
 
 const AppRouter = () => {
@@ -8,9 +8,9 @@ const AppRouter = () => {
         const { element, path } = route
 
         const elementWrapper = (
-            <Suspense fallback="Load...">
-                <div className="page">
-                    <div className="container">
+            <Suspense fallback={<PageLoader />}>
+                <div className="Page">
+                    <div className="Container">
                         {element}
                     </div>
                 </div>
@@ -27,11 +27,9 @@ const AppRouter = () => {
     }, [])
 
     return (
-        <Suspense fallback="Load...">
-            <Routes>
-                {Object.values(routeConfig).map(renderRoute)}
-            </Routes>
-        </Suspense>
+        <Routes>
+            {Object.values(routeConfig).map(renderRoute)}
+        </Routes>
     )
 }
 
