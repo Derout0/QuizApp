@@ -16,8 +16,6 @@ export const Navbar = (props: NavbarProps) => {
         className,
     } = props
 
-    console.log(Logo)
-
     return (
         <header className={classNames(cls.Navbar, {}, [className])}>
             <HStack gap="8" align="center" justify="space-between" maxWidth>

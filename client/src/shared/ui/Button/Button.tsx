@@ -37,6 +37,7 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
         size,
         disabled,
         type = 'button',
+        ...other
     } = props
 
     const additional: string[] = [
@@ -51,7 +52,7 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
     }
 
     return (
-        <button type={type} className={classNames(cls.Button, mods, additional)} disabled={disabled}>
+        <button type={type} className={classNames(cls.Button, mods, additional)} disabled={disabled} {...other}>
             {children}
         </button>
     )
