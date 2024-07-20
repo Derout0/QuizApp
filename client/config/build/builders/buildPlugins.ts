@@ -1,6 +1,7 @@
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 
 import { BuildOptions } from 'config/build/types/config'
 
@@ -17,6 +18,7 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
         new webpack.DefinePlugin({ // For global project variables
             __IS_DEV__: JSON.stringify(isDev),
         }),
+        // new BundleAnalyzerPlugin(),
     ]
 
     if (isProd) {
