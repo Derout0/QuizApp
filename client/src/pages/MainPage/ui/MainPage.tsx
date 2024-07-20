@@ -3,10 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/ui/Button/Button'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
-import { Loader } from '@/shared/ui/Loader/Loader'
+import { Modal } from '@/shared/ui/Modal/Modal'
+import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
+
+    const { visible, close, open } = useModal()
 
     const toggle = () => {
         i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
@@ -39,7 +42,10 @@ const MainPage = () => {
                     <Button disabled theme="elevated" color="primary">Elevated</Button>
                 </VStack>
             </HStack>
-            <Loader />
+            <button onClick={open}>Открыть модалку</button>
+            <Modal isOpen={visible} onClose={close}>
+                ТЕСТ
+            </Modal>
             {t('Тестовое предложение')}
         </div>
     )
