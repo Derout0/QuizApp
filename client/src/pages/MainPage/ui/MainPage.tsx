@@ -3,8 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { Button } from '@/shared/ui/Button/Button'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
-import { Modal } from '@/shared/ui/Modal/Modal'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
+import { motion } from 'framer-motion'
+import { Modal } from '@/shared/ui/Modal/Modal'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
@@ -18,6 +19,7 @@ const MainPage = () => {
     return (
         <div className={classNames('1')}>
             Main Page
+            <motion.div animate={{ x: 100 }}>ТЕСТ</motion.div>
             <button onClick={toggle}>Переключить</button>
             <HStack gap="8">
                 <VStack gap="8" align="start">

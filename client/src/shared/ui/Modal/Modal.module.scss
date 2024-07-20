@@ -7,28 +7,21 @@
   z-index: 100;
   overflow: hidden;
   overflow-y: auto;
-  transition: all 1.2s ease 0s;
 }
 
 .inner {
+  display: none;
   max-width: 767px;
   width: 100%;
   z-index: 10;
   padding: var(--base-size-20);
   border-radius: 12px;
   background-color: var(--surface-color);
-  transform: scale(0.9);
-  margin: 0 15px;
-  transition: transform 1.2s ease 0s;
+  margin: 0 1rem;
 }
 
 .open {
-   z-index: 1;
-   opacity: 1;
-   pointer-events: visible;
-   visibility: visible;
-
    .inner {
-    transform: scale(1);
+      display: block;
    }
 }
