@@ -1,4 +1,6 @@
 import * as cls from './Overlay.module.scss'
+import { motion } from 'framer-motion'
+
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 interface OverlayProps {
@@ -13,7 +15,10 @@ export const Overlay = (props: OverlayProps) => {
     } = props
 
     return (
-        <div
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className={classNames(cls.Overlay, {}, [className])}
             onClick={onClick}
         />

@@ -1,33 +1,27 @@
-import { Variants } from 'framer-motion'
+import { CommonAnimationVariants } from '@/shared/consts/animation'
 
-export enum BaseVariants {
-    hidden = 'hidden',
-    visible = 'visible',
-    exit = 'exit',
-}
-
-type BaseVariantKeys = keyof typeof BaseVariants
-type ModalVariants = Record<BaseVariantKeys, Variants[keyof Variants]>
-
-export const baseModalVariants: ModalVariants = {
+export const baseModalVariants: CommonAnimationVariants = {
     hidden: {
         opacity: 0,
-        scale: 0.9,
+        y: -20,
+        scale: 0.98,
     },
     visible: {
         opacity: 1,
+        y: 0,
         scale: 1,
         transition: {
             ease: 'easeOut',
-            duration: 0.15,
+            duration: 0.25,
         },
     },
     exit: {
         opacity: 0,
-        scale: 0.9,
+        y: 20,
+        scale: 0.98,
         transition: {
-            ease: 'easeIn',
-            duration: 0.15,
+            ease: 'easeOut',
+            duration: 0.25,
         },
     },
 }

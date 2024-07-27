@@ -14,10 +14,23 @@
   max-width: 767px;
   width: 100%;
   z-index: 10;
-  padding: var(--base-size-20);
   border-radius: 12px;
   background-color: var(--surface-color);
   margin: 0 1rem;
+}
+
+.header {
+  padding: var(--base-size-12);
+  border-bottom: var(--base-border);
+}
+
+.body {
+  padding: var(--base-size-20) var(--base-size-12);
+}
+
+.footer {
+  padding: var(--base-size-12);
+  border-top: var(--base-border);
 }
 
 .open {
