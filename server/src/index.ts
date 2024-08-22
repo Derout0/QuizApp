@@ -1,22 +1,6 @@
-import express from 'express'
+import dotenv from 'dotenv'
+import { server } from '@/api/core/Server.js'
 
-export const app = express()
+dotenv.config()
 
-interface ProductsInterface {
-    id: number
-    title: string
-}
-
-interface DB {
-    products: ProductsInterface[]
-}
-
-const testDB: DB = {
-    products: [
-        { id: 1, title: 'Some Name' },
-    ],
-}
-
-app.get('/products', (req, res) => {
-    res.json(testDB).send()
-})
+server()
