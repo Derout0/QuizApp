@@ -5,15 +5,20 @@ import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { ErrorPage } from '@/widgets/Errors'
+import { StoreProvider } from '@/app/providers/StoreProvider'
+
 import App from './App'
 
 const rootElement = document.getElementById('root') as HTMLElement
 const root = createRoot(rootElement)
 
 root.render(
-    <BrowserRouter>
-        <ErrorBoundary FallbackComponent={ErrorPage}>
-            <App />
-        </ErrorBoundary>
-    </BrowserRouter>,
+    <StoreProvider>
+        <BrowserRouter>
+            <ErrorBoundary FallbackComponent={ErrorPage}>
+                <App />
+            </ErrorBoundary>
+        </BrowserRouter>
+    </StoreProvider>
+    ,
 )

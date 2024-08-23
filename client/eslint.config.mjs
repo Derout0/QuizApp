@@ -19,6 +19,7 @@ export default [
       '@stylistic/jsx-indent-props': ['error', 4],
       '@typescript-eslint/no-unused-vars': 'warn',
       'react/display-name': 'off',
+      "@typescript-eslint/consistent-type-imports": "error"
     },
   },
   {
