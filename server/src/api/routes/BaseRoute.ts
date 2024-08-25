@@ -1,18 +1,35 @@
 import express, { NextFunction, Request, Response } from 'express'
+import { ValidationChain } from 'express-validator'
+
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
 
 export class BaseRoute {
     router = express.Router()
     path!: string
+    method: HttpMethod = 'GET'
+    validationChains: ValidationChain[] = []
 
     public async InitializeController() {
         await this.InitializeRoutes()
     }
 
     private async InitializeRoutes() {
-        await this.InitializeGet()
-        await this.InitializePost()
-        await this.InitializePut()
-        await this.InitializeDelete()
+        switch (this.method) {
+            case 'GET':
+                await this.InitializeGet()
+                break
+            case 'POST':
+                await this.InitializePost()
+                break
+            case 'PUT':
+                await this.InitializePut()
+                break
+            case 'DELETE':
+                await this.InitializeDelete()
+                break
+            default:
+                await this.InitializeGet()
+        }
     }
 
     public async startService(req: Request, res: Response, next: NextFunction): Promise<any> {
@@ -21,18 +38,18 @@ export class BaseRoute {
 
     // CRUD methods
     public async InitializeGet() {
-        this.router.get(this.path, this.startService.bind(this))
+        this.router.get(this.path, this.validationChains, this.startService.bind(this))
     }
 
     public async InitializePost() {
-        this.router.post(this.path, this.startService.bind(this))
+        this.router.post(this.path, this.validationChains, this.startService.bind(this))
     }
 
     public async InitializePut() {
-        this.router.put(this.path, this.startService.bind(this))
+        this.router.put(this.path, this.validationChains, this.startService.bind(this))
     }
 
     public async InitializeDelete() {
-        this.router.delete(this.path, this.startService.bind(this))
+        this.router.delete(this.path, this.validationChains, this.startService.bind(this))
     }
 }

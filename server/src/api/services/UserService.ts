@@ -9,7 +9,7 @@ export class UserService {
         return await UserRepository.getAllUsers()
     }
 
-    public static async registrationUser(email: string, password: string, username: string) {
+    public static async registration(email: string, password: string, username: string) {
         const existingUserByEmail = await UserRepository.findUserByEmail(email)
         const existingUserByUsername = await UserRepository.findUserByUsername(username)
 
@@ -28,9 +28,26 @@ export class UserService {
         const tokens = TokenService.generateTokens({ ...userDTO })
         await TokenService.saveToken(userDTO.id, tokens)
 
-        return {
-            ...tokens,
-            user: userDTO,
+        return { ...tokens, user: userDTO }
+    }
+
+    public static async login(email: string, password: string) {
+        const user = await UserRepository.findUserByEmail(email)
+
+        if (!user) {
+            throw ApiError.BadRequest(`User with email ${email} not found!`)
         }
+
+        const isPasswordEquals = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordEquals) {
+            throw ApiError.BadRequest(`Wrong password`)
+        }
+
+        const userDTO = new UserDTO(user)
+        const tokens = TokenService.generateTokens({ ...userDTO })
+        await TokenService.saveToken(userDTO.id, tokens)
+
+        return { ...tokens, user: userDTO }
     }
 }

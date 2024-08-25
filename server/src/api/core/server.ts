@@ -3,7 +3,6 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { InitializeRoutes } from '@/api/core/InitializeRoutes.js'
 import { InitializeMiddleware } from '@/api/core/InitializeMiddleware.js'
-import bodyParser from 'body-parser'
 
 export const server = async () => {
     const app: Express = express()
