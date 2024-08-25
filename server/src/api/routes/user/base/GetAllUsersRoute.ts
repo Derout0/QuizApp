@@ -1,8 +1,8 @@
-import { BaseRouteController } from '@/api/routes/BaseRouteController.ts'
+import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { Request, Response } from 'express'
-import { GetAllUsersController } from '@/api/controllers/user/GetAllUsersController.js'
+import { GetAllUsersController } from '@/api/controllers/user/base/GetAllUsersController.js'
 
-export class GetAllUsersRouteController extends BaseRouteController {
+export class GetAllUsersRoute extends BaseRoute {
     private controller: GetAllUsersController
 
     constructor() {
@@ -12,7 +12,7 @@ export class GetAllUsersRouteController extends BaseRouteController {
         this.controller = new GetAllUsersController()
     }
 
-    public async startService(req: Request, res: Response): Promise<void> {
+    public async startService(req: Request, res: Response) {
         await this.controller.execute(req, res)
     }
 }

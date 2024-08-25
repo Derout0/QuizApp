@@ -1,6 +1,8 @@
-import { BaseRouteController } from '@/api/routes/BaseRouteController.js'
-import { GetAllUsersRouteController } from '@/api/routes/user/GetAllUsersRouteController.js'
+import { BaseRoute } from '@/api/routes/BaseRoute.js'
+import { GetAllUsersRoute } from '@/api/routes/user/base/GetAllUsersRoute.js'
+import { RegistrationRoute } from '@/api/routes/user/auth/RegistrationRoute.js'
 
-export const UserRoutesControllers: BaseRouteController[] = [
-    new GetAllUsersRouteController(),
+export const UserRoutesControllers: BaseRoute[] = [
+    new RegistrationRoute(),
+    new GetAllUsersRoute(),
 ]

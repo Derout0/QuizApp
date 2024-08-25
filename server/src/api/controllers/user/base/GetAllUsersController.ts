@@ -1,16 +1,16 @@
 import { Request, Response } from 'express'
-import { UserService } from '@/api/services/user/UserService.js'
+import { UserService } from '@/api/services/UserService.js'
 import { BaseController } from '@/api/controllers/BaseController.js'
-import { User } from '@/api/models/User.js'
+import { UserModel } from '@/api/models/UserModel.js'
 
 export class GetAllUsersController extends BaseController {
     constructor() {
         super()
     }
 
-    protected async executeImplement(req: Request, res: Response): Promise<void> {
+    protected async executeImplement(req: Request, res: Response) {
         try {
-            const users: User[] = await UserService.getAllUsers()
+            const users: UserModel[] = await UserService.getAllUsers()
             this.ok(res, users)
         }
         catch (error: any) {

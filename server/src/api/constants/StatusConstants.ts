@@ -7,11 +7,14 @@ export class StatusConstants {
     public static CONFLICT_CODE = 409
     public static INTERNAL_SERVER_ERROR_CODE = 500
 
-    public static SUCCESS_MSG = 'Success'
-    public static BAD_REQUEST_MSG = 'Bad request'
-    public static UNAUTHORIZED_MSG = 'Unauthorized'
-    public static FORBIDDEN_MSG = 'Forbidden'
-    public static CONFLICT_MSG = 'Conflict'
-    public static NOT_FOUND_RESOURCE_MSG = 'Resource not found'
-    public static INTERNAL_SERVER_ERROR_MSG = 'Internal server error'
+    public static SUCCESS_MSG = '[Success]: Success.'
+    public static BAD_REQUEST_MSG = '[Error]: Bad request!'
+    public static UNAUTHORIZED_MSG = '[Error]: Unauthorized!'
+    public static FORBIDDEN_MSG = '[Error]: Forbidden!'
+    public static NOT_FOUND_RESOURCE_MSG = '[Error]: Resource not found!'
+    public static CONFLICT_MSG = '[Error]: Conflict!'
+    public static INTERNAL_SERVER_ERROR_MSG = '[Error]: Internal server error!'
+
+    // Additionally
+    public static USER_ALREADY_EXISTS_MSG = '[Error]: User already exists!'
 }

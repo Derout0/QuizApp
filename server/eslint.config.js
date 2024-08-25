@@ -14,6 +14,7 @@ export default [
         rules: {
             '@stylistic/indent': ['error', 4],
             '@typescript-eslint/no-explicit-any': 'off',
+            '@typescript-eslint/no-unused-vars': 'warn',
         },
     },
 

@@ -1,12 +1,12 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { StatusConstants } from '@/api/constants/StatusConstants.js'
 
 export abstract class BaseController {
-    protected abstract executeImplement(req: Request, res: Response): Promise<void | any>
+    protected abstract executeImplement(req: Request, res: Response, next: NextFunction): Promise<void | any>
 
-    public async execute(req: Request, res: Response): Promise<void> {
+    public async execute(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
-            await this.executeImplement(req, res)
+            await this.executeImplement(req, res, next)
         }
         catch (error) {
             console.log(`[BaseController]: Uncaught controller error \n`, error)

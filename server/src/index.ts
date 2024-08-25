@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { server } from '@/api/core/Server.js'
+import { server } from '@/api/core/server.ts'
 
 dotenv.config()
 

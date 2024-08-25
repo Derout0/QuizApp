@@ -1,6 +1,6 @@
-import express, { Request, Response } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 
-export class BaseRouteController {
+export class BaseRoute {
     router = express.Router()
     path!: string
 
@@ -15,8 +15,8 @@ export class BaseRouteController {
         await this.InitializeDelete()
     }
 
-    public async startService(req: Request, resp: Response): Promise<any> {
-        resp.send('Start Service Method for ' + this.path + 'does not exist !')
+    public async startService(req: Request, res: Response, next: NextFunction): Promise<any> {
+        res.send('Start Service Method for ' + this.path + 'does not exist !')
     }
 
     // CRUD methods
