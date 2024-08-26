@@ -1,5 +1,6 @@
 import { UserModel } from '@/api/models/UserModel.js'
 import database from '@/config/DatabaseConfig.js'
+import { UserDTO } from '@/api/dtos/UserDTO.ts'
 
 export class UserRepository {
     public static async createUser(user: Omit<UserModel, 'user_id'>): Promise<UserModel> {
@@ -12,22 +13,16 @@ export class UserRepository {
         return result.rows[0]
     }
 
-    public static async findUserByEmail(email: string): Promise<UserModel | null> {
-        const user = await database.query('SELECT * FROM users WHERE email = $1',
-            [email])
+    public static async findUser(conditions: Partial<UserDTO>): Promise<UserModel | null> {
+        const keys = Object.keys(conditions) // ['email']
+        const values = Object.values(conditions) // ['test@gmail.com']
+
+        if (keys.length === 0) return null
+
+        const query = `SELECT * FROM users WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
+        const user = await database.query(query, values)
 
         return user.rows[0] || null
-    }
-
-    public static async findUserByUsername(username: string): Promise<UserModel | null> {
-        const user = await database.query('SELECT * FROM users WHERE username = $1',
-            [username])
-
-        if (user.rows.length > 0) {
-            return user.rows[0]
-        }
-
-        return null
     }
 
     public static async getAllUsers(): Promise<UserModel[]> {

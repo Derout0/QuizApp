@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { UserService } from '@/api/services/UserService.js'
 import { BaseController } from '@/api/controllers/BaseController.js'
 import { UserModel } from '@/api/models/UserModel.js'
@@ -8,13 +8,13 @@ export class GetAllUsersController extends BaseController {
         super()
     }
 
-    protected async executeImplement(req: Request, res: Response) {
+    protected async executeImplement(req: Request, res: Response, next: NextFunction) {
         try {
             const users: UserModel[] = await UserService.getAllUsers()
             this.ok(res, users)
         }
         catch (error: any) {
-            this.fail(res, error)
+            next(error)
         }
     }
 }

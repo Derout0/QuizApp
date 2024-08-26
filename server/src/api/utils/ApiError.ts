@@ -10,7 +10,7 @@ export class ApiError extends Error {
         this.errors = errors
     }
 
-    static UnauthorizedError() {
+    static Unauthorized() {
         return new ApiError(StatusConstants.UNAUTHORIZED_CODE, StatusConstants.UNAUTHORIZED_MSG)
     }
 

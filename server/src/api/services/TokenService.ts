@@ -3,7 +3,7 @@ import { TokenRepository } from '@/api/repositories/TokenRepository.js'
 import { GeneratedTokenModel } from '@/api/models/TokenModel.js'
 
 export class TokenService {
-    static generateTokens(payload: string | Buffer | object): GeneratedTokenModel {
+    static generateTokens(payload: string | Buffer | object) {
         const accessToken = jwt.sign(payload, String(process.env.JWT_ACCESS_KEY), { expiresIn: '30m' })
         const refreshToken = jwt.sign(payload, String(process.env.JWT_REFRESH_KEY), { expiresIn: '30d' })
 
@@ -30,5 +30,31 @@ export class TokenService {
         }
 
         return await TokenRepository.createToken(userId, tokens)
+    }
+
+    static async getToken(token: string) {
+        return await TokenRepository.getToken(token)
+    }
+
+    static async deleteToken(token: string) {
+        return await TokenRepository.deleteToken(token)
+    }
+
+    static async validateAccessToken(token: string) {
+        try {
+            return jwt.verify(token, String(process.env.JWT_ACCESS_KEY))
+        }
+        catch (error) {
+            return null
+        }
+    }
+
+    static async validateRefreshToken(token: string) {
+        try {
+            return jwt.verify(token, String(process.env.JWT_REFRESH_TOKEN))
+        }
+        catch (error) {
+            return null
+        }
     }
 }
