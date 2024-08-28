@@ -8,7 +8,7 @@ export class RefreshTokenRoute extends BaseRoute {
     constructor() {
         super()
         this.path = '/refresh'
-        this.method = 'POST'
+        this.method = 'GET'
 
         this.InitializeController()
         this.controller = new RefreshTokenController()

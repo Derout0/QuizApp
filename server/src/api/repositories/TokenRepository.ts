@@ -19,7 +19,7 @@ export class TokenRepository {
     }
 
     public static async getToken(refreshToken: string) {
-        const result = await database.query('SELECT * FROM tokens = WHERE refresh_token = $1', [refreshToken])
+        const result = await database.query('SELECT * FROM tokens WHERE refresh_token = $1', [refreshToken])
         return result.rows[0]
     }
 

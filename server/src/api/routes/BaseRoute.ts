@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express'
+import express, { NextFunction, Request, RequestHandler, Response } from 'express'
 import { ValidationChain } from 'express-validator'
 
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE'
@@ -7,6 +7,7 @@ export class BaseRoute {
     router = express.Router()
     path!: string
     method: HttpMethod = 'GET'
+    middlewares: RequestHandler[] = []
     validationChains: ValidationChain[] = []
 
     public async InitializeController() {
@@ -38,18 +39,18 @@ export class BaseRoute {
 
     // CRUD methods
     public async InitializeGet() {
-        this.router.get(this.path, this.validationChains, this.startService.bind(this))
+        this.router.get(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
     }
 
     public async InitializePost() {
-        this.router.post(this.path, this.validationChains, this.startService.bind(this))
+        this.router.post(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
     }
 
     public async InitializePut() {
-        this.router.put(this.path, this.validationChains, this.startService.bind(this))
+        this.router.put(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
     }
 
     public async InitializeDelete() {
-        this.router.delete(this.path, this.validationChains, this.startService.bind(this))
+        this.router.delete(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
     }
 }

@@ -1,6 +1,7 @@
-import { Express } from 'express'
+import { Express, RequestHandler } from 'express'
 import { ErrorHandlingMiddleware } from '@/api/middleware/ErrorHandlingMiddleware.js'
 import { CommonMiddleware } from '@/api/middleware/CommonMiddleware.ts'
+import { AuthMiddleware } from '@/api/middleware/AuthMiddleware.ts'
 
 export class InitializeMiddleware {
     public static async InitializeCommonMiddleware(app: Express) {
@@ -15,5 +16,11 @@ export class InitializeMiddleware {
         const errorHandlingMiddleware = new ErrorHandlingMiddleware(app)
 
         await errorHandlingMiddleware.errorHandler()
+    }
+
+    public static InitializeAuthMiddleware(): RequestHandler {
+        const authMiddleware = new AuthMiddleware()
+
+        return authMiddleware.authHandler.bind(authMiddleware)
     }
 }

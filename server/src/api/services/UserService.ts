@@ -62,7 +62,7 @@ export class UserService {
             throw ApiError.Unauthorized()
         }
 
-        const user = await UserRepository.findUser(tokenFromDB.id)
+        const user = await UserRepository.findUser({ user_id: tokenFromDB.user_id })
 
         if (!user) {
             throw ApiError.BadRequest(`User not found!`)

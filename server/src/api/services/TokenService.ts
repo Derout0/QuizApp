@@ -51,7 +51,7 @@ export class TokenService {
 
     static async validateRefreshToken(token: string) {
         try {
-            return jwt.verify(token, String(process.env.JWT_REFRESH_TOKEN))
+            return jwt.verify(token, String(process.env.JWT_REFRESH_KEY))
         }
         catch (error) {
             return null

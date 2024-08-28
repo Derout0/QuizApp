@@ -1,6 +1,5 @@
 import { UserModel } from '@/api/models/UserModel.js'
 import database from '@/config/DatabaseConfig.js'
-import { UserDTO } from '@/api/dtos/UserDTO.ts'
 
 export class UserRepository {
     public static async createUser(user: Omit<UserModel, 'user_id'>): Promise<UserModel> {
@@ -13,7 +12,7 @@ export class UserRepository {
         return result.rows[0]
     }
 
-    public static async findUser(conditions: Partial<UserDTO>): Promise<UserModel | null> {
+    public static async findUser(conditions: Partial<UserModel>): Promise<UserModel | null> {
         const keys = Object.keys(conditions) // ['email']
         const values = Object.values(conditions) // ['test@gmail.com']
 
