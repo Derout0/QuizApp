@@ -6,8 +6,8 @@ export const server = async () => {
     const app: Express = express()
     const PORT = process.env.PORT || 3000
 
-    await InitializeRoutes.Initialize(app)
     await InitializeMiddleware.InitializeCommonMiddleware(app)
+    await InitializeRoutes.Initialize(app)
     await InitializeMiddleware.InitializeErrorHandlingMiddleware(app)
 
     try {

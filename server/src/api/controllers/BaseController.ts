@@ -10,7 +10,7 @@ export abstract class BaseController {
         }
         catch (error) {
             console.log(`[BaseController]: Uncaught controller error \n`, error)
-            this.fail(res, 'An unexpected error occurred')
+            this.fail(res, '[BaseController]: An unexpected error occurred')
         }
     }
 
