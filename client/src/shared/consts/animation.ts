@@ -1,4 +1,4 @@
-import { Variants } from 'framer-motion'
+import type { Variants } from 'framer-motion'
 
 export enum BaseAnimationVariants {
     hidden = 'hidden',

@@ -1,6 +1,7 @@
 import * as cls from './Button.module.scss'
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { Mods } from '@/shared/lib/classNames/classNames'
+import { classNames } from '@/shared/lib/classNames/classNames'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 type ButtonFilledColors = 'primary' | 'primary-variant' | 'secondary' | 'secondary-variant' | 'error' | 'error-variant'
 type ButtonOutlinedColors = 'primary' | 'secondary' | 'error'

@@ -1,5 +1,5 @@
 import { memo, Suspense, useCallback } from 'react'
-import { Route, RouteProps, Routes } from 'react-router-dom'
+import { Route, type RouteProps, Routes } from 'react-router-dom'
 import { PageLoader } from '@/widgets/PageLoader'
 import { routeConfig } from '../config/routeConfig'
 

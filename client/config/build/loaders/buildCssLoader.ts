@@ -1,5 +1,5 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { BuildOptions } from '../types/config'
+import type { BuildOptions } from '../types/config'
 
 export function buildCssLoader(options: BuildOptions) {
     const { isDev } = options

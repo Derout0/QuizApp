@@ -1,5 +1,5 @@
 import * as cls from './Icon.module.scss'
-import { FC, SVGProps } from 'react'
+import type { FC, SVGProps } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 interface IconProps extends SVGProps<SVGSVGElement> {

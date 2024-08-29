@@ -9,6 +9,6 @@ export function createReduxStore(initialState?: StateSchema) {
     })
 }
 
-export type RootState = ReturnType<typeof createReduxStore>['getState']
+export type AppState = ReturnType<typeof createReduxStore>['getState']
 export type AppStore = ReturnType<typeof createReduxStore>
 export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch']

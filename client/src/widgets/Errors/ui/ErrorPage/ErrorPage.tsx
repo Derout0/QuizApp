@@ -1,5 +1,5 @@
 import * as cls from './ErrorPage.module.scss'
-import { FallbackProps } from 'react-error-boundary'
+import type { FallbackProps } from 'react-error-boundary'
 import { Button } from '@/shared/ui/Button/Button'
 
 export const ErrorPage = (props: FallbackProps) => {

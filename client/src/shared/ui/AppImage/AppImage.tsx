@@ -1,6 +1,7 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import * as cls from '@/shared/ui/AppImage/AppImage.module.scss'
-import { ImgHTMLAttributes, ReactElement, useLayoutEffect, useState } from 'react'
+import type { ImgHTMLAttributes, ReactElement } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     className?: string

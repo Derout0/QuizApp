@@ -1,4 +1,4 @@
-import { CommonAnimationVariants } from '@/shared/consts/animation'
+import type { CommonAnimationVariants } from '@/shared/consts/animation'
 
 export const baseModalVariants: CommonAnimationVariants = {
     hidden: {

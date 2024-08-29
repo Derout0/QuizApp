@@ -1,6 +1,7 @@
 import * as cls from './Hamburger.module.scss'
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
-import { ButtonHTMLAttributes } from 'react'
+import type { Mods } from '@/shared/lib/classNames/classNames'
+import { classNames } from '@/shared/lib/classNames/classNames'
+import type { ButtonHTMLAttributes } from 'react'
 
 type Size = 'small' | 'medium' | 'large'
 

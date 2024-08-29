@@ -1,5 +1,6 @@
 import * as cls from './Loader.module.scss'
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import type { Mods } from '@/shared/lib/classNames/classNames'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 type LoaderPosition = 'start' | 'center' | 'end'
 

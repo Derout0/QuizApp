@@ -1,8 +1,10 @@
 import * as cls from './Modal.module.scss'
-import { ReactNode } from 'react'
-import { AnimatePresence, motion, Variants } from 'framer-motion'
+import type { ReactNode } from 'react'
+import type { Variants } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
-import { classNames, Mods } from '@/shared/lib/classNames/classNames'
+import type { Mods } from '@/shared/lib/classNames/classNames'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import { Overlay } from '@/shared/ui/Overlay/Overlay'
 import { Portal } from '@/shared/ui/Portal/Portal'
 import { BaseAnimationVariants } from '@/shared/consts/animation'
