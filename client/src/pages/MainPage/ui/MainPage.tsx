@@ -5,6 +5,7 @@ import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Modal } from '@/shared/ui/Modal/Modal'
+import { Input } from '@/shared/ui/Input/Input'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
@@ -19,6 +20,7 @@ const MainPage = () => {
         <div className={classNames('1')}>
             Main Page
             <button onClick={toggle}>Переключить</button>
+            <Input placeholder="Введите ваше имя" label="Имя" error="Somethind went wrong" />
             <HStack gap="8">
                 <VStack gap="8" align="start">
                     <Button theme="filled" color="primary" size="small">Test Size</Button>

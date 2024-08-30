@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { ErrorPage } from '@/widgets/Errors'
-import { StoreProvider } from '@/app/providers/StoreProvider'
+import { StoreProvider } from '@/app/providers/store-provider'
 
 import App from './App'
 

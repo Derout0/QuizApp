@@ -5,4 +5,12 @@
   --base-border: 1px solid var(--outline-color);
   --base-border-variant: 1px solid var(--outline-color-variant);
   --base-border-error: 1px solid var(--error-color);
+
+  // Border Radius
+  --border-radius-xs: 4px;
+  --border-radius-s: 8px;
+  --border-radius-m: 12px;
+  --border-radius-l: 16px;
+  --border-radius-xl: 28px;
+  --border-radius-full: 1000px;
 }

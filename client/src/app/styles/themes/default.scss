@@ -15,7 +15,7 @@
   --surface-container-color-low: #F7F2FA;
   --surface-container-color: #F3EDF7;
   --surface-container-color-high: #ECE6F0;
-  --surface-container-color-highest: #E6E0;
+  --surface-container-color-highest: #E6E0E9;
 
   // Основные цвета над поверхностью.
   --on-surface-color: #1D1B20;
@@ -75,7 +75,7 @@
   --surface-color-inverse: #322F35;
   --on-surface-color-inverse: #F5EFF7;
 
-  // Нетральные
+  // Нейтральные
   --neutral-color: #1D1B20;
   --neutral-color-opacity-12: rgb(29 27 32 / 12%);
   --neutral-color-opacity-38: rgb(29 27 32 / 38%);
@@ -92,5 +92,29 @@
   --base-shadow-5: 0 4px 4px 0 rgb(0 0 0 / 30%), 0 8px 12px 6px rgb(0 0 0 / 15%);
 
   // Оверлей
-  --overlay-color: rgb(0 0 0 / 90%)
+  --overlay-color: rgb(0 0 0 / 90%);
+
+  // Цвета компонентов (используют цвета выше)
+
+  // Input
+  --primary-input-background-color: var(--surface-container-color-highest);
+  --primary-input-text-color: var(--on-surface-color);
+  --primary-input-label-color: var(--on-surface-color-variant);
+  --primary-input-border-color: var(--on-surface-color);
+
+  // Input - focus
+  --primary-input-label-color-focus: var(--primary-color);
+  --primary-input-border-color-focus: var(--primary-color);
+
+  // Input - hover
+  --primary-input-background-color-hover: #D6D0D9;
+
+  // Tabs
+  --primary-tabs-divider-color: var(--primary-color);
+  --primary-tabs-text-color: var(--on-surface-color-variant);
+  --primary-tabs-border-color: var(--surface-container-color-highest);
+
+  // Tabs - hover
+  --primary-tabs-background-color-hover: var(--surface-container-color);
+  --primary-tabs-text-color-selected: var(--primary-color);
 }

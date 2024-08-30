@@ -1,0 +1,112 @@
+.Input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--base-size-4);
+}
+
+.fieldMain {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-input-background-color);
+  border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+  transition: background-color .2s ease 0s;
+  position: relative;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transition: opacity, transform, .2s ease 0s;
+  }
+
+  &::after {
+    height: 1px;
+    background-color: var(--primary-input-border-color);
+  }
+
+  &::before {
+    height: 2px;
+    opacity: 0;
+    transform: scaleX(0);
+    background-color: var(--primary-input-border-color-focus);
+  }
+}
+
+.inner {
+    width: 100%;
+    height: 100%;
+}
+
+.field {
+  width: 100%;
+  height: 100%;
+}
+
+.input {
+  color: var(--primary-input-text-color);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  width: 100%;
+  height: 100%;
+  outline: none;
+  padding: var(--base-size-12);
+  transition: transform .2s ease 0s;
+
+  &::placeholder {
+    opacity: 0;
+    transition: opacity .2s ease 0s;
+  }
+}
+
+.label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-input-label-color);
+  font-weight: var(--font-weight-medium);
+  pointer-events: none;
+  user-select: none;
+  font-size: var(--font-size-s);
+  transition: all .3s ease 0s;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.focused {
+  .fieldMain {
+    background: var(--primary-input-background-color-hover);
+
+    &::before {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  .input {
+    transform: translateY(4px);
+
+    &::placeholder {
+      opacity: 1;
+    }
+  }
+
+  .label {
+    color: var(--primary-input-label-color-focus);
+    font-size: var(--font-size-xxs);
+    top: calc(50% - 10px);
+    transition: color, top, font-size, 0.2s ease 0s;
+  }
+}
+
+.hovered {
+  .fieldMain {
+    background: var(--primary-input-background-color-hover);
+  }
+}

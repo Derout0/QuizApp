@@ -1,0 +1,142 @@
+.Text {
+  font-size: inherit;
+  color: var(--on-surface-color-variant);
+  line-height: 1;
+
+  // Темы
+  &.title-h1 {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &.title-h2 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &.title-h3 {
+    font-size: var(--font-size-l);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &.title-h4 {
+    font-size: var(--font-size-m);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  &.text-theme {
+    font-size: var(--font-size-s);
+    line-height: var(--text-line-height-130);
+    color: var(--secondary-color);
+  }
+}
+
+// Align
+.center {
+  text-align: center;
+}
+
+.inherit {
+  text-align: inherit;
+}
+
+.justify {
+  text-align: justify;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+
+// Colors
+.primary {
+  color: var(--primary-color);
+}
+
+.on-primary {
+  color: var(--on-primary-color);
+}
+
+.on-secondary {
+  color: var(--on-secondary-color);
+}
+
+.on-tertiary {
+  color: var(--on-tertiary-color);
+}
+
+.error {
+  color: var(--error-color);
+}
+
+.on-error {
+  color: var(--on-error-color);
+}
+
+// Sizes
+.fz-xxs {
+  font-size: var(--font-size-xxs);
+}
+
+.fz-xs {
+  font-size: var(--font-size-xs);
+}
+
+.fz-s {
+  font-size: var(--font-size-s);
+}
+
+.fs-m {
+  font-size: var(--font-size-m);
+}
+
+.fs-l {
+  font-size: var(--font-size-l);
+}
+
+.fs-xl {
+  font-size: var(--font-size-xl);
+}
+
+.fs-xxl {
+  font-size: var(--font-size-xxl);
+}
+
+// Line Height
+.lh-110 {
+  line-height: var(--text-line-height-100);
+}
+
+.lh-120 {
+  line-height: var(--text-line-height-120);
+}
+
+.lh-125 {
+  line-height: var(--text-line-height-125);
+}
+
+.lh-130 {
+  line-height: var(--text-line-height-130);
+}
+
+// Font Weight
+.fw-400 {
+  font-weight: var(--font-weight-normal);
+}
+
+.fw-500 {
+  font-weight: var(--font-weight-medium);
+}
+
+.fw-600 {
+  font-weight: var(--font-weight-semibold);
+}
+
+.fw-700 {
+  font-weight: var(--font-weight-bold);
+}

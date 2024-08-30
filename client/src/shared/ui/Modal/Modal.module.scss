@@ -11,12 +11,13 @@
 
 .inner {
   display: none;
-  max-width: 767px;
+  max-width: 47.9375rem;
   width: 100%;
   z-index: 10;
-  border-radius: 12px;
+  border-radius: var(--border-radius-s);
+  padding: var(--base-size-24);
   background-color: var(--surface-color);
-  margin: 0 1rem;
+  margin: 0 var(--base-size-16);
 }
 
 .header {
