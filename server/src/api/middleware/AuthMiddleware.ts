@@ -3,6 +3,12 @@ import { ApiError } from '@/api/utils/ApiError.ts'
 import { TokenService } from '@/api/services/TokenService.ts'
 
 export class AuthMiddleware {
+    private tokenService: TokenService
+
+    constructor() {
+        this.tokenService = new TokenService()
+    }
+
     public async authHandler(req: Request, res: Response, next: NextFunction) {
         try {
             const authorizationHeader = req.headers.authorization
@@ -17,7 +23,7 @@ export class AuthMiddleware {
                 return next(ApiError.Unauthorized())
             }
 
-            const userData = await TokenService.validateAccessToken(accessToken)
+            const userData = await this.tokenService.validateAccessToken(accessToken)
 
             if (!userData) {
                 return next(ApiError.Unauthorized())

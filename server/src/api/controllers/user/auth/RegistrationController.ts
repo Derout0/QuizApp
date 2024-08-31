@@ -6,6 +6,13 @@ import { UserService } from '@/api/services/UserService.js'
 import { ApiError } from '@/api/utils/ApiError.ts'
 
 export class RegistrationController extends BaseController {
+    private userService: UserService
+
+    constructor() {
+        super()
+        this.userService = new UserService()
+    }
+
     protected async executeImplement(req: TypedRequestBody<{ email: string, password: string, username: string }>, res: Response, next: NextFunction) {
         try {
             const errors = validationResult(req)
@@ -15,7 +22,8 @@ export class RegistrationController extends BaseController {
             }
 
             const { email, password, username } = req.body
-            const userData = await UserService.registration(email, password, username)
+            const userData = await this.userService.registration(email, password, username)
+
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
 
             return this.ok(res, userData)

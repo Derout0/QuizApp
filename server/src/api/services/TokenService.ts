@@ -3,7 +3,13 @@ import { TokenRepository } from '@/api/repositories/TokenRepository.js'
 import { GeneratedTokenModel } from '@/api/models/TokenModel.js'
 
 export class TokenService {
-    static generateTokens(payload: string | Buffer | object) {
+    private tokenRepository: TokenRepository
+
+    constructor() {
+        this.tokenRepository = new TokenRepository()
+    }
+
+    generateTokens(payload: string | Buffer | object) {
         const accessToken = jwt.sign(payload, String(process.env.JWT_ACCESS_KEY), { expiresIn: '30m' })
         const refreshToken = jwt.sign(payload, String(process.env.JWT_REFRESH_KEY), { expiresIn: '30d' })
 
@@ -13,34 +19,31 @@ export class TokenService {
         const accessTokenExpire = new Date(decodedAccessToken.payload.exp! * 1000)
         const refreshTokenExpire = new Date(decodedRefreshToken.payload.exp! * 1000)
 
-        console.log('Access Token Expire', accessTokenExpire)
-        console.log('Refresh Token Expire', refreshTokenExpire)
-
         return { accessToken, refreshToken, accessTokenExpire, refreshTokenExpire }
     }
 
-    static async saveToken(userId: number, tokens: GeneratedTokenModel) {
-        const { refreshToken } = tokens
+    async saveToken(userId: number, tokens: GeneratedTokenModel) {
+        const { refreshToken, refreshTokenExpire } = tokens
 
-        const tokenData = await TokenRepository.getTokenByUserId(userId)
+        const tokenData = await this.tokenRepository.getTokenByUserId(userId)
 
         if (tokenData) {
-            await TokenRepository.updateToken(userId, refreshToken) // ACCESS???
+            await this.tokenRepository.updateToken(userId, refreshToken)
             return
         }
 
-        return await TokenRepository.createToken(userId, tokens)
+        return await this.tokenRepository.createToken(userId, tokens)
     }
 
-    static async getToken(token: string) {
-        return await TokenRepository.getToken(token)
+    async getToken(token: string) {
+        return await this.tokenRepository.getToken(token)
     }
 
-    static async deleteToken(token: string) {
-        return await TokenRepository.deleteToken(token)
+    async deleteToken(token: string) {
+        return await this.tokenRepository.deleteToken(token)
     }
 
-    static async validateAccessToken(token: string) {
+    async validateAccessToken(token: string) {
         try {
             return jwt.verify(token, String(process.env.JWT_ACCESS_KEY))
         }
@@ -49,7 +52,7 @@ export class TokenService {
         }
     }
 
-    static async validateRefreshToken(token: string) {
+    async validateRefreshToken(token: string) {
         try {
             return jwt.verify(token, String(process.env.JWT_REFRESH_KEY))
         }
