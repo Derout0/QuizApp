@@ -16,31 +16,31 @@ export class TokenService {
         const decodedAccessToken = jwt.decode(accessToken, { complete: true }) as { payload: JwtPayload }
         const decodedRefreshToken = jwt.decode(refreshToken, { complete: true }) as { payload: JwtPayload }
 
-        const accessTokenExpire = new Date(decodedAccessToken.payload.exp! * 1000)
-        const refreshTokenExpire = new Date(decodedRefreshToken.payload.exp! * 1000)
+        const accessTokenExpires = new Date(decodedAccessToken.payload.exp! * 1000)
+        const refreshTokenExpires = new Date(decodedRefreshToken.payload.exp! * 1000)
 
-        return { accessToken, refreshToken, accessTokenExpire, refreshTokenExpire }
+        return { accessToken, refreshToken, accessTokenExpires, refreshTokenExpires }
     }
 
     async saveToken(userId: number, tokens: GeneratedTokenModel) {
-        const { refreshToken, refreshTokenExpire } = tokens
+        const { refreshToken, refreshTokenExpires } = tokens
 
-        const tokenData = await this.tokenRepository.getTokenByUserId(userId)
+        const tokenData = await this.tokenRepository.findBy({ userId })
 
         if (tokenData) {
-            await this.tokenRepository.updateToken(userId, refreshToken)
+            await this.tokenRepository.update({ refreshToken }, { userId })
             return
         }
 
-        return await this.tokenRepository.createToken(userId, tokens)
+        return await this.tokenRepository.create({ userId, refreshToken, refreshTokenExpires })
     }
 
     async getToken(token: string) {
-        return await this.tokenRepository.getToken(token)
+        return await this.tokenRepository.findBy({ refreshToken: token })
     }
 
     async deleteToken(token: string) {
-        return await this.tokenRepository.deleteToken(token)
+        return await this.tokenRepository.delete({ refreshToken: token })
     }
 
     async validateAccessToken(token: string) {

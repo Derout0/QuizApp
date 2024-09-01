@@ -52,6 +52,7 @@ export class UserService {
         const userDTO = new UserDTO(user)
 
         const tokens = this.tokenService.generateTokens({ ...userDTO })
+
         await this.tokenService.saveToken(userDTO.userId, tokens)
 
         return { ...tokens, user: userDTO }
@@ -68,12 +69,12 @@ export class UserService {
 
         const userData = await this.tokenService.validateRefreshToken(refreshToken)
         const tokenFromDB = await this.tokenService.getToken(refreshToken)
-        console.log(tokenFromDB)
+
         if (!userData || !tokenFromDB) {
             throw ApiError.Unauthorized()
         }
 
-        const user = await this.userRepository.findBy({ userId: tokenFromDB.user_id })
+        const user = await this.userRepository.findBy({ userId: tokenFromDB.userId })
 
         if (!user) {
             throw ApiError.BadRequest(`User not found!`)
