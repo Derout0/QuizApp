@@ -8,7 +8,7 @@ export class LoginRoute extends BaseRoute {
 
     constructor() {
         super()
-        this.path = '/login'
+        this.path = '/loginService'
         this.method = 'POST'
         this.validationChains = [
             body('email').isEmail(),
