@@ -89,14 +89,11 @@ export class BaseRepository<T> {
         return this.executeMapping(async (mappedColumns) => {
             const keys = Object.keys(mappedColumns)
             const values = Object.values(mappedColumns)
-            console.log('KEYS', keys)
-            console.log('Values', values)
 
             const query
                 = `INSERT INTO ${this.tableName} (${keys.join(', ')}) 
                    VALUES (${keys.map((_, index) => `$${index + 1}`).join(', ')}) RETURNING *`
 
-            console.log('QUERY', query)
             const result = await database.query(query, values)
 
             return result.rows[0]
