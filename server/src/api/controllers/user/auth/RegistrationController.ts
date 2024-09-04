@@ -24,7 +24,7 @@ export class RegistrationController extends BaseController {
             const { email, password, username } = req.body
             const userData = await this.userService.registration(email, password, username)
 
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
+            res.cookie('refreshToken', userData.tokens.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
 
             return this.ok(res, userData)
         }

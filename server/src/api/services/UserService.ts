@@ -33,7 +33,7 @@ export class UserService {
 
         await this.tokenService.saveToken(userDTO.userId, tokens)
 
-        return { ...tokens, user: userDTO }
+        return { tokens, user: userDTO }
     }
 
     public async login(email: string, password: string) {
@@ -55,7 +55,7 @@ export class UserService {
 
         await this.tokenService.saveToken(userDTO.userId, tokens)
 
-        return { ...tokens, user: userDTO }
+        return { tokens, user: userDTO }
     }
 
     public async logout(refreshToken: string) {
@@ -85,6 +85,6 @@ export class UserService {
 
         await this.tokenService.saveToken(userDTO.userId, tokens)
 
-        return { ...tokens, user: userDTO }
+        return { tokens, user: userDTO }
     }
 }

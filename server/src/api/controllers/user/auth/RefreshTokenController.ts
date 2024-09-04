@@ -16,7 +16,7 @@ export class RefreshTokenController extends BaseController {
 
             const userData = await this.userService.refresh(refreshToken)
 
-            res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
+            res.cookie('refreshToken', userData.tokens.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
             return this.ok(res, userData)
         }
         catch (error) {
