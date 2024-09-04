@@ -13,13 +13,14 @@ export default [
   ...fixupConfigRules(pluginReactConfig),
   {
     rules: {
-      "react/react-in-jsx-scope": "off",
+      'react/react-in-jsx-scope': 'off',
       '@stylistic/indent': ['error', 4],
       '@stylistic/jsx-indent': ['error', 4],
       '@stylistic/jsx-indent-props': ['error', 4],
       '@typescript-eslint/no-unused-vars': 'warn',
       'react/display-name': 'off',
-      "@typescript-eslint/consistent-type-imports": "error"
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-explicit-any': 'off'
     },
   },
   {

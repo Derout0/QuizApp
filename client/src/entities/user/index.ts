@@ -1,2 +1,3 @@
 export { userActions, userReducer } from './slice/userSlice'
-export { UserEntity, UserSchema } from './types/user'
+export { UserEntity, TokenEntity, UserSchema, AuthResponse } from './types/user'
+export { checkAuthorization } from './services/checkAuthorization/checkAuthorization'

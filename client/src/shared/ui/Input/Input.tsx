@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
 import { memo } from 'react'
@@ -39,6 +40,10 @@ export const Input = memo((props: InputProps) => {
     const { isHover } = useHover(ref)
     const [isFocus, setIsFocus] = useState<boolean>(false)
 
+    const isEmptyValue = (value: string | undefined) => {
+        return !value
+    }
+
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         const targetValue = event.target.value
 
@@ -49,10 +54,16 @@ export const Input = memo((props: InputProps) => {
     const onBlurHandler = (event: FocusEvent<HTMLInputElement>) => {
         const targetValue = event.target.value
 
-        if (!targetValue) {
+        if (isEmptyValue(targetValue)) {
             setIsFocus(false)
         }
     }
+
+    useEffect(() => {
+        if (!isEmptyValue(value)) {
+            setIsFocus(true)
+        }
+    }, [value])
 
     const InputLabel = () => {
         if (label) {

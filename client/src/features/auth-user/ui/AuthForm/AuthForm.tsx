@@ -4,15 +4,15 @@ import { LoginForm } from '@/features/auth-user/ui/LoginForm/LoginForm'
 import type { TabData } from '@/shared/ui/Tabs/Tabs'
 import { Tabs } from '@/shared/ui/Tabs/Tabs'
 import { Text } from '@/shared/ui/Text/Text'
-import { Button } from '@/shared/ui/Button/Button'
 import { HStack, VStack } from '@/shared/ui/Stack'
+import { memo } from 'react'
 
 interface AuthFormProps {
     className?: string
     onClose: () => void
 }
 
-export const AuthForm = (props: AuthFormProps) => {
+export const AuthForm = memo((props: AuthFormProps) => {
     const {
         className,
         onClose,
@@ -37,4 +37,4 @@ export const AuthForm = (props: AuthFormProps) => {
             <Tabs tabsData={tabsData} />
         </VStack>
     )
-}
+})

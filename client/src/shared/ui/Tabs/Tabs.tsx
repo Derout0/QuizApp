@@ -1,6 +1,6 @@
 import * as cls from './Tabs.module.scss'
 import type { ReactElement } from 'react'
-import { Fragment, forwardRef } from 'react'
+import { Fragment } from 'react'
 import { TabGroup, TabList, TabPanels, Tab, TabPanel } from '@headlessui/react'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'

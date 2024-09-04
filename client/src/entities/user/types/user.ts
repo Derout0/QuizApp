@@ -1,9 +1,22 @@
+export interface AuthResponse {
+    user: UserEntity
+    tokens: TokenEntity
+}
+
+export interface TokenEntity {
+    accessToken: string
+    refreshToken: string
+    accessTokenExpires: Date | null
+    refreshTokenExpires: Date | null
+}
+
 export interface UserEntity {
-    id: string
+    userId: number
     email: string
     username: string
 }
 
 export interface UserSchema {
     data: UserEntity | undefined
+    authorized: boolean
 }
