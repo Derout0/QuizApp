@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { AppRouter } from '@/app/providers/router'
-import { Navbar } from '@/widgets/Navbar/ui/Navbar'
+import { Navbar } from '@/widgets/Navbar/ui/Navbar/Navbar'
 import { useAppDispatch, useEffectOnce } from '@/shared/lib/hooks'
 import { USER_ACCESS_TOKEN } from '@/shared/consts/localStorage'
 import { checkAuthorization } from '@/entities/user'

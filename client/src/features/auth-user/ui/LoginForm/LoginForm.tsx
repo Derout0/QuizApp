@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux'
 import type { FormEvent } from 'react'
 import { useCallback } from 'react'
 
-import { getLoginEmail, getLoginPassword } from '../../model/selectors/getLoginSelectors'
+import { getLoginEmail, getLoginIsLoading, getLoginPassword } from '../../model/selectors/getLoginSelectors'
 import { loginActions } from '../../model/slice/loginSlice'
-
-import { loginService } from '@/features/auth-user/model/services/login/loginService'
+import { loginService } from '../../model/services/login/loginService'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -21,7 +20,7 @@ interface LoginFormProps {
     onClose: () => void
 }
 
-export const LoginForm = (props: LoginFormProps) => {
+const LoginForm = (props: LoginFormProps) => {
     const {
         className,
         onClose,
@@ -31,6 +30,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
     const email = useSelector(getLoginEmail)
     const password = useSelector(getLoginPassword)
+    const isLoading = useSelector(getLoginIsLoading)
 
     const onChangeEmail = useCallback((value: string) => {
         dispatch(loginActions.setEmail(value))
@@ -40,22 +40,31 @@ export const LoginForm = (props: LoginFormProps) => {
         dispatch(loginActions.setPassword(value))
     }, [dispatch])
 
-    const onLoginFormSubmit = useCallback(async (event: FormEvent) => {
+    const onFormSubmit = useCallback(async (event: FormEvent) => {
         event.preventDefault()
 
         dispatch(loginService({ email, password }))
     }, [dispatch, email, password])
 
     return (
-        <form onSubmit={onLoginFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
+        <form onSubmit={onFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
             <VStack gap="12">
                 <Input value={email} onChange={onChangeEmail} placeholder="Введите email" label="Email" />
-                <Input value={password} onChange={onChangePassword} placeholder="Введите пароль" label="Password" />
+                <Input
+                    value={password}
+                    onChange={onChangePassword}
+                    type="password"
+                    placeholder="Введите пароль"
+                    label="Password"
+                    autoComplete="off"
+                />
             </VStack>
             <HStack gap="12" justify="end">
                 <Button type="button" onClick={onClose} theme="outlined" color="secondary">Отмена</Button>
-                <Button type="submit" theme="filled" color="primary">Войти</Button>
+                <Button type="submit" theme="filled" color="primary" loading={isLoading}>Войти</Button>
             </HStack>
         </form>
     )
 }
+
+export default LoginForm

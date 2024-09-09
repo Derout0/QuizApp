@@ -26,6 +26,7 @@ interface ButtonProps<Theme extends ButtonTheme> extends ButtonHTMLAttributes<HT
     theme?: Theme
     color?: ButtonColor<Theme>
     size?: ButtonSize
+    loading?: boolean
     disabled?: boolean
 }
 
@@ -37,6 +38,7 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
         color,
         size,
         disabled,
+        loading,
         type = 'button',
         ...other
     } = props
@@ -50,11 +52,13 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
 
     const mods: Mods = {
         [cls.disabled]: disabled,
+        [cls.loading]: loading,
     }
 
     return (
         <button type={type} className={classNames(cls.Button, mods, additional)} disabled={disabled} {...other}>
             {children}
+            {loading && <span className={cls.loader}></span>}
         </button>
     )
 }

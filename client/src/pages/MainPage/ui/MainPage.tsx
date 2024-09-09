@@ -9,7 +9,6 @@ import { Input } from '@/shared/ui/Input/Input'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
-
     const { visible, close, open } = useModal()
 
     const toggle = () => {

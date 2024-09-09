@@ -28,6 +28,9 @@ export const loginSlice = createSlice({
         })
         builder.addCase(loginService.fulfilled, (state) => {
             state.isLoading = false
+
+            state.email = ''
+            state.password = ''
         })
         builder.addCase(loginService.rejected, (state, action) => {
             state.isLoading = false

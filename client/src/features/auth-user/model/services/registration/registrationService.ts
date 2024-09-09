@@ -11,7 +11,7 @@ interface RegistrationRequest {
     username: string
 }
 
-export const refreshService = createAsyncThunk<UserEntity, RegistrationRequest>(
+export const registrationService = createAsyncThunk<UserEntity, RegistrationRequest>(
     'service-user/registrationService',
     async (data, thunkAPI) => {
         try {

@@ -4,7 +4,7 @@ import type { AuthResponse } from '@/entities/user'
 import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
 
-export const refreshService = createAsyncThunk(
+export const logoutService = createAsyncThunk(
     'service-user/registrationService',
     async (_, thunkAPI) => {
         try {
