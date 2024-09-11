@@ -5,7 +5,7 @@ import type { FormEvent } from 'react'
 import { useCallback } from 'react'
 
 import { getLoginEmail, getLoginIsLoading, getLoginPassword } from '../../model/selectors/getLoginSelectors'
-import { loginActions } from '../../model/slice/loginSlice'
+import { loginActions, loginReducer } from '../../model/slice/loginSlice'
 import { loginService } from '../../model/services/login/loginService'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
@@ -15,15 +15,24 @@ import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { Button } from '@/shared/ui/Button/Button'
 import { HStack } from '@/shared/ui/Stack'
 
+import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
+import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
+
 interface LoginFormProps {
     className?: string
     onClose: () => void
+    onSuccess: () => void
+}
+
+const reducers: ReducersList = {
+    loginForm: loginReducer,
 }
 
 const LoginForm = (props: LoginFormProps) => {
     const {
         className,
         onClose,
+        onSuccess,
     } = props
 
     const dispatch = useAppDispatch()
@@ -43,27 +52,33 @@ const LoginForm = (props: LoginFormProps) => {
     const onFormSubmit = useCallback(async (event: FormEvent) => {
         event.preventDefault()
 
-        dispatch(loginService({ email, password }))
-    }, [dispatch, email, password])
+        const result = await dispatch(loginService({ email, password }))
+
+        if (result.meta.requestStatus === 'fulfilled') {
+            onSuccess()
+        }
+    }, [dispatch, email, password, onSuccess])
 
     return (
-        <form onSubmit={onFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
-            <VStack gap="12">
-                <Input value={email} onChange={onChangeEmail} placeholder="Введите email" label="Email" />
-                <Input
-                    value={password}
-                    onChange={onChangePassword}
-                    type="password"
-                    placeholder="Введите пароль"
-                    label="Password"
-                    autoComplete="off"
-                />
-            </VStack>
-            <HStack gap="12" justify="end">
-                <Button type="button" onClick={onClose} theme="outlined" color="secondary">Отмена</Button>
-                <Button type="submit" theme="filled" color="primary" loading={isLoading}>Войти</Button>
-            </HStack>
-        </form>
+        <AsyncReducerLoader reducers={reducers}>
+            <form onSubmit={onFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
+                <VStack gap="12">
+                    <Input value={email} onChange={onChangeEmail} placeholder="Введите email" label="Email" />
+                    <Input
+                        value={password}
+                        onChange={onChangePassword}
+                        type="password"
+                        placeholder="Введите пароль"
+                        label="Password"
+                        autoComplete="off"
+                    />
+                </VStack>
+                <HStack gap="12" justify="end">
+                    <Button type="button" onClick={onClose} theme="outlined" color="secondary">Отмена</Button>
+                    <Button type="submit" theme="filled" color="primary" loading={isLoading}>Войти</Button>
+                </HStack>
+            </form>
+        </AsyncReducerLoader>
     )
 }
 

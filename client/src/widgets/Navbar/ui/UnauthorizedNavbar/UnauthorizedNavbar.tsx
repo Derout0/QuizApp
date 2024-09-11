@@ -47,7 +47,6 @@ export const UnauthorizedNavbar = (props: UnauthorizedNavbarProps) => {
                 <Button theme="outlined" onClick={onSignUp}>Зарегистрироваться</Button>
                 <AuthModal isOpen={visible} onClose={close} defaultTabId={defaultTab} />
             </HStack>
-
         </HStack>
     )
 }

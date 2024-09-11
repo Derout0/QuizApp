@@ -15,6 +15,7 @@ import { Loader } from '@/shared/ui/Loader/Loader'
 interface AuthFormProps {
     className?: string
     onClose: () => void
+    onSuccess: () => void
     defaultTabId?: AuthFormTabId
 }
 
@@ -22,6 +23,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
     const {
         className,
         onClose,
+        onSuccess,
         defaultTabId,
     } = props
 
@@ -31,7 +33,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
             name: 'Войти',
             element: (
                 <Suspense fallback={<Loader position="center" />}>
-                    <LoginForm onClose={onClose} />
+                    <LoginForm onClose={onClose} onSuccess={onSuccess} />
                 </Suspense>
             ),
         },
@@ -40,7 +42,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
             name: 'Регистрация',
             element: (
                 <Suspense fallback={<Loader position="center" />}>
-                    <RegistrationForm onClose={onClose} />
+                    <RegistrationForm onClose={onClose} onSuccess={onSuccess} />
                 </Suspense>
             ),
         },

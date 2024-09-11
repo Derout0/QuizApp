@@ -17,7 +17,7 @@ export const AuthModal = (props: AuthModalProps) => {
 
     return (
         <Modal isOpen={isOpen} onClose={onClose}>
-            <AuthForm onClose={onClose} defaultTabId={defaultTabId} />
+            <AuthForm onClose={onClose} onSuccess={onClose} defaultTabId={defaultTabId} />
         </Modal>
     )
 }
