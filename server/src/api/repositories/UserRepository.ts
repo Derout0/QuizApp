@@ -10,9 +10,4 @@ export class UserRepository extends BaseRepository<UserModel> {
     constructor() {
         super('users', userFieldMapping)
     }
-
-    public async getAllUsers(): Promise<UserModel[]> {
-        const users = await database.query('SELECT * FROM users')
-        return users.rows
-    }
 }

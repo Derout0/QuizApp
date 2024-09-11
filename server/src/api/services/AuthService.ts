@@ -4,17 +4,13 @@ import { TokenService } from '@/api/services/TokenService.ts'
 import { UserDTO } from '@/api/dtos/UserDTO.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 
-export class UserService {
+export class AuthService {
     private userRepository: UserRepository
     private tokenService: TokenService
 
     constructor() {
         this.userRepository = new UserRepository()
         this.tokenService = new TokenService()
-    }
-
-    public async getAllUsers() {
-        return await this.userRepository.getAll()
     }
 
     public async registration(email: string, password: string, username: string) {

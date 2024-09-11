@@ -1,17 +1,17 @@
 import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { NextFunction, Request, Response } from 'express'
-import { RefreshTokenController } from '@/api/controllers/user/auth/RefreshTokenController.ts'
+import { LogoutController } from '@/api/controllers/auth/LogoutController.ts'
 
-export class RefreshTokenRoute extends BaseRoute {
-    private controller: RefreshTokenController
+export class LogoutRoute extends BaseRoute {
+    private controller: LogoutController
 
     constructor() {
         super()
-        this.path = '/refresh'
-        this.method = 'GET'
+        this.path = '/logout'
+        this.method = 'POST'
 
         this.InitializeController()
-        this.controller = new RefreshTokenController()
+        this.controller = new LogoutController()
     }
 
     public async startService(req: Request, res: Response, next: NextFunction) {

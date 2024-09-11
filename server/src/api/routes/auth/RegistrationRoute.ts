@@ -1,7 +1,7 @@
 import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { NextFunction, Request, Response } from 'express'
 import { body } from 'express-validator'
-import { RegistrationController } from '@/api/controllers/user/auth/RegistrationController.js'
+import { RegistrationController } from '@/api/controllers/auth/RegistrationController.ts'
 
 export class RegistrationRoute extends BaseRoute {
     private controller: RegistrationController

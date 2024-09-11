@@ -1,16 +1,16 @@
 import { NextFunction, Response } from 'express'
 import { validationResult } from 'express-validator'
-import { BaseController } from '@/api/controllers/BaseController.js'
-import { TypedRequestBody } from '@/api/types/types.js'
-import { UserService } from '@/api/services/UserService.js'
+import { BaseController } from '@/api/controllers/BaseController.ts'
+import { TypedRequestBody } from '@/api/types/types.ts'
+import { AuthService } from '@/api/services/AuthService.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 
 export class RegistrationController extends BaseController {
-    private userService: UserService
+    private authService: AuthService
 
     constructor() {
         super()
-        this.userService = new UserService()
+        this.authService = new AuthService()
     }
 
     protected async executeImplement(req: TypedRequestBody<{ email: string, password: string, username: string }>, res: Response, next: NextFunction) {
@@ -22,7 +22,7 @@ export class RegistrationController extends BaseController {
             }
 
             const { email, password, username } = req.body
-            const userData = await this.userService.registration(email, password, username)
+            const userData = await this.authService.registration(email, password, username)
 
             res.cookie('refreshToken', userData.tokens.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
 

@@ -1,7 +1,7 @@
 import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { NextFunction, Request, Response } from 'express'
 import { body } from 'express-validator'
-import { LoginController } from '@/api/controllers/user/auth/LoginController.ts'
+import { LoginController } from '@/api/controllers/auth/LoginController.ts'
 
 export class LoginRoute extends BaseRoute {
     private controller: LoginController
