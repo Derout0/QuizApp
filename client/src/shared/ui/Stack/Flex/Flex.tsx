@@ -1,13 +1,14 @@
 import * as cls from './Flex.module.scss'
 import { classNames, type Mods } from '@/shared/lib/classNames/classNames'
-import { type DetailedHTMLProps, type HTMLAttributes, type ReactNode } from 'react'
+import type { CSSProperties } from 'react'
+import { type DetailedHTMLProps, type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
 type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 
 export type FlexJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-evenly'
 export type FlexAlign = 'start' | 'center' | 'end' | 'stretch'
 export type FlexDirection = 'column' | 'row'
-export type CommonGap = '4' | '8' | '12' | '16' | '20' | '24' | '28' | '32' | '36' | '40'
+export type Gap = '4' | '8' | '12' | '16' | '20' | '24' | '28' | '32' | '36' | '40'
 
 const justifyClasses: Record<FlexJustify, string> = {
     'start': cls.justifyStart,
@@ -29,7 +30,7 @@ const directionClasses: Record<FlexDirection, string> = {
     row: cls.directionRow,
 }
 
-const gapClasses: Record<CommonGap, string> = {
+const gapClasses: Record<Gap, string> = {
     4: cls.gap4,
     8: cls.gap8,
     12: cls.gap12,
@@ -44,26 +45,51 @@ const gapClasses: Record<CommonGap, string> = {
 
 export interface FlexProps extends DivProps {
     className?: string
-    as?: keyof JSX.IntrinsicElements
     children: ReactNode
+    as?: keyof JSX.IntrinsicElements
     justify?: FlexJustify
     align?: FlexAlign
     direction?: FlexDirection
-    gap?: CommonGap
+    flexGrow?: number
+    flexShrink?: number
+    flexBasis?: number
+    flex?: string
+    gap?: Gap
     maxWidth?: boolean
+    padding?: string
+    margin?: string
 }
 
 export const Flex = (props: FlexProps) => {
     const {
         className,
-        as: Component = 'div',
         children,
+        as: Component = 'div',
         justify,
         align,
         direction,
+        flexGrow,
+        flexShrink,
+        flexBasis,
+        flex,
         gap,
         maxWidth,
+        padding,
+        margin,
     } = props
+
+    console.log(flexGrow)
+
+    const styles: CSSProperties = useMemo<CSSProperties>(() => {
+        return {
+            flex,
+            flexShrink,
+            flexBasis,
+            flexGrow,
+            padding,
+            margin,
+        }
+    }, [flex, flexShrink, flexBasis, flexGrow, padding, margin])
 
     const additional = [
         className,
@@ -78,7 +104,7 @@ export const Flex = (props: FlexProps) => {
     }
 
     return (
-        <Component className={classNames(cls.Flex, mods, additional)}>
+        <Component className={classNames(cls.Flex, mods, additional)} style={{ ...styles }}>
             {children}
         </Component>
     )
