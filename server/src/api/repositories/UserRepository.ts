@@ -1,4 +1,3 @@
-import database from '@/config/DatabaseConfig.js'
 import { UserModel } from '@/api/models/UserModel.js'
 import { BaseRepository, FieldMapping } from '@/api/repositories/BaseRepository.ts'
 

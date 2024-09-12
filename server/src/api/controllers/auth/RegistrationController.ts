@@ -4,6 +4,7 @@ import { BaseController } from '@/api/controllers/BaseController.ts'
 import { TypedRequestBody } from '@/api/types/types.ts'
 import { AuthService } from '@/api/services/AuthService.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
+import { RequestProfileModel } from '@/api/models/ProfileModel.ts'
 
 export class RegistrationController extends BaseController {
     private authService: AuthService
@@ -13,7 +14,10 @@ export class RegistrationController extends BaseController {
         this.authService = new AuthService()
     }
 
-    protected async executeImplement(req: TypedRequestBody<{ email: string, password: string, username: string }>, res: Response, next: NextFunction) {
+    protected async executeImplement(
+        req: TypedRequestBody<{ email: string, password: string, username: string, profileData?: RequestProfileModel }>,
+        res: Response, next: NextFunction,
+    ) {
         try {
             const errors = validationResult(req)
 
@@ -21,8 +25,8 @@ export class RegistrationController extends BaseController {
                 return next(ApiError.BadRequest('Validation failed', errors.array()))
             }
 
-            const { email, password, username } = req.body
-            const userData = await this.authService.registration(email, password, username)
+            const { email, password, username, profileData } = req.body
+            const userData = await this.authService.registration(email, password, username, profileData)
 
             res.cookie('refreshToken', userData.tokens.refreshToken, { maxAge: 30 * 24 * 60 * 1000, httpOnly: true })
 
