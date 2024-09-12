@@ -5,7 +5,7 @@ import { HStack } from '@/shared/ui/Stack'
 import { getRouteMain } from '@/shared/consts/router'
 import { Icon } from '@/shared/ui/Icon/Icon'
 import { AppLink } from '@/shared/ui/AppLink/AppLink'
-import { ReactComponent as Logo } from '@/shared/assets/Logo.svg'
+import Logo from '@/shared/assets/Logo.svg'
 import { AuthFormTabId, AuthModal } from '@/features/auth-user'
 import { useModal } from '@/shared/lib/hooks'
 

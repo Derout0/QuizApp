@@ -1,6 +1,6 @@
 import * as cls from './Avatar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import DefaultAvatarURL from '@/shared/assets/icons/DefaultAvatar.svg'
+import DefaultAvatar from '@/shared/assets/icons/DefaultAvatar.svg?url'
 
 type AvatarColor = 'primary'
 type AvatarTheme = 'outlined'
@@ -24,7 +24,7 @@ export const Avatar = (props: AvatarProps) => {
         size = 'medium',
     } = props
 
-    const avatarSrc = src || DefaultAvatarURL
+    const avatarSrc = src || DefaultAvatar
 
     const additional: string[] = [
         className,

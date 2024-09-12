@@ -6,6 +6,7 @@ import { HStack } from '@/shared/ui/Stack/HStack/HStack'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { Modal } from '@/shared/ui/Modal/Modal'
 import { Input } from '@/shared/ui/Input/Input'
+import { Sidebar } from '@/widgets/Sidebar/ui/Sidebar/Sidebar'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
