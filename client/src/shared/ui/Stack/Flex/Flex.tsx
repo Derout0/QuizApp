@@ -78,14 +78,9 @@ export const Flex = (props: FlexProps) => {
         margin,
     } = props
 
-    console.log(flexGrow)
-
     const styles: CSSProperties = useMemo<CSSProperties>(() => {
         return {
-            flex,
-            flexShrink,
-            flexBasis,
-            flexGrow,
+            ...(flex ? { flex } : { flexGrow, flexBasis, flexShrink }),
             padding,
             margin,
         }
@@ -102,6 +97,10 @@ export const Flex = (props: FlexProps) => {
     const mods: Mods = {
         [cls.maxWidth]: maxWidth,
     }
+
+    const s = { ...styles }
+
+    console.log(s)
 
     return (
         <Component className={classNames(cls.Flex, mods, additional)} style={{ ...styles }}>
