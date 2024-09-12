@@ -44,6 +44,7 @@ const gapClasses: Record<CommonGap, string> = {
 
 export interface FlexProps extends DivProps {
     className?: string
+    as?: keyof JSX.IntrinsicElements
     children: ReactNode
     justify?: FlexJustify
     align?: FlexAlign
@@ -55,6 +56,7 @@ export interface FlexProps extends DivProps {
 export const Flex = (props: FlexProps) => {
     const {
         className,
+        as: Component = 'div',
         children,
         justify,
         align,
@@ -76,8 +78,8 @@ export const Flex = (props: FlexProps) => {
     }
 
     return (
-        <div className={classNames(cls.Flex, mods, additional)}>
+        <Component className={classNames(cls.Flex, mods, additional)}>
             {children}
-        </div>
+        </Component>
     )
 }
