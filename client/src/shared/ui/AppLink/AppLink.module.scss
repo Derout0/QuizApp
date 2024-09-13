@@ -1,5 +1,23 @@
 .AppLink {
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-medium);
   color: var(--primary-color);
+  transition: color, background-color .2s ease 0s;
+
+  // Theme
+  &.primary {
+    display: flex;
+    align-items: center;
+    font-weight: var(--font-weight-medium);
+    gap: var(--base-size-8);
+    color: var(--on-surface-color-variant);
+    padding: var(--base-size-8);
+    border-radius: var(--border-radius-s);
+
+    @media (any-hover: hover) {
+      &:hover {
+        background-color: var(--secondary-fixed-color);
+      }
+    }
+  }
 }

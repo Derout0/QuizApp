@@ -6,7 +6,7 @@ export enum TextTheme {
     TEXT = 'text-theme',
 }
 
-export type TextColor = 'on-primary' | 'on-secondary' | 'on-tertiary' | 'error' | 'on-error'
+export type TextColor = 'on-primary' | 'on-secondary' | 'on-tertiary' | 'on-surface' | 'on-surface-variant' | 'error' | 'on-error'
 export type TextAlign = 'center' | 'inherit' | 'justify' | 'left' | 'right'
 
 export enum TextSize {

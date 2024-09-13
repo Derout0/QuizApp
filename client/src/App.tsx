@@ -4,6 +4,8 @@ import { Navbar } from '@/widgets/Navbar/ui/Navbar/Navbar'
 import { useAppDispatch, useEffectOnce } from '@/shared/lib/hooks'
 import { USER_ACCESS_TOKEN } from '@/shared/consts/localStorage'
 import { checkAuthorization } from '@/entities/user'
+import { HStack, VStack } from '@/shared/ui/Stack'
+import { Sidebar } from '@/widgets/Sidebar/ui/Sidebar/Sidebar'
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -16,14 +18,15 @@ const App = () => {
 
     return (
         <Suspense fallback={<div>Loading for language...</div>}>
-            <div className="App">
-                <div className="AppInner">
-                    <Navbar />
+            <VStack className="App">
+                <HStack flexGrow={1} className="AppInner">
+                    <Sidebar />
                     <main className="AppMain">
+                        <Navbar />
                         <AppRouter />
                     </main>
-                </div>
-            </div>
+                </HStack>
+            </VStack>
         </Suspense>
     )
 }

@@ -29,6 +29,7 @@ interface TextProps {
     theme?: TextTheme
     type?: TextType
     align?: TextAlign
+    noWrap?: boolean
 }
 
 export const Text = (props: TextProps) => {
@@ -39,6 +40,7 @@ export const Text = (props: TextProps) => {
         sx = {},
         type = 'div',
         align,
+        noWrap,
     } = props
 
     const {
@@ -50,15 +52,19 @@ export const Text = (props: TextProps) => {
 
     const additional: string[] = [
         className,
-        (theme ? cls[theme] : null),
-        (size ? cls[size] : null),
-        (lineHeight ? cls[lineHeight] : null),
-        (fontWeight ? [cls[`fw-${fontWeight}`]] : null),
-        (color ? [cls[color]] : null),
-        (align ? cls[align] : null),
+        (theme && cls[theme]),
+        (size && cls[size]),
+        (lineHeight && cls[lineHeight]),
+        (fontWeight && [cls[`fw-${fontWeight}`]]),
+        (color && [cls[color]]),
+        (align && cls[align]),
     ]
 
-    return createElement(type, { className: classNames(cls.Text, {}, additional) }, children)
+    const mods: Mods = {
+        [cls.noWrap]: noWrap,
+    }
+
+    return createElement(type, { className: classNames(cls.Text, mods, additional) }, children)
 }
 
 Text.H1 = (props: excludeForTitles) => <Text {...props} type="h1" theme={TextTheme.titleH1} />

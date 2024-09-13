@@ -70,6 +70,14 @@
   color: var(--on-tertiary-color);
 }
 
+.on-surface {
+  color: var(--on-surface-color)
+}
+
+.on-surface-variant {
+  color: var(--on-surface-color-variant)
+}
+
 .error {
   color: var(--error-color);
 }
@@ -139,4 +147,9 @@
 
 .fw-700 {
   font-weight: var(--font-weight-bold);
+}
+
+// Wrap
+.noWrap {
+  white-space: nowrap;
 }

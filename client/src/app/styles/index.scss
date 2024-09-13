@@ -15,24 +15,18 @@ body {
   color: var(--primary-color);
   font-size: var(--font-size-xs);
   background: var(--surface-color);
-  font-family: var(--font-family-main);
+  font-family: var(--font-family-main), sans-serif;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
   overflow: hidden;
   min-height: 100%;
 }
 
 .AppInner {
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
 }
 
 .AppMain {
-  display: flex;
   flex: 1 1 auto;
 }
 

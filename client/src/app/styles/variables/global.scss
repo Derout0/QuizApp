@@ -1,10 +1,24 @@
 :root {
+  // Button
   --button-height-s: 30px;
   --button-height-m: 36px;
   --button-height-l: 42px;
   --base-border: 1px solid var(--outline-color);
   --base-border-variant: 1px solid var(--outline-color-variant);
   --base-border-error: 1px solid var(--error-color);
+
+  // Icon Button
+  --icon-button-size-s: 1rem;
+  --icon-button-size-m: 1.125rem;
+  --icon-button-size-l: 1.25rem;
+
+  // Hamburger
+  --hamburger-width-size-s: 1.5rem;
+  --hamburger-height-size-s: 1rem;
+  --hamburger-width-size-m: 1.875rem;
+  --hamburger-height-size-m: 1.125rem;
+  --hamburger-width-size-l: 2.25rem;
+  --hamburger-height-size-l: 1.25rem;
 
   // Border Radius
   --border-radius-xs: 4px;
@@ -13,4 +27,8 @@
   --border-radius-l: 16px;
   --border-radius-xl: 28px;
   --border-radius-full: 1000px;
+
+  // Sidebar
+  --sidebar-width: 18.75rem;
+  --sidebar-width-collapsed: 6.25rem;
 }

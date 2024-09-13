@@ -3,18 +3,19 @@ import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import type { ButtonHTMLAttributes } from 'react'
 
-type Size = 'small' | 'medium' | 'large'
+type HamburgerSize = 'small' | 'medium' | 'large'
 
 interface HamburgerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
     collapsed: boolean
-    size: Size
+    size?: HamburgerSize
 }
 export const Hamburger = (props: HamburgerProps) => {
     const {
         className,
         collapsed = false,
-        size,
+        size = 'medium',
+        ...otherProps
     } = props
 
     const mods: Mods = {
@@ -22,7 +23,7 @@ export const Hamburger = (props: HamburgerProps) => {
     }
 
     return (
-        <button className={classNames(cls.Hamburger, mods, [className, cls[size]])}>
+        <button type="button" className={classNames(cls.Hamburger, mods, [className, cls[size]])} {...otherProps}>
             <span></span>
             <span></span>
             <span></span>

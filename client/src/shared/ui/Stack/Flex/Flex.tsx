@@ -98,10 +98,6 @@ export const Flex = (props: FlexProps) => {
         [cls.maxWidth]: maxWidth,
     }
 
-    const s = { ...styles }
-
-    console.log(s)
-
     return (
         <Component className={classNames(cls.Flex, mods, additional)} style={{ ...styles }}>
             {children}

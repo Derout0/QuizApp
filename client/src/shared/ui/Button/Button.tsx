@@ -45,9 +45,9 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
 
     const additional: string[] = [
         className,
-        (theme ? cls[theme] : null),
-        (color ? cls[color] : null),
-        (size ? cls[size] : null),
+        (theme && cls[theme]),
+        (color && cls[color]),
+        (size && cls[size]),
     ]
 
     const mods: Mods = {

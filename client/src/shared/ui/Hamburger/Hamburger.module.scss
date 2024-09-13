@@ -1,4 +1,79 @@
 .Hamburger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  top: 0;
+  right: 0;
 
+  span {
+    position: absolute;
+    top: calc(50% - 1px);
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--on-surface-color-variant);
+    transition: all 0.2s;
+    transform: translateX(0.1875rem);
+
+    &:first-child {
+      top: 0;
+    }
+
+    &:last-child {
+      top: auto;
+      bottom: 0;
+    }
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      span {
+        width: 90%;
+
+        &:first-child {
+          width: 80%;
+        }
+
+        &:last-child {
+          width: 95%;
+        }
+      }
+    }
+  }
+
+  &.collapsed {
+    span {
+      width: 60%;
+
+      &:first-child {
+        width: 40%;
+      }
+
+      &:last-child {
+        width: 80%;
+      }
+    }
+  }
+
+  // Size
+  &.small {
+    width: var(--hamburger-width-size-s);
+    height: var(--hamburger-height-size-s);
+    flex: 0 0 var(--hamburger-width-size-s);
+  }
+
+  &.medium {
+    width: var(--hamburger-width-size-m);
+    height: var(--hamburger-height-size-m);
+    flex: 0 0 var(--hamburger-width-size-m);
+  }
+
+  &.large {
+    width: var(--hamburger-width-size-l);
+    height: var(--hamburger-height-size-l);
+    flex: 0 0 var(--hamburger-width-size-l);
+  }
 }
 

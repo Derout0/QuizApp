@@ -96,6 +96,9 @@
 
   // Цвета компонентов (используют цвета выше)
 
+  // Sidebar
+  --sidebar-background-color: var(--surface-container-color);
+
   // Input
   --primary-input-background-color: var(--surface-container-color-highest);
   --primary-input-text-color: var(--on-surface-color);
