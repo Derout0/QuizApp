@@ -17,7 +17,6 @@ const MainPage = () => {
 
     return (
         <div className={classNames('1')}>
-            Main Page
             <button onClick={toggle}>Переключить</button>
             <Input placeholder="Введите ваше имя" label="Имя" error="Somethind went wrong" />
             <HStack gap="8">
