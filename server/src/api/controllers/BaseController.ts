@@ -35,6 +35,7 @@ export abstract class BaseController {
         })
     }
 
+    // TODO: REMOVE METHODS?
     public created(res: Response) {
         return res.sendStatus(201)
     }

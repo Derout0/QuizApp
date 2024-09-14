@@ -1,7 +1,8 @@
 import { Express } from 'express'
 import { BaseRoute } from '@/api/routes/BaseRoute.js'
-import { UserRoutesControllers } from '@/api/routes/user'
-import { AuthRoutesControllers } from '@/api/routes/auth'
+import { UserRoutes } from '@/api/routes/user'
+import { AuthRoutes } from '@/api/routes/auth'
+import { ProfileRoutes } from '@/api/routes/profile'
 
 export class InitializeRoutes {
     public static async Initialize(app: Express) {
@@ -13,8 +14,11 @@ export class InitializeRoutes {
 
     public static async getRoutes(): Promise<BaseRoute[]> {
         const routes: BaseRoute[] = []
-        routes.push(...AuthRoutesControllers)
-        routes.push(...UserRoutesControllers)
+        routes.push(
+            ...AuthRoutes,
+            ...UserRoutes,
+            ...ProfileRoutes,
+        )
 
         return Promise.resolve(routes)
     }

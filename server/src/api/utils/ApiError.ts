@@ -21,4 +21,8 @@ export class ApiError extends Error {
     static Conflict(message: string, errors: any[] = []) {
         return new ApiError(StatusConstants.CONFLICT_CODE, message, errors)
     }
+
+    static NotFound(message: string, errors: any[] = []) {
+        return new ApiError(StatusConstants.NOT_FOUND_RESOURCE_CODE, message, errors)
+    }
 }

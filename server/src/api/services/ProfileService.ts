@@ -1,34 +1,43 @@
 import { ProfileRepository } from '@/api/repositories/ProfileRepository.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
+import { RequestProfileModel } from '@/api/models/ProfileModel.ts'
+
+interface CreateProfileData extends Partial<RequestProfileModel> {
+    userId: number
+}
 
 export class ProfileService {
-    private profileRepository: ProfileRepository
+    private repository: ProfileRepository
 
     constructor() {
-        this.profileRepository = new ProfileRepository()
+        this.repository = new ProfileRepository()
     }
 
-    async createProfile(data: {
-        userId: number
-        firstName?: string
-        lastName?: string
-        age?: number
-        country?: string
-    }) {
-        if (!data.userId) {
+    async createProfile(data: CreateProfileData) {
+        const { userId, firstName, lastName, age, country } = data
+
+        if (!userId) {
             throw ApiError.BadRequest('User ID not found!')
         }
 
-        if (data.age && (data.age < 0 || data.age > 100)) {
+        if (age && (age < 0 || age > 100)) {
             throw ApiError.BadRequest('Age must be between 0 and 100!')
         }
 
-        return await this.profileRepository.create({
-            userId: data.userId,
-            firstName: data.firstName,
-            lastName: data.lastName,
-            age: data.age,
-            country: data.country,
+        return await this.repository.create({
+            userId,
+            firstName,
+            lastName,
+            age,
+            country,
         })
+    }
+
+    async getProfileByUserId(id: number) {
+        if (!id) {
+            throw ApiError.BadRequest('ID not found!')
+        }
+
+        return await this.repository.findBy({ userId: id })
     }
 }

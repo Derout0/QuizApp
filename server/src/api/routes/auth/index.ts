@@ -4,7 +4,7 @@ import { LoginRoute } from './LoginRoute.ts'
 import { LogoutRoute } from './LogoutRouter.ts'
 import { RefreshTokenRoute } from './RefreshTokenRoute.ts'
 
-export const AuthRoutesControllers: BaseRoute[] = [
+export const AuthRoutes: BaseRoute[] = [
     new RegistrationRoute(),
     new LoginRoute(),
     new LogoutRoute(),

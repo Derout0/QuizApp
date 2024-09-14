@@ -2,7 +2,7 @@ import { BaseRepository, FieldMapping } from '@/api/repositories/BaseRepository.
 import { ProfileModel } from '@/api/models/ProfileModel.ts'
 
 const profileFieldMapping: FieldMapping<ProfileModel> = {
-    profileId: 'token_id',
+    profileId: 'profile_id',
     userId: 'user_id',
     avatarUrl: 'avatar_url',
     firstName: 'first_name',

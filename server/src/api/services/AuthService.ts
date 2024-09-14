@@ -55,7 +55,7 @@ export class AuthService {
         const isPasswordEquals = await bcrypt.compare(password, user.password)
 
         if (!isPasswordEquals) {
-            throw ApiError.BadRequest(`Wrong password`)
+            throw ApiError.BadRequest(`Wrong password!`)
         }
 
         const userDTO = new UserDTO(user)
