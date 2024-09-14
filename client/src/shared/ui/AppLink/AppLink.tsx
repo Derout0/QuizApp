@@ -1,5 +1,6 @@
 import * as cls from './AppLink.module.scss'
 import type { FunctionComponent, ReactNode, SVGAttributes } from 'react'
+import { memo } from 'react'
 import type { LinkProps } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -15,7 +16,7 @@ interface AppLinkProps extends LinkProps {
     endIcon?: FunctionComponent<SVGAttributes<SVGElement>>
 }
 
-export const AppLink = (props: AppLinkProps) => {
+export const AppLink = memo((props: AppLinkProps) => {
     const {
         className,
         children,
@@ -37,4 +38,4 @@ export const AppLink = (props: AppLinkProps) => {
             {EndIcon && <Icon SVG={EndIcon} />}
         </Link>
     )
-}
+})

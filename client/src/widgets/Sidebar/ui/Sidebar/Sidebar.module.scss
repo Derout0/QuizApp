@@ -10,22 +10,11 @@
 }
 
 .logo {
-  transition: margin, opacity, .2s ease 0s;
+  transition: margin, opacity, .3s ease 0s;
 }
 
 .body {
   padding: 0 var(--base-size-12);
-}
-
-.block {
-  &:not(:last-child) {
-    padding-bottom: var(--base-size-20);
-    border-bottom: var(--base-border-variant);
-  }
-}
-
-.title {
-  transition: transform, margin, .3s ease 0s;
 }
 
 .collapsed {
@@ -34,6 +23,8 @@
   }
 
   .logo {
-    margin-left: -200px;
+    opacity: 0;
+    margin-left: -10rem;
+    transform: scale(0.3);
   }
 }

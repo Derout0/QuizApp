@@ -1,5 +1,6 @@
 import * as cls from './Icon.module.scss'
 import type { CSSProperties, FC, SVGProps } from 'react'
+import { memo } from 'react'
 import { useMemo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
@@ -13,7 +14,7 @@ interface IconProps extends SVGProps<SVGSVGElement> {
     SVG: FC<SVGProps<SVGSVGElement>>
 }
 
-export const Icon = (props: IconProps) => {
+export const Icon = memo((props: IconProps) => {
     const {
         className,
         SVG,
@@ -39,4 +40,4 @@ export const Icon = (props: IconProps) => {
     return (
         <SVG className={classNames(cls.Icon, {}, additional)} style={{ ...style }} {...restProps} />
     )
-}
+})

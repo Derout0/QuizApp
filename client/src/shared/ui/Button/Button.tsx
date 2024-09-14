@@ -2,6 +2,7 @@ import * as cls from './Button.module.scss'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { memo } from 'react'
 
 type ButtonFilledColors = 'primary' | 'primary-variant' | 'secondary' | 'secondary-variant' | 'error' | 'error-variant'
 type ButtonOutlinedColors = 'primary' | 'secondary' | 'error'
@@ -30,7 +31,7 @@ interface ButtonProps<Theme extends ButtonTheme> extends ButtonHTMLAttributes<HT
     disabled?: boolean
 }
 
-export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => {
+export const Button = memo(<Theme extends ButtonTheme>(props: ButtonProps<Theme>) => {
     const {
         className,
         children,
@@ -61,4 +62,4 @@ export const Button = <Theme extends ButtonTheme>(props: ButtonProps<Theme>) => 
             {loading && <span className={cls.loader}></span>}
         </button>
     )
-}
+})

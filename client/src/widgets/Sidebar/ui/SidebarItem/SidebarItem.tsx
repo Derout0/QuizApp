@@ -1,5 +1,6 @@
 import * as cls from './SidebarItem.module.scss'
 import type { FunctionComponent, ReactNode, SVGAttributes } from 'react'
+import { memo } from 'react'
 import React from 'react'
 
 import type { Mods } from '@/shared/lib/classNames/classNames'
@@ -14,7 +15,7 @@ interface SidebarItemProps {
     Icon?: FunctionComponent<SVGAttributes<SVGElement>>
 }
 
-export const SidebarItem = (props: SidebarItemProps) => {
+export const SidebarItem = memo((props: SidebarItemProps) => {
     const {
         className,
         children,
@@ -32,4 +33,4 @@ export const SidebarItem = (props: SidebarItemProps) => {
             <AppLink className={cls.link} theme="primary" to={path} startIcon={Icon}>{children}</AppLink>
         </li>
     )
-}
+})

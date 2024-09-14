@@ -1,6 +1,7 @@
 import * as cls from './Avatar.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import DefaultAvatar from '@/shared/assets/icons/DefaultAvatar.svg?url'
+import { memo } from 'react'
 
 type AvatarColor = 'primary'
 type AvatarTheme = 'outlined'
@@ -14,7 +15,7 @@ interface AvatarProps {
     theme?: AvatarTheme
     size?: AvatarSize
 }
-export const Avatar = (props: AvatarProps) => {
+export const Avatar = memo((props: AvatarProps) => {
     const {
         className,
         src,
@@ -38,4 +39,4 @@ export const Avatar = (props: AvatarProps) => {
             <img src={avatarSrc} alt={alt} />
         </div>
     )
-}
+})

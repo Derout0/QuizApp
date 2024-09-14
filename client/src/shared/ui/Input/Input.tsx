@@ -3,6 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react'
+import { useMemo } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useRef } from 'react'
@@ -65,21 +66,23 @@ export const Input = memo((props: InputProps) => {
         }
     }, [value])
 
-    const InputLabel = () => {
+    const InputLabel = useMemo(() => {
         if (label) {
             return (
                 <span className={cls.label}>{label}</span>
             )
         }
-    }
+    }, [label])
 
-    const InputError = () => {
+    const InputError = useMemo(() => {
         if (error) {
             return (
                 <Text sx={{ color: 'error' }}>{error}</Text>
             )
         }
-    }
+
+        return null
+    }, [error])
 
     const mods: Mods = {
         [cls.disabled]: disabled,
@@ -88,10 +91,10 @@ export const Input = memo((props: InputProps) => {
     }
 
     return (
-        <div ref={ref} className={classNames(cls.Input, mods, [className])}>
+        <div className={classNames(cls.Input, mods, [className])}>
             <HStack gap="8" className={cls.fieldMain}>
-                <div className={cls.inner}>
-                    {InputLabel()}
+                <div ref={ref} className={cls.inner}>
+                    {InputLabel}
                     <div className={cls.field}>
                         <input
                             className={cls.input}
@@ -106,7 +109,7 @@ export const Input = memo((props: InputProps) => {
                     </div>
                 </div>
             </HStack>
-            {InputError()}
+            {InputError}
         </div>
     )
 })

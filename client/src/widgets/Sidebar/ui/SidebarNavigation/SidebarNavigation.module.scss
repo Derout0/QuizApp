@@ -1,0 +1,14 @@
+.SidebarNavigation {
+  display: flex;
+}
+
+.block {
+  &:not(:last-child) {
+    padding-bottom: var(--base-size-20);
+    border-bottom: var(--base-border-variant);
+  }
+}
+
+.title {
+  transition: transform, margin, .3s ease 0s;
+}

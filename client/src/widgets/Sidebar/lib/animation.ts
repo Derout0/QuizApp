@@ -1,5 +1,10 @@
 import type { Variants } from 'framer-motion'
 
+export enum SidebarVariants {
+    VISIBLE = 'visible',
+    COLLAPSED = 'collapsed',
+}
+
 export const sidebarAnimation: Variants = {
     visible: {
         width: '18.75rem',
