@@ -6,7 +6,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import type { BuildOptions } from 'config/build/types/config'
 
 export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstance[] {
-    const { paths, isProd, isDev } = options
+    const { paths, isProd, isDev, apiURL } = options
+
     let productionPlugins: webpack.WebpackPluginInstance[] = []
 
     const basePlugins = [
@@ -17,6 +18,7 @@ export function buildPlugins(options: BuildOptions): webpack.WebpackPluginInstan
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({ // For global project variables
             __IS_DEV__: JSON.stringify(isDev),
+            __API_URL__: JSON.stringify(apiURL),
         }),
         // new BundleAnalyzerPlugin(),
     ]

@@ -1,14 +1,16 @@
-import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { AuthResponse } from '@/entities/user'
 import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
+import type { ThunkConfig } from '@/app/providers/store-provider'
 
-export const refreshService = createAsyncThunk<void>(
+export const refreshService = createAsyncThunk<void, void, ThunkConfig>(
     'service-user/refreshService',
     async (_, thunkAPI) => {
+        const { extra } = thunkAPI
+
         try {
-            const response = await axios.get<AuthResponse>('http://localhost:4000/api/refresh', { withCredentials: true })
+            const response = await extra.api.get<AuthResponse>('/refresh')
             const { tokens, user } = response.data
 
             authResponseHandler({ purpose: 'save', thunkAPI, user, tokens })

@@ -1,25 +1,21 @@
-import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { UserEntity, AuthResponse } from '@/entities/user'
-import { USER_ACCESS_TOKEN } from '@/shared/consts/localStorage'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
 import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
+import type { ThunkConfig } from '@/app/providers/store-provider'
 
 interface LoginRequest {
     email: string
     password: string
 }
 
-export const loginService = createAsyncThunk<UserEntity, LoginRequest>(
+export const loginService = createAsyncThunk<UserEntity, LoginRequest, ThunkConfig>(
     'service-user/loginService',
     async (data, thunkAPI) => {
+        const { extra } = thunkAPI
+
         try {
-            const response = await axios.post<AuthResponse>('http://localhost:4000/api/login', data, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem(USER_ACCESS_TOKEN)}`,
-                },
-                withCredentials: true,
-            })
+            const response = await extra.api.post<AuthResponse>('/login', data)
 
             if (!response.data) {
                 throw new Error()

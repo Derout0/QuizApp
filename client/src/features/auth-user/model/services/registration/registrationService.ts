@@ -1,9 +1,9 @@
-import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { AuthResponse } from '@/entities/user'
 import { type UserEntity } from '@/entities/user'
 import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
+import type { ThunkConfig } from '@/app/providers/store-provider'
 
 interface RegistrationRequest {
     email: string
@@ -11,11 +11,12 @@ interface RegistrationRequest {
     username: string
 }
 
-export const registrationService = createAsyncThunk<UserEntity, RegistrationRequest>(
+export const registrationService = createAsyncThunk<UserEntity, RegistrationRequest, ThunkConfig>(
     'service-user/registrationService',
     async (data, thunkAPI) => {
+        const { extra } = thunkAPI
         try {
-            const response = await axios.post<AuthResponse>('http://localhost:4000/api/registration', data)
+            const response = await extra.api.post<AuthResponse>('/registration', data)
 
             if (!response.data) {
                 throw new Error()
