@@ -17,7 +17,7 @@ export interface UserEntity {
 }
 
 export interface UserSchema {
-    data: UserEntity | undefined
+    data?: UserEntity
     authorized: boolean
     inited: boolean
     isLoading: boolean

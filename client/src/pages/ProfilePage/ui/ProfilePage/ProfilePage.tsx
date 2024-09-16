@@ -7,6 +7,7 @@ import { AsyncReducerLoader, type ReducersList } from '@/shared/lib/components/A
 import { useAppDispatch, useEffectOnce } from '@/shared/lib/hooks'
 
 import { fetchProfileData, getProfileData, getProfileError, ProfileCard, profileReducer } from '@/entities/profile'
+import { useParams } from 'react-router-dom'
 
 interface ProfilePageProps {
     className?: string
@@ -23,12 +24,19 @@ const ProfilePage = memo((props: ProfilePageProps) => {
     } = props
 
     const dispatch = useAppDispatch()
+    const { id } = useParams<{ id: string }>()
     const profileData = useSelector(getProfileData)
     const error = useSelector(getProfileError)
 
     useEffectOnce(() => {
-        dispatch(fetchProfileData({ id: 31 }))
+        if (id) {
+            dispatch(fetchProfileData({ id }))
+        }
     })
+
+    if (error) {
+        return <div>{error}</div>
+    }
 
     return (
         <AsyncReducerLoader reducers={reducers}>
