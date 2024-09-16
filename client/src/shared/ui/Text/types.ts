@@ -6,18 +6,20 @@ export enum TextTheme {
     TEXT = 'text-theme',
 }
 
-export type TextColor = 'on-primary' | 'on-secondary' | 'on-tertiary' | 'on-surface' | 'on-surface-variant' | 'error' | 'on-error'
+export type TextColor = 'on-primary'
+  | 'primary'
+  | 'on-secondary'
+  | 'secondary'
+  | 'on-tertiary'
+  | 'tertiary'
+  | 'on-surface'
+  | 'on-surface-variant'
+  | 'error'
+  | 'on-error'
+
 export type TextAlign = 'center' | 'inherit' | 'justify' | 'left' | 'right'
 
-export enum TextSize {
-    xxs = 'fz-xxs',
-    xs = 'fs-xs',
-    s = 'fs-s',
-    m = 'fs-m',
-    l = 'fs-l',
-    xl = 'fs-xl',
-    xxl = 'fs-xxl',
-}
+export type TextSize = 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'
 
 export type TextType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div'
 

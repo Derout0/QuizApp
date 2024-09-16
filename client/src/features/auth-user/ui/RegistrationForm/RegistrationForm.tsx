@@ -2,6 +2,8 @@ import * as cls from './RegistrationForm.module.scss'
 import { type FormEvent, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
+import { useAuth } from '@/features/auth-user'
+
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { Input } from '@/shared/ui/Input/Input'
@@ -35,12 +37,13 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         onSuccess,
     } = props
 
+    const dispatch = useAppDispatch()
+    const { signUp } = useAuth()
+
     const username = useSelector(getRegistrationUsername)
     const email = useSelector(getRegistrationEmail)
     const password = useSelector(getRegistrationPassword)
     const isLoading = useSelector(getRegistrationIsLoading)
-
-    const dispatch = useAppDispatch()
 
     const onChangeUsername = useCallback((value: string) => {
         dispatch(registrationActions.setUsername(value))
@@ -57,12 +60,12 @@ const RegistrationForm = (props: RegistrationFormProps) => {
     const onFormSubmit = useCallback(async (event: FormEvent) => {
         event.preventDefault()
 
-        const result = await dispatch(registrationService({ username, email, password }))
+        const result = await signUp({ username, email, password })
 
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess()
         }
-    }, [dispatch, username, email, password, onSuccess])
+    }, [signUp, username, email, password, onSuccess])
 
     return (
         <AsyncReducerLoader reducers={reducers}>

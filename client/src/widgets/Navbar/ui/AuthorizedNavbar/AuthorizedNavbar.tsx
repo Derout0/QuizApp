@@ -1,9 +1,9 @@
+import { useAuth } from '@/features/auth-user'
+
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack } from '@/shared/ui/Stack'
 import { Avatar } from '@/shared/ui/Avatar/Avatar'
 import { Button } from '@/shared/ui/Button/Button'
-import { useAppDispatch } from '@/shared/lib/hooks'
-import { logoutService } from '@/features/auth-user'
 
 interface AuthorizedNavbarProps {
     className?: string
@@ -14,7 +14,7 @@ export const AuthorizedNavbar = (props: AuthorizedNavbarProps) => {
         className,
     } = props
 
-    const dispatch = useAppDispatch()
+    const { signOut } = useAuth()
 
     return (
         <HStack
@@ -25,7 +25,7 @@ export const AuthorizedNavbar = (props: AuthorizedNavbarProps) => {
             gap="20"
         >
             <HStack gap="20" align="end">
-                <Button theme="filled" onClick={() => dispatch(logoutService())}>Выйти</Button>
+                <Button theme="filled" onClick={() => signOut()}>Выйти</Button>
                 <Avatar />
             </HStack>
         </HStack>

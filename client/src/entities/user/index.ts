@@ -1,4 +1,4 @@
-export { userActions, userReducer } from './slice/userSlice'
-export { UserEntity, TokenEntity, UserSchema, AuthResponse } from './types/user'
-export { getUserAuthorized, getUserData } from './selectors/getUserSelectors'
-export { checkAuthorization } from './services/checkAuthorization/checkAuthorization'
+export { userActions, userReducer } from '@/entities/user/model/slice/userSlice'
+export { UserEntity, TokenEntity, UserSchema, AuthResponse } from '@/entities/user/model/types/user'
+export { getUserAuthorized, getUserInited, getUserData, getUserError, getUserIsLoading } from './model/selectors/getUserSelectors'
+export { checkAuthorization } from './model/services/checkAuthorization/checkAuthorization'

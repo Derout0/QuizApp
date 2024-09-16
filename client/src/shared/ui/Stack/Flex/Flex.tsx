@@ -8,6 +8,7 @@ type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement
 export type FlexJustify = 'start' | 'center' | 'end' | 'space-between' | 'space-evenly'
 export type FlexAlign = 'start' | 'center' | 'end' | 'stretch'
 export type FlexDirection = 'column' | 'row'
+export type FlexWrap = 'wrap' | 'no-wrap' | 'wrap-reverse' | 'inherit' | 'initial' | 'revert' | 'unset'
 export type Gap = '4' | '8' | '12' | '16' | '20' | '24' | '28' | '32' | '36' | '40'
 
 const justifyClasses: Record<FlexJustify, string> = {
@@ -30,6 +31,16 @@ const directionClasses: Record<FlexDirection, string> = {
     row: cls.directionRow,
 }
 
+const wrapClasses: Record<FlexWrap, string> = {
+    'wrap': cls.wrap,
+    'no-wrap': cls.noWrap,
+    'wrap-reverse': cls.wrapReverse,
+    'inherit': cls.inherit,
+    'initial': cls.initial,
+    'revert': cls.revert,
+    'unset': cls.unset,
+}
+
 const gapClasses: Record<Gap, string> = {
     4: cls.gap4,
     8: cls.gap8,
@@ -50,6 +61,7 @@ export interface FlexProps extends DivProps {
     justify?: FlexJustify
     align?: FlexAlign
     direction?: FlexDirection
+    flexWrap?: FlexWrap
     flexGrow?: number
     flexShrink?: number
     flexBasis?: number
@@ -68,6 +80,7 @@ export const Flex = (props: FlexProps) => {
         justify,
         align,
         direction,
+        flexWrap,
         flexGrow,
         flexShrink,
         flexBasis,
@@ -92,6 +105,7 @@ export const Flex = (props: FlexProps) => {
         align && alignClasses[align],
         direction && directionClasses[direction],
         gap && gapClasses[gap],
+        flexWrap && wrapClasses[flexWrap],
     ]
 
     const mods: Mods = {

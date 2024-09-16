@@ -4,8 +4,10 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ErrorBoundary } from 'react-error-boundary'
 
-import { ErrorPage } from '@/widgets/Errors'
 import { StoreProvider } from '@/app/providers/store-provider'
+import { AuthInitializer } from '@/app/providers/router'
+
+import { ErrorPage } from '@/widgets/Errors'
 
 import App from './App'
 
@@ -16,7 +18,9 @@ root.render(
     <StoreProvider>
         <BrowserRouter>
             <ErrorBoundary FallbackComponent={ErrorPage}>
-                <App />
+                <AuthInitializer>
+                    <App />
+                </AuthInitializer>
             </ErrorBoundary>
         </BrowserRouter>
     </StoreProvider>

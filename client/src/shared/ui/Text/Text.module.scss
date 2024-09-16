@@ -62,8 +62,16 @@
   color: var(--on-primary-color);
 }
 
+.secondary {
+  color: var(--secondary-color);
+}
+
 .on-secondary {
   color: var(--on-secondary-color);
+}
+
+.tertiary {
+  color: var(--tertiary-color);
 }
 
 .on-tertiary {
@@ -87,31 +95,31 @@
 }
 
 // Sizes
-.fz-xxs {
+.xxs {
   font-size: var(--font-size-xxs);
 }
 
-.fz-xs {
+.xs {
   font-size: var(--font-size-xs);
 }
 
-.fz-s {
+.s {
   font-size: var(--font-size-s);
 }
 
-.fs-m {
+.m {
   font-size: var(--font-size-m);
 }
 
-.fs-l {
+.l {
   font-size: var(--font-size-l);
 }
 
-.fs-xl {
+.xl {
   font-size: var(--font-size-xl);
 }
 
-.fs-xxl {
+.xxl {
   font-size: var(--font-size-xxl);
 }
 

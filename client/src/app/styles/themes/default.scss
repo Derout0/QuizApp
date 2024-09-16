@@ -13,6 +13,7 @@
   --surface-color-dim: #DED8E1;
   --surface-color-bright: #FEF7FF;
   --surface-container-color-low: #F7F2FA;
+  --surface-container-color-lowest: #FFFFFF;
   --surface-container-color: #F3EDF7;
   --surface-container-color-high: #ECE6F0;
   --surface-container-color-highest: #E6E0E9;
@@ -96,8 +97,11 @@
 
   // Цвета компонентов (используют цвета выше)
 
+  // Navbar
+  --navbar-background-color: var(--surface-color);
+
   // Sidebar
-  --sidebar-background-color: var(--surface-container-color);
+  --sidebar-background-color: var(--surface-color);
 
   // Input
   --primary-input-background-color: var(--surface-container-color-highest);

@@ -30,6 +30,7 @@ interface ThunkExtraArguments {
     api: AxiosInstance
 }
 
-export interface ThunkConfig {
+export interface ThunkConfig<T> {
+    rejectValue: T
     extra: ThunkExtraArguments
 }

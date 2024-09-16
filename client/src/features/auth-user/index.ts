@@ -1,3 +1,5 @@
+export { useAuth } from './lib/hooks/useAuth/useAuth'
+
 export { AuthModal } from './ui/AuthModal/AuthModal'
 
 export { loginService } from './model/services/login/loginService'

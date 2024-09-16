@@ -98,6 +98,36 @@
   &.maxWidth {
     width: 100%;
   }
+
+  // Wrap
+
+  &.wrap {
+    flex-wrap: wrap;
+  }
+
+  &.noWrap {
+    flex-wrap: nowrap;
+  }
+
+  &.wrapReverse {
+    flex-wrap: wrap-reverse;
+  }
+
+  &.inherit {
+    flex-wrap: inherit;
+  }
+
+  &.initial {
+    flex-wrap: initial;
+  }
+
+  &.revert {
+    flex-wrap: revert;
+  }
+
+  &.unset {
+    flex-wrap: unset;
+  }
 }
 
 

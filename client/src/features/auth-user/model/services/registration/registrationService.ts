@@ -5,14 +5,14 @@ import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
 import type { ThunkConfig } from '@/app/providers/store-provider'
 
-interface RegistrationRequest {
+export interface RegistrationRequest {
     email: string
     password: string
     username: string
 }
 
-export const registrationService = createAsyncThunk<UserEntity, RegistrationRequest, ThunkConfig>(
-    'service-user/registrationService',
+export const registrationService = createAsyncThunk<UserEntity, RegistrationRequest, ThunkConfig<string>>(
+    'user/registrationService',
     async (data, thunkAPI) => {
         const { extra } = thunkAPI
         try {

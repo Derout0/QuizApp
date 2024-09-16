@@ -4,10 +4,10 @@ import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
 import type { ThunkConfig } from '@/app/providers/store-provider'
 
-export const logoutService = createAsyncThunk<void, void, ThunkConfig>(
-    'service-user/registrationService',
+export const logoutService = createAsyncThunk<void, void, ThunkConfig<string>>(
+    'user/registrationService',
     async (_, thunkAPI) => {
-        const { extra, rejectWithValue } = thunkAPI
+        const { extra } = thunkAPI
 
         try {
             await extra.api.post<AuthResponse>('/logout')
@@ -15,7 +15,6 @@ export const logoutService = createAsyncThunk<void, void, ThunkConfig>(
             authResponseHandler({ purpose: 'forbid', thunkAPI })
         }
         catch (error) {
-            rejectWithValue(123)
             return thunkErrorHandler(error, thunkAPI)
         }
     },

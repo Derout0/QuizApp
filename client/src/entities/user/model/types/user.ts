@@ -19,4 +19,7 @@ export interface UserEntity {
 export interface UserSchema {
     data: UserEntity | undefined
     authorized: boolean
+    inited: boolean
+    isLoading: boolean
+    error?: string
 }

@@ -1,6 +1,7 @@
 import type { GetThunkAPI } from '@reduxjs/toolkit'
 import type { AsyncThunkConfig } from '@reduxjs/toolkit/dist/createAsyncThunk'
 import { isAxiosError } from 'axios'
+import type { ThunkConfig } from '@/app/providers/store-provider'
 
 /**
  * Функция принимает объект ошибки, thunkAPI и необязательное
@@ -13,7 +14,7 @@ import { isAxiosError } from 'axios'
 
 export const thunkErrorHandler = (
     error: unknown,
-    thunkAPI: GetThunkAPI<AsyncThunkConfig>,
+    thunkAPI: GetThunkAPI<ThunkConfig<any>>,
     message?: string,
 ) => {
     if (isAxiosError(error)) {

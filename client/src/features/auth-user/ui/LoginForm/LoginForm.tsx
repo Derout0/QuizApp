@@ -17,6 +17,7 @@ import { HStack } from '@/shared/ui/Stack'
 
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
+import { useAuth } from '@/features/auth-user'
 
 interface LoginFormProps {
     className?: string
@@ -36,6 +37,7 @@ const LoginForm = (props: LoginFormProps) => {
     } = props
 
     const dispatch = useAppDispatch()
+    const { signIn } = useAuth()
 
     const email = useSelector(getLoginEmail)
     const password = useSelector(getLoginPassword)
@@ -52,12 +54,12 @@ const LoginForm = (props: LoginFormProps) => {
     const onFormSubmit = useCallback(async (event: FormEvent) => {
         event.preventDefault()
 
-        const result = await dispatch(loginService({ email, password }))
+        const result = await signIn({ email, password })
 
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess()
         }
-    }, [dispatch, email, password, onSuccess])
+    }, [signIn, email, password, onSuccess])
 
     return (
         <AsyncReducerLoader reducers={reducers}>

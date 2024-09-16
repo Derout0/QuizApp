@@ -11,7 +11,7 @@ export const SidebarNavigationItems: SidebarItemType[] = [
     },
     {
         name: 'Библиотека',
-        path: '/',
+        path: '/profile/39',
         Icon: FolderIcon,
     },
     {

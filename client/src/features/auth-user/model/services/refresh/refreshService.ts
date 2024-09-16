@@ -4,8 +4,9 @@ import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { authResponseHandler } from '@/shared/lib/service/authResponseHandler'
 import type { ThunkConfig } from '@/app/providers/store-provider'
 
-export const refreshService = createAsyncThunk<void, void, ThunkConfig>(
-    'service-user/refreshService',
+// TODO: DELETE?
+export const refreshService = createAsyncThunk<void, void, ThunkConfig<string>>(
+    'user/refreshService',
     async (_, thunkAPI) => {
         const { extra } = thunkAPI
 

@@ -32,6 +32,9 @@ body {
 
 .Page {
   flex: 1 1 auto;
+  padding: var(--base-size-20);
+  background-color: var(--surface-container-color-lowest);
+  border-radius: var(--border-radius-m);
 }
 
 .Container {
