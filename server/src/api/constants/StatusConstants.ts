@@ -15,6 +15,13 @@ export class StatusConstants {
     public static CONFLICT_MSG = '[Error]: Conflict!'
     public static INTERNAL_SERVER_ERROR_MSG = '[Error]: Internal server error!'
 
-    // Additionally
+    // Custom
     public static USER_ALREADY_EXISTS_MSG = '[Error]: User already exists!'
+    public static VALIDATION_ERROR_MSG = '[Error]: Validation Error!'
+
+    // Not Found
+    public static ID_NOT_FOUND_MSG = '[Error]: ID not found!'
+    public static PROFILE_NOT_FOUND_MSG = '[Error]: Profile not found!'
+    public static USER_NOT_FOUND_MSG = '[Error]: User not found!'
+    public static DATA_NOT_FOUND_MSG = '[Error]: Data not found!'
 }

@@ -1,7 +1,7 @@
 import { BaseRepository, FieldMapping } from '@/api/repositories/BaseRepository.ts'
 import { ProfileModel } from '@/api/models/ProfileModel.ts'
 
-const profileFieldMapping: FieldMapping<ProfileModel> = {
+export const profileFieldMapping: FieldMapping<ProfileModel> = {
     profileId: 'profile_id',
     userId: 'user_id',
     avatarUrl: 'avatar_url',
@@ -13,6 +13,8 @@ const profileFieldMapping: FieldMapping<ProfileModel> = {
     createdAt: 'created_at',
     updatedAt: 'updated_at',
 }
+
+export const profileFieldClientKeys = Object.keys(profileFieldMapping)
 
 export class ProfileRepository extends BaseRepository<ProfileModel> {
     constructor() {

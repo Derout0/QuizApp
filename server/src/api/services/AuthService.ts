@@ -5,7 +5,9 @@ import { ProfileService } from '@/api/services/ProfileService.ts'
 import { UserDTO } from '@/api/dtos/UserDTO.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 import { RequestProfileModel } from '@/api/models/ProfileModel.ts'
+import { StatusConstants } from '@/api/constants/StatusConstants.ts'
 
+// TODO: Вынести повтор логики аутентификации в отдельный метод!
 export class AuthService {
     private userRepository: UserRepository
     private tokenService: TokenService
@@ -61,7 +63,6 @@ export class AuthService {
         const userDTO = new UserDTO(user)
 
         const tokens = this.tokenService.generateTokens({ ...userDTO })
-
         await this.tokenService.saveToken(userDTO.userId, tokens)
 
         return { tokens, user: userDTO }
@@ -86,7 +87,7 @@ export class AuthService {
         const user = await this.userRepository.findBy({ userId: tokenFromDB.userId })
 
         if (!user) {
-            throw ApiError.BadRequest(`User not found!`)
+            throw ApiError.BadRequest(StatusConstants.USER_NOT_FOUND_MSG)
         }
 
         const userDTO = new UserDTO(user)
