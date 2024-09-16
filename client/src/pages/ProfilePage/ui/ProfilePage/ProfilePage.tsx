@@ -7,7 +7,6 @@ import { AsyncReducerLoader, type ReducersList } from '@/shared/lib/components/A
 import { useAppDispatch, useEffectOnce } from '@/shared/lib/hooks'
 
 import { fetchProfileData, getProfileData, getProfileError, ProfileCard, profileReducer } from '@/entities/profile'
-import { Text } from '@/shared/ui/Text/Text'
 
 interface ProfilePageProps {
     className?: string
