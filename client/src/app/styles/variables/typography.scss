@@ -1,13 +1,21 @@
 :root {
   --font-family-main: 'Montserrat', 'sans-serif';
 
-  @include setRem(--font-size-xxs, 12);
-  @include setRem(--font-size-xs, 14);
-  @include setRem(--font-size-s, 16);
-  @include setRem(--font-size-m, 18);
-  @include setRem(--font-size-l, 21);
-  @include setRem(--font-size-xl, 24);
-  @include setRem(--font-size-xxl, 27);
+  @include setRem(--font-size-display-large, 57);
+  @include setRem(--font-size-display-medium, 45);
+  @include setRem(--font-size-display-small, 36);
+  @include setRem(--font-size-headline-large, 32);
+  @include setRem(--font-size-headline-medium, 28);
+  @include setRem(--font-size-headline-small, 24);
+  @include setRem(--font-size-title-large, 22);
+  @include setRem(--font-size-title-medium, 16);
+  @include setRem(--font-size-title-small, 14);
+  @include setRem(--font-size-label-large, 14);
+  @include setRem(--font-size-label-medium, 12);
+  @include setRem(--font-size-label-small, 11);
+  @include setRem(--font-size-body-large, 14);
+  @include setRem(--font-size-body-medium, 12);
+  @include setRem(--font-size-body-small, 11);
 
   --text-line-height-100: 1;
   --text-line-height-110: 1.1;

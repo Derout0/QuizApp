@@ -4,19 +4,64 @@
   line-height: 1;
 
   // Темы
-  &.title-h1 {
-    font-size: var(--font-size-xxl);
-    font-weight: var(--font-weight-bold);
+  &.theme-display-l {
+    font-size: var(--font-size-display-large);
   }
 
-  &.title-h2 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
+  &.theme-display-m {
+    font-size: var(--font-size-display-medium);
   }
 
-  &.title-h3 {
-    font-size: var(--font-size-l);
-    font-weight: var(--font-weight-semibold);
+  &.theme-display-s {
+    font-size: var(--font-size-display-small);
+  }
+
+  &.theme-headline-l {
+    font-size: var(--font-size-headline-large);
+  }
+
+  &.theme-headline-m {
+    font-size: var(--font-size-headline-medium);
+  }
+
+  &.theme-headline-s {
+    font-size: var(--font-size-headline-small);
+  }
+
+  &.theme-title-l {
+    font-size: var(--font-size-title-large);
+  }
+
+  &.theme-title-m {
+    font-size: var(--font-size-title-medium);
+  }
+
+  &.theme-title-s {
+    font-size: var(--font-size-title-small);
+  }
+
+  &.theme-label-l {
+    font-size: var(--font-size-label-large);
+  }
+
+  &.theme-label-m {
+    font-size: var(--font-size-label-medium);
+  }
+
+  &.theme-label-s {
+    font-size: var(--font-size-label-small);
+  }
+
+  &.theme-body-l {
+    font-size: var(--font-size-body-large);
+  }
+
+  &.theme-body-m {
+    font-size: var(--font-size-body-medium);
+  }
+
+  &.theme-body-s {
+    font-size: var(--font-size-body-small);
   }
 
   &.title-h4 {
@@ -51,7 +96,6 @@
 .right {
   text-align: right;
 }
-
 
 // Colors
 .primary {
@@ -94,33 +138,65 @@
   color: var(--on-error-color);
 }
 
-// Sizes
-.xxs {
-  font-size: var(--font-size-xxs);
+// Font Size
+.display-l {
+  font-size: var(--font-size-display-large);
 }
 
-.xs {
-  font-size: var(--font-size-xs);
+.display-m {
+  font-size: var(--font-size-display-medium);
 }
 
-.s {
-  font-size: var(--font-size-s);
+.display-s {
+  font-size: var(--font-size-display-small);
 }
 
-.m {
-  font-size: var(--font-size-m);
+.headline-l {
+  font-size: var(--font-size-headline-large);
 }
 
-.l {
-  font-size: var(--font-size-l);
+.headline-m {
+  font-size: var(--font-size-headline-medium);
 }
 
-.xl {
-  font-size: var(--font-size-xl);
+.headline-s {
+  font-size: var(--font-size-headline-small);
 }
 
-.xxl {
-  font-size: var(--font-size-xxl);
+.title-l {
+  font-size: var(--font-size-title-large);
+}
+
+.title-m {
+  font-size: var(--font-size-title-medium);
+}
+
+.title-s {
+  font-size: var(--font-size-title-small);
+}
+
+.label-l {
+  font-size: var(--font-size-label-large);
+}
+
+.label-m {
+  font-size: var(--font-size-label-medium);
+}
+
+.label-s {
+  font-size: var(--font-size-label-small);
+}
+
+.body-l {
+  font-size: var(--font-size-body-large);
+}
+
+.body-m {
+  font-size: var(--font-size-body-medium);
+}
+
+.body-s {
+  font-size: var(--font-size-body-small);
 }
 
 // Line Height

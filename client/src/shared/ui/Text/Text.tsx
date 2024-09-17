@@ -2,23 +2,22 @@ import * as cls from './Text.module.scss'
 import { classNames, type Mods } from '@/shared/lib/classNames/classNames'
 import { createElement, type ReactNode } from 'react'
 
+import type { TextTheme } from './types'
 import {
     type TextColor,
-    type TextFW,
-    type TextLH,
+    type TextFontWeight,
+    type TextLineHeight,
     type TextSize,
     type TextType,
     type TextAlign,
-    TextTheme,
 } from './types'
 
-type excludeTextType = Omit<TextProps, 'type'>
-type excludeForTitles = Omit<excludeTextType, 'theme'>
+type TextBlankProps = Omit<TextProps, 'theme' | 'as'>
 
 interface TextSX {
-    size?: TextSize
-    lineHeight?: TextLH
-    fontWeight?: TextFW
+    fontSize?: TextSize
+    lineHeight?: TextLineHeight
+    fontWeight?: TextFontWeight
     color?: TextColor
 }
 
@@ -27,7 +26,7 @@ interface TextProps {
     children?: ReactNode
     sx?: TextSX
     theme?: TextTheme
-    type?: TextType
+    as?: TextType
     align?: TextAlign
     noWrap?: boolean
 }
@@ -38,13 +37,13 @@ export const Text = (props: TextProps) => {
         children,
         theme,
         sx = {},
-        type = 'div',
+        as = 'div',
         align,
         noWrap,
     } = props
 
     const {
-        size,
+        fontSize,
         lineHeight,
         fontWeight,
         color,
@@ -52,10 +51,10 @@ export const Text = (props: TextProps) => {
 
     const additional: string[] = [
         className,
-        (theme && cls[theme]),
-        (size && cls[size]),
+        (fontSize && cls[fontSize]),
         (lineHeight && cls[lineHeight]),
         (fontWeight && [cls[`fw-${fontWeight}`]]),
+        (theme && [cls[`theme-${theme}`]]),
         (color && [cls[color]]),
         (align && cls[align]),
     ]
@@ -64,13 +63,37 @@ export const Text = (props: TextProps) => {
         [cls.noWrap]: noWrap,
     }
 
-    return createElement(type, { className: classNames(cls.Text, mods, additional) }, children)
+    return createElement(as, { className: classNames(cls.Text, mods, additional) }, children)
 }
 
-Text.H1 = (props: excludeForTitles) => <Text {...props} type="h1" theme={TextTheme.titleH1} />
-Text.H2 = (props: excludeForTitles) => <Text {...props} type="h2" theme={TextTheme.titleH2} />
-Text.H3 = (props: excludeForTitles) => <Text {...props} type="h3" theme={TextTheme.titleH3} />
-Text.H4 = (props: excludeForTitles) => <Text {...props} type="h4" theme={TextTheme.titleH4} />
-Text.P = (props: excludeTextType) => <Text {...props} type="p" theme={TextTheme.TEXT} />
-Text.SPAN = (props: excludeTextType) => <Text {...props} type="span" />
-Text.DIV = (props: excludeTextType) => <Text {...props} type="div" />
+// Ready-made themes
+Text.DisplayH1 = (props: TextBlankProps) => <Text {...props} as="h1" theme="display-l" />
+Text.DisplayH2 = (props: TextBlankProps) => <Text {...props} as="h2" theme="display-m" />
+Text.DisplayH3 = (props: TextBlankProps) => <Text {...props} as="h3" theme="display-s" />
+
+Text.HeadlineH1 = (props: TextBlankProps) => <Text {...props} as="h1" theme="headline-l" />
+Text.HeadlineH2 = (props: TextBlankProps) => <Text {...props} as="h2" theme="headline-m" />
+Text.HeadlineH3 = (props: TextBlankProps) => <Text {...props} as="h3" theme="headline-s" />
+
+Text.TitleH1 = (props: TextBlankProps) => <Text {...props} as="h1" theme="title-l" />
+Text.TitleH2 = (props: TextBlankProps) => <Text {...props} as="h2" theme="title-m" />
+Text.TitleH3 = (props: TextBlankProps) => <Text {...props} as="h3" theme="title-s" />
+
+Text.LabelL = (props: TextBlankProps) => <Text {...props} as="label" theme="label-l" />
+Text.LabelM = (props: TextBlankProps) => <Text {...props} as="label" theme="label-m" />
+Text.LabelS = (props: TextBlankProps) => <Text {...props} as="label" theme="label-s" />
+
+Text.BodyL = (props: TextBlankProps) => <Text {...props} as="p" theme="body-l" />
+Text.BodyM = (props: TextBlankProps) => <Text {...props} as="p" theme="body-m" />
+Text.BodyS = (props: TextBlankProps) => <Text {...props} as="p" theme="body-s" />
+
+// Default
+Text.H1 = (props: TextBlankProps) => <Text {...props} as="h1" />
+Text.H2 = (props: TextBlankProps) => <Text {...props} as="h2" />
+Text.H3 = (props: TextBlankProps) => <Text {...props} as="h3" />
+Text.H4 = (props: TextBlankProps) => <Text {...props} as="h4" />
+Text.H5 = (props: TextBlankProps) => <Text {...props} as="h5" />
+Text.H6 = (props: TextBlankProps) => <Text {...props} as="h6" />
+Text.SPAN = (props: TextBlankProps) => <Text {...props} as="span" />
+Text.P = (props: TextBlankProps) => <Text {...props} as="p" />
+Text.Label = (props: TextBlankProps) => <Text {...props} as="label" />
