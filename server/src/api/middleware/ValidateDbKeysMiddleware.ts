@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { ApiError } from '@/api/utils/ApiError.ts'
+import { StatusConstants } from '@/api/constants/StatusConstants.ts'
 
 /**
  * Middleware для валидации передаваемых в запросе ключей с клиентской части
@@ -17,7 +18,7 @@ export class ValidateDbKeysMiddleware {
         const data = req.body
 
         if (!Object.keys(data).length) {
-            return next(ApiError.BadRequest('No data to update!'))
+            return next(ApiError.BadRequest(StatusConstants.DATA_NOT_FOUND_MSG))
         }
 
         const invalidKeys = Object.keys(data).filter(key => !this.allowedKeys.includes(key))
