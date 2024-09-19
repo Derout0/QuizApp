@@ -2,7 +2,8 @@ import { Express, RequestHandler } from 'express'
 import { ErrorHandlingMiddleware } from '@/api/middleware/ErrorHandlingMiddleware.js'
 import { CommonMiddleware } from '@/api/middleware/CommonMiddleware.ts'
 import { AuthMiddleware } from '@/api/middleware/AuthMiddleware.ts'
-import { ValidateDbKeysMiddleware } from '@/api/middleware/ValidateDbKeysMiddleware.ts'
+import { ValidationDbKeysMiddleware } from '@/api/middleware/ValidationDbKeysMiddleware.ts'
+import { ValidationMiddleware } from '@/api/middleware/ValidationMiddleware.ts'
 
 export class InitializeMiddleware {
     public static async InitializeCommonMiddleware(app: Express) {
@@ -25,9 +26,15 @@ export class InitializeMiddleware {
         return authMiddleware.authHandler.bind(authMiddleware)
     }
 
-    public static InitializeValidateDbKeysMiddleware(allowedKeys: string[]): RequestHandler {
-        const validateDbKeysMiddleware = new ValidateDbKeysMiddleware(allowedKeys)
+    public static InitializeValidationDbKeysMiddleware(allowedKeys: string[]): RequestHandler {
+        const validateDbKeysMiddleware = new ValidationDbKeysMiddleware(allowedKeys)
 
         return validateDbKeysMiddleware.validate.bind(validateDbKeysMiddleware)
+    }
+
+    public static InitializeValidationMiddleware(): RequestHandler {
+        const validationMiddleware = new ValidationMiddleware()
+
+        return validationMiddleware.validate.bind(validationMiddleware)
     }
 }

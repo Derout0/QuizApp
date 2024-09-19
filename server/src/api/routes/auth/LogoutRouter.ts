@@ -10,7 +10,7 @@ export class LogoutRoute extends BaseRoute {
         this.path = '/logout'
         this.method = 'POST'
 
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new LogoutController()
     }
 

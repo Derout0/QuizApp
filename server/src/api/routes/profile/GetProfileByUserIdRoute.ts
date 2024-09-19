@@ -10,7 +10,7 @@ export class GetProfileByUserIdRoute extends BaseRoute {
         this.path = '/profile/:id'
         this.method = 'GET'
 
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new GetProfileByUserIdController()
     }
 

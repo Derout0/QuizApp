@@ -10,7 +10,7 @@ export class GetAllUsersRoute extends BaseRoute {
         super()
         this.path = '/users'
         this.middlewares = [InitializeMiddleware.InitializeAuthMiddleware()]
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new GetAllUsersController()
     }
 

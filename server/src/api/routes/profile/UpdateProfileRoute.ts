@@ -1,5 +1,5 @@
-import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { NextFunction, Request, Response } from 'express'
+import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { UpdateProfileController } from '@/api/controllers/profile/UpdateProfileController.ts'
 import { InitializeMiddleware } from '@/api/core/InitializeMiddleware.ts'
 import { profileFieldClientKeys } from '@/api/repositories/ProfileRepository.ts'
@@ -11,15 +11,15 @@ export class UpdateProfileRoute extends BaseRoute {
 
     constructor() {
         super()
-        this.path = '/profile/:id'
+        this.path = '/profile'
         this.method = 'POST'
         this.middlewares = [
             InitializeMiddleware.InitializeAuthMiddleware(),
-            InitializeMiddleware.InitializeValidateDbKeysMiddleware(profileFieldClientKeys),
+            InitializeMiddleware.InitializeValidationMiddleware(),
+            InitializeMiddleware.InitializeValidationDbKeysMiddleware(profileFieldClientKeys),
         ]
         this.validationChains = validation(profileValidation)
-
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new UpdateProfileController()
     }
 

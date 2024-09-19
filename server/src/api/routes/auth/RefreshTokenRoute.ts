@@ -10,7 +10,7 @@ export class RefreshTokenRoute extends BaseRoute {
         this.path = '/refresh'
         this.method = 'GET'
 
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new RefreshTokenController()
     }
 

@@ -1,20 +1,20 @@
 import { NextFunction, Response } from 'express'
 import { StatusConstants } from '@/api/constants/StatusConstants.ts'
 import { BaseController } from '@/api/controllers/BaseController.ts'
-import { ProfileService } from '@/api/services/ProfileService.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 import { TypedRequestBody } from '@/api/types/types.ts'
-import { ProfileModel } from '@/api/models/ProfileModel.ts'
+import { UserService } from '@/api/services/UserService.ts'
+import { UserModel } from '@/api/models/UserModel.ts'
 
-export class UpdateProfileController extends BaseController {
-    private service: ProfileService
+export class UpdateUserController extends BaseController {
+    private service: UserService
 
     constructor() {
         super()
-        this.service = new ProfileService()
+        this.service = new UserService()
     }
 
-    protected async executeImplement(req: TypedRequestBody<ProfileModel>, res: Response, next: NextFunction) {
+    protected async executeImplement(req: TypedRequestBody<UserModel>, res: Response, next: NextFunction) {
         try {
             const { userId } = res.locals.user
             const updatedData = req.body
@@ -27,13 +27,11 @@ export class UpdateProfileController extends BaseController {
                 return next(ApiError.BadRequest(StatusConstants.UNAUTHORIZED_MSG))
             }
 
-            const profile = await this.service.getProfileByUserId(userId)
-
-            if (!profile) {
-                return next(ApiError.NotFound(StatusConstants.PROFILE_NOT_FOUND_MSG))
+            if (updatedData.password) {
+                updatedData.password = await this.service.encryptPassword(updatedData.password)
             }
 
-            const result = await this.service.updateProfile(updatedData, userId)
+            const result = await this.service.updateUser(updatedData, userId)
 
             return this.ok(res, result)
         }

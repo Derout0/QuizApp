@@ -6,15 +6,18 @@ import { UserDTO } from '@/api/dtos/UserDTO.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 import { RequestProfileModel } from '@/api/models/ProfileModel.ts'
 import { StatusConstants } from '@/api/constants/StatusConstants.ts'
+import { UserService } from '@/api/services/UserService.ts'
 
 // TODO: Вынести повтор логики аутентификации в отдельный метод!
 export class AuthService {
     private userRepository: UserRepository
+    private userService: UserService
     private tokenService: TokenService
     private profileService: ProfileService
 
     constructor() {
         this.userRepository = new UserRepository()
+        this.userService = new UserService()
         this.tokenService = new TokenService()
         this.profileService = new ProfileService()
     }
@@ -26,7 +29,7 @@ export class AuthService {
             throw ApiError.Conflict(`The user already exists!`)
         }
 
-        const hashPassword = await bcrypt.hash(password, 3)
+        const hashPassword = await this.userService.encryptPassword(password)
 
         const user = await this.userRepository.create({ email, password: hashPassword, username })
 

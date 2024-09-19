@@ -10,7 +10,7 @@ export class BaseRoute {
     middlewares: RequestHandler[] = []
     validationChains: ValidationChain[] = []
 
-    public async InitializeController() {
+    public async InitializeRouteController() {
         await this.InitializeRoutes()
     }
 
@@ -39,18 +39,18 @@ export class BaseRoute {
 
     // CRUD methods
     public async InitializeGet() {
-        this.router.get(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
+        this.router.get(this.path, [...this.validationChains, ...this.middlewares], this.startService.bind(this))
     }
 
     public async InitializePost() {
-        this.router.post(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
+        this.router.post(this.path, [...this.validationChains, ...this.middlewares], this.startService.bind(this))
     }
 
     public async InitializePut() {
-        this.router.put(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
+        this.router.put(this.path, [...this.validationChains, ...this.middlewares], this.startService.bind(this))
     }
 
     public async InitializeDelete() {
-        this.router.delete(this.path, [...this.middlewares, ...this.validationChains], this.startService.bind(this))
+        this.router.delete(this.path, [...this.validationChains, ...this.middlewares], this.startService.bind(this))
     }
 }

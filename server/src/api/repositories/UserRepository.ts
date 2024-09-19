@@ -3,7 +3,12 @@ import { BaseRepository, FieldMapping } from '@/api/repositories/BaseRepository.
 
 const userFieldMapping: FieldMapping<UserModel> = {
     userId: 'user_id',
+    email: 'email',
+    password: 'password',
+    username: 'username',
 }
+
+export const userFieldClientKeys = Object.keys(userFieldMapping)
 
 export class UserRepository extends BaseRepository<UserModel> {
     constructor() {

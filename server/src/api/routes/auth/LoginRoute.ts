@@ -15,7 +15,7 @@ export class LoginRoute extends BaseRoute {
             body('password').isLength({ min: 3, max: 32 }),
         ]
 
-        this.InitializeController()
+        this.InitializeRouteController()
         this.controller = new LoginController()
     }
 

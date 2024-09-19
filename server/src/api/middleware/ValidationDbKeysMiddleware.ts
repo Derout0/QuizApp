@@ -7,7 +7,7 @@ import { StatusConstants } from '@/api/constants/StatusConstants.ts'
  * @param {string[]} allowedKeys - Массив разрешённых ключей для проверки.
  */
 
-export class ValidateDbKeysMiddleware {
+export class ValidationDbKeysMiddleware {
     allowedKeys: string[]
 
     constructor(allowedKeys: string[]) {
