@@ -15,12 +15,24 @@ export class UserService {
         return await bcrypt.hash(password, salt)
     }
 
-    async checkPassword(password: string) {
-        // const isPasswordEquals = await bcrypt.compare()
+    async checkPassword(password: string, userId: number) {
+        const user = await this.repository.findBy({ userId })
+
+        if (!user) {
+            throw ApiError.NotFound(StatusConstants.USER_NOT_FOUND_MSG)
+        }
+
+        const isPasswordEquals = await bcrypt.compare(password, user.password)
+
+        if (!isPasswordEquals) {
+            throw ApiError.BadRequest('Wrong password!')
+        }
+
+        return isPasswordEquals
     }
 
-    async updateUser(data: Partial<UserModel>, id: number) {
-        return await this.repository.update(data, { userId: id })
+    async updateUser(data: Partial<UserModel>, userId: number) {
+        return await this.repository.update(data, { userId })
     }
 
     async getUserByUserId(id: number) {
