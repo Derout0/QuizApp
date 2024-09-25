@@ -32,6 +32,24 @@ export class UserService {
     }
 
     async updateUser(data: Partial<UserModel>, userId: number) {
+        const { username, email } = data
+
+        if (username) {
+            const existingUsername = await this.repository.findBy({ username })
+
+            if (existingUsername) {
+                throw ApiError.Conflict(`Username ${username} is already taken!`)
+            }
+        }
+
+        if (email) {
+            const existingEmail = await this.repository.findBy({ email })
+
+            if (existingEmail) {
+                throw ApiError.Conflict(`Email ${email} is already taken!`)
+            }
+        }
+
         return await this.repository.update(data, { userId })
     }
 
