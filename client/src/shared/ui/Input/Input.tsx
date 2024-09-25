@@ -69,7 +69,7 @@ export const Input = memo((props: InputProps) => {
     const InputLabel = useMemo(() => {
         if (label) {
             return (
-                <span className={cls.label}>{label}</span>
+                <Text.SPAN className={cls.label}>{label}</Text.SPAN>
             )
         }
     }, [label])

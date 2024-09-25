@@ -2,67 +2,76 @@
   font-size: inherit;
   color: var(--on-surface-color-variant);
   line-height: 1;
+}
 
-  // Темы
-  &.theme-display-l {
-    font-size: var(--font-size-display-large);
-  }
+// Темы
+.theme-display-l {
+  font-size: var(--font-size-display-large);
+  font-weight: var(--font-weight-semibold);
+}
 
-  &.theme-display-m {
-    font-size: var(--font-size-display-medium);
-  }
+.theme-display-m {
+  font-size: var(--font-size-display-medium);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-display-s {
-    font-size: var(--font-size-display-small);
-  }
+.theme-display-s {
+  font-size: var(--font-size-display-small);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-headline-l {
-    font-size: var(--font-size-headline-large);
-  }
+.theme-headline-l {
+  font-size: var(--font-size-headline-large);
+  font-weight: var(--font-weight-semibold);
+}
 
-  &.theme-headline-m {
-    font-size: var(--font-size-headline-medium);
-  }
+.theme-headline-m {
+  font-size: var(--font-size-headline-medium);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-headline-s {
-    font-size: var(--font-size-headline-small);
-  }
+.theme-headline-s {
+  font-size: var(--font-size-headline-small);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-title-l {
-    font-size: var(--font-size-title-large);
-  }
+.theme-title-l {
+  font-size: var(--font-size-title-large);
+  font-weight: var(--font-weight-semibold);
+}
 
-  &.theme-title-m {
-    font-size: var(--font-size-title-medium);
-  }
+.theme-title-m {
+  font-size: var(--font-size-title-medium);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-title-s {
-    font-size: var(--font-size-title-small);
-  }
+.theme-title-s {
+  font-size: var(--font-size-title-small);
+  font-weight: var(--font-weight-medium);
+}
 
-  &.theme-label-l {
-    font-size: var(--font-size-label-large);
-  }
+.theme-label-l {
+  font-size: var(--font-size-label-large);
+}
 
-  &.theme-label-m {
-    font-size: var(--font-size-label-medium);
-  }
+.theme-label-m {
+  font-size: var(--font-size-label-medium);
+}
 
-  &.theme-label-s {
-    font-size: var(--font-size-label-small);
-  }
+.theme-label-s {
+  font-size: var(--font-size-label-small);
+}
 
-  &.theme-body-l {
-    font-size: var(--font-size-body-large);
-  }
+.theme-body-l {
+  font-size: var(--font-size-body-large);
+}
 
-  &.theme-body-m {
-    font-size: var(--font-size-body-medium);
-  }
+.theme-body-m {
+  font-size: var(--font-size-body-medium);
+}
 
-  &.theme-body-s {
-    font-size: var(--font-size-body-small);
-  }
+.theme-body-s {
+  font-size: var(--font-size-body-small);
 }
 
 // Align

@@ -61,7 +61,7 @@ export const ProfileCardInfo = (props: ProfileInformationProps) => {
         if (!hasInformation) {
             return (
                 <HStack className={cls.empty} flexGrow={1} justify="center">
-                    <Text sx={{ fontWeight: '600', color: 'on-surface-variant', size: 's' }}>
+                    <Text sx={{ fontWeight: '600', color: 'on-surface-variant', fontSize: 'title-l' }}>
                         Пользователь еще не указал о себе ничего
                     </Text>
                 </HStack>

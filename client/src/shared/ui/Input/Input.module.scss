@@ -47,7 +47,7 @@
 
 .input {
   color: var(--primary-input-text-color);
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-title-medium);
   font-weight: var(--font-weight-medium);
   width: 100%;
   height: 100%;
@@ -67,10 +67,10 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--primary-input-label-color);
+  font-size: var(--font-size-title-medium);
   font-weight: var(--font-weight-medium);
   pointer-events: none;
   user-select: none;
-  font-size: var(--font-size-s);
   transition: all .3s ease 0s;
 }
 
@@ -99,7 +99,7 @@
 
   .label {
     color: var(--primary-input-label-color-focus);
-    font-size: var(--font-size-xxs);
+    font-size: var(--font-size-label-medium);
     top: calc(50% - 10px);
     transition: color, top, font-size, 0.2s ease 0s;
   }

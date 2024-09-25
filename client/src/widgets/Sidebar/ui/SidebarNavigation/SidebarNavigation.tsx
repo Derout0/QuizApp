@@ -39,7 +39,13 @@ export const SidebarNavigation = memo((props: SidebarNavigationProps) => {
                     variants={titleAnimation}
                     animate={collapsed ? SidebarVariants.COLLAPSED : SidebarVariants.VISIBLE}
                 >
-                    <Text noWrap className={cls.title} sx={{ fontWeight: '600', color: 'on-surface-variant' }}>{title}</Text>
+                    <Text
+                        noWrap
+                        className={cls.title}
+                        sx={{ fontSize: 'title-s', fontWeight: '600', color: 'on-surface-variant' }}
+                    >
+                        {title}
+                    </Text>
                 </motion.div>
                 <VStack as="ul" gap="4">
                     {renderSidebarItems(items)}

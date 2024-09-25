@@ -41,7 +41,7 @@ const ProfilePage = memo((props: ProfilePageProps) => {
     return (
         <AsyncReducerLoader reducers={reducers}>
             <div className={classNames(cls.ProfilePage, {}, [className])}>
-                <ProfileCard profileData={profileData} />
+                <ProfileCard profileData={profileData || {}} />
             </div>
         </AsyncReducerLoader>
     )

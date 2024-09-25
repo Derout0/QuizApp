@@ -1,8 +1,10 @@
-import type { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit'
-import type { UserSchema } from '@/entities/user'
-import type { LoginSchema, RegistrationSchema } from '@/features/auth-user'
-import type { ProfileSchema } from '@/entities/profile'
 import type { AxiosInstance } from 'axios'
+import type { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit'
+import type { LoginSchema, RegistrationSchema } from '@/features/auth-user'
+import type { CheckPasswordSchema } from '@/features/check-password'
+import type { UserSchema } from '@/entities/user'
+import type { ProfileSchema } from '@/entities/profile'
+import type { UpdateSettingsSchema } from '@/features/update-settings'
 
 export interface StateSchema {
     user: UserSchema
@@ -11,6 +13,10 @@ export interface StateSchema {
     loginForm?: LoginSchema
     registrationForm?: RegistrationSchema
     profile?: ProfileSchema
+
+    // Update
+    updateSettings?: UpdateSettingsSchema
+    checkPasswordForm?: CheckPasswordSchema
 }
 
 export type StateSchemaKey = keyof StateSchema

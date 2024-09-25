@@ -51,7 +51,7 @@ export const AuthForm = memo((props: AuthFormProps) => {
     return (
         <VStack gap="20" className={classNames('', {}, [className])}>
             <HStack justify="center">
-                <Text.H1 sx={{ fontWeight: '500' }} align="center">Авторизация в сервисе</Text.H1>
+                <Text sx={{ fontSize: 'headline-m', fontWeight: '600' }} align="center">Авторизация в сервисе</Text>
             </HStack>
             <Tabs tabsData={tabsData} defaultTabId={defaultTabId} />
         </VStack>

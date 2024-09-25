@@ -6,7 +6,6 @@ import { useCallback } from 'react'
 
 import { getLoginEmail, getLoginIsLoading, getLoginPassword } from '../../model/selectors/getLoginSelectors'
 import { loginActions, loginReducer } from '../../model/slice/loginSlice'
-import { loginService } from '../../model/services/login/loginService'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { classNames } from '@/shared/lib/classNames/classNames'

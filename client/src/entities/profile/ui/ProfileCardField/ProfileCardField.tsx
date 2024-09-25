@@ -15,8 +15,8 @@ export const ProfileCardField = (props: ProfileCardFieldProps) => {
 
     return (
         <VStack gap="4" className={cls.ProfileCardField}>
-            <Text sx={{ color: 'tertiary', fontWeight: '600', size: 'xxs' }}>{title}</Text>
-            <Text sx={{ fontWeight: '500', size: 's' }}>{argument}</Text>
+            <Text sx={{ color: 'tertiary', fontWeight: '600', fontSize: 'label-m' }}>{title}</Text>
+            <Text sx={{ fontWeight: '500', fontSize: 'body-m' }}>{argument}</Text>
         </VStack>
     )
 }
