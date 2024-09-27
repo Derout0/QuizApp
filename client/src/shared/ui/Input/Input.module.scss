@@ -7,32 +7,7 @@
 .fieldMain {
   display: flex;
   align-items: center;
-  background-color: var(--primary-input-background-color);
-  border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
-  transition: background-color .2s ease 0s;
   position: relative;
-
-  &::after,
-  &::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    transition: opacity, transform, .2s ease 0s;
-  }
-
-  &::after {
-    height: 1px;
-    background-color: var(--primary-input-border-color);
-  }
-
-  &::before {
-    height: 2px;
-    opacity: 0;
-    transform: scaleX(0);
-    background-color: var(--primary-input-border-color-focus);
-  }
 }
 
 .inner {
@@ -46,67 +21,161 @@
 }
 
 .input {
-  color: var(--primary-input-text-color);
+  color: var(--neutral-color);
   font-size: var(--font-size-title-medium);
   font-weight: var(--font-weight-medium);
   width: 100%;
   height: 100%;
   outline: none;
-  padding: var(--base-size-12);
   transition: transform .2s ease 0s;
-
-  &::placeholder {
-    opacity: 0;
-    transition: opacity .2s ease 0s;
-  }
 }
 
 .label {
   position: absolute;
-  left: 12px;
+  left: 0;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--primary-input-label-color);
+  color: var(--neutral-color);
   font-size: var(--font-size-title-medium);
   font-weight: var(--font-weight-medium);
   pointer-events: none;
   user-select: none;
-  transition: all .3s ease 0s;
+  transition: color, top, font-size, 0.2s ease 0s;
+}
+
+
+// Themes
+.filled {
+  .fieldMain {
+    transition: background-color .2s ease 0s;
+    background-color: var(--filled-input-background-color);
+    border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;
+
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      transition: opacity, transform, .2s ease 0s;
+    }
+
+    &::after {
+      height: 1px;
+      background-color: var(--filled-input-border-color);
+    }
+
+    &::before {
+      height: 2px;
+      opacity: 0;
+      transform: scaleX(0);
+      background-color: var(--filled-input-border-color-focus);
+    }
+  }
+
+  .input {
+    color: var(--filled-input-text-color);
+    padding: var(--base-size-12);
+
+    &::placeholder {
+      opacity: 0;
+      transition: opacity .2s ease 0s;
+    }
+  }
+
+  .label {
+    left: 12px;
+    color: var(--filled-input-label-color);
+  }
+}
+
+.border {
+  .input {
+    padding: var(--base-size-8);
+  }
+
+  .fieldMain {
+    &::after,
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      transition: opacity, transform, .2s ease 0s;
+    }
+
+    &::after {
+      height: 1px;
+      background-color: var(--border-input-border-color);
+    }
+
+    &::before {
+      height: 2px;
+      opacity: 0;
+      transform: scaleX(0);
+      background-color: var(--filled-input-border-color-focus);
+    }
+  }
+}
+
+// States
+.hovered {
+  // Filled Theme
+  &.filled {
+    .fieldMain {
+      background: var(--filled-input-background-color-hover);
+    }
+  }
+}
+
+.focused {
+  .label {
+    top: calc(50% - 10px);
+    font-size: var(--font-size-label-medium);
+  }
+
+  // Filled Theme
+  &.filled {
+    .fieldMain {
+      background: var(--filled-input-background-color-hover);
+
+      &::before {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    .input {
+      transform: translateY(4px);
+
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+
+    .label {
+      color: var(--filled-input-label-color-focus);
+      font-size: var(--font-size-label-medium);
+      top: calc(50% - 10px);
+    }
+  }
+
+  // Border Theme
+  &.border {
+    .fieldMain {
+      &::before {
+        z-index: 5;
+        background-color: var(--border-input-border-color-focus);
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+  }
 }
 
 .disabled {
   pointer-events: none;
   opacity: 0.7;
-}
-
-.focused {
-  .fieldMain {
-    background: var(--primary-input-background-color-hover);
-
-    &::before {
-      opacity: 1;
-      transform: scaleX(1);
-    }
-  }
-
-  .input {
-    transform: translateY(4px);
-
-    &::placeholder {
-      opacity: 1;
-    }
-  }
-
-  .label {
-    color: var(--primary-input-label-color-focus);
-    font-size: var(--font-size-label-medium);
-    top: calc(50% - 10px);
-    transition: color, top, font-size, 0.2s ease 0s;
-  }
-}
-
-.hovered {
-  .fieldMain {
-    background: var(--primary-input-background-color-hover);
-  }
 }

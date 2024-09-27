@@ -64,8 +64,15 @@ const LoginForm = (props: LoginFormProps) => {
         <AsyncReducerLoader reducers={reducers}>
             <form onSubmit={onFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
                 <VStack gap="12">
-                    <Input value={email} onChange={onChangeEmail} placeholder="Введите email" label="Email" />
                     <Input
+                        theme="filled"
+                        value={email}
+                        onChange={onChangeEmail}
+                        placeholder="Введите email"
+                        label="Email"
+                    />
+                    <Input
+                        theme="filled"
                         value={password}
                         onChange={onChangePassword}
                         type="password"

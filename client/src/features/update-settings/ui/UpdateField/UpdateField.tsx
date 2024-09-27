@@ -1,3 +1,5 @@
+import * as cls from './UpdateField.module.scss'
+import type { FormEvent } from 'react'
 import { memo } from 'react'
 
 import { HStack, VStack } from '@/shared/ui/Stack'
@@ -6,9 +8,12 @@ import { Button } from '@/shared/ui/Button/Button'
 import { Input } from '@/shared/ui/Input/Input'
 
 export interface UpdateFieldProps {
+    id: string
     label: string
-    data: string
-    newData: string
+    inputLabel?: string
+    inputPlaceholder?: string
+    data: string | number
+    newData: string | number
     editing: boolean
     onEdit: () => void
     onChange: (value: string) => void
@@ -19,6 +24,8 @@ export interface UpdateFieldProps {
 export const UpdateField = memo((props: UpdateFieldProps) => {
     const {
         label,
+        inputLabel,
+        inputPlaceholder,
         data,
         newData,
         editing,
@@ -28,26 +35,43 @@ export const UpdateField = memo((props: UpdateFieldProps) => {
         onCancel,
     } = props
 
+    const onFormSubmit = (event: FormEvent) => {
+        event.preventDefault()
+
+        if (editing) {
+            onSave()
+        }
+    }
+
     if (editing) {
         return (
-            <HStack gap="20" justify="space-between">
-                <VStack gap="8">
-                    <Text>{label}</Text>
-                    <Input autoComplete="off" label={label} value={newData} onChange={onChange} />
-                </VStack>
-                <HStack gap="12">
-                    <Button theme="filled" onClick={onSave}>Сохранить</Button>
-                    <Button theme="filled" onClick={onCancel}>Отмена</Button>
+            <form className={cls.UpdateField} onSubmit={onFormSubmit}>
+                <HStack gap="20" justify="space-between" align="center">
+                    <VStack className={cls.content} gap="8" flexGrow={1}>
+                        <Text sx={{ fontSize: 'label-l', fontWeight: '500' }}>{label}</Text>
+                        <Input
+                            theme="border"
+                            label={inputLabel}
+                            placeholder={inputPlaceholder}
+                            value={String(newData)}
+                            onChange={onChange}
+                            autoComplete="off"
+                        />
+                    </VStack>
+                    <HStack gap="12">
+                        <Button theme="filled" type="submit">Сохранить</Button>
+                        <Button theme="filled" onClick={onCancel}>Отмена</Button>
+                    </HStack>
                 </HStack>
-            </HStack>
+            </form>
         )
     }
 
     return (
-        <HStack gap="20" justify="space-between">
+        <HStack className={cls.UpdateField} gap="20" justify="space-between" align="center">
             <VStack gap="8">
-                <Text>{label}</Text>
-                <Text>{data ? data : 'Не указано'}</Text>
+                <Text sx={{ fontSize: 'label-l', fontWeight: '500' }}>{label}</Text>
+                <Text sx={{ fontSize: 'title-m', fontWeight: '600' }}>{data ? data : 'Не указано'}</Text>
             </VStack>
             <Button theme="filled" onClick={onEdit}>Редактировать</Button>
         </HStack>

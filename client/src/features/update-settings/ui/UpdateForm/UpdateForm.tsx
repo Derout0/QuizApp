@@ -1,10 +1,11 @@
+import { UpdateBlock } from '@/features/update-settings/ui/UpdateBlock/UpdateBlock'
+
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { VStack } from '@/shared/ui/Stack'
 import { updateSettingsReducer } from '../../model/slice/updateSettingsSlice'
 import { UpdateProfileForm } from '../UpdateProfileForm/UpdateProfileForm'
 import { UpdateUserForm } from '../UpdateUserForm/UpdateUserForm'
-import { Text } from '@/shared/ui/Text/Text'
 
 const reducers: ReducersList = {
     updateSettings: updateSettingsReducer,
@@ -13,12 +14,13 @@ const reducers: ReducersList = {
 export const UpdateForm = () => {
     return (
         <AsyncReducerLoader reducers={reducers}>
-            <VStack gap="20">
-                <VStack gap="20">
-                    <Text.TitleH3 sx={{ fontSize: 'headline-s' }}>Персональная информация</Text.TitleH3>
+            <VStack gap="28">
+                <UpdateBlock title="Персональная информация">
                     <UpdateUserForm />
-                </VStack>
-                <UpdateProfileForm />
+                </UpdateBlock>
+                <UpdateBlock title="Информация профиля">
+                    <UpdateProfileForm />
+                </UpdateBlock>
             </VStack>
         </AsyncReducerLoader>
     )

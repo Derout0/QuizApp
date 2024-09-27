@@ -1,7 +1,9 @@
 import type { SidebarBlockType, SidebarItemType } from './types/sidebar'
+import SettingsIcon from '@/shared/assets/icons/Settings.svg'
 import HomeIcon from '@/shared/assets/icons/Home.svg'
 import FolderIcon from '@/shared/assets/icons/Folder.svg'
 import NotificationIcon from '@/shared/assets/icons/Notification.svg'
+import { getRouteSettings } from '@/shared/consts/router'
 
 export const SidebarNavigationItems: SidebarItemType[] = [
     {
@@ -18,6 +20,11 @@ export const SidebarNavigationItems: SidebarItemType[] = [
         name: 'Оповещения',
         path: '/',
         Icon: NotificationIcon,
+    },
+    {
+        name: 'Настройки',
+        path: getRouteSettings(),
+        Icon: SettingsIcon,
     },
 ]
 

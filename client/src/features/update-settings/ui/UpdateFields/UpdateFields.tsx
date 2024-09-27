@@ -1,6 +1,8 @@
+import * as cls from './UpdateFields.module.scss'
 import { useCallback } from 'react'
 import { UpdateField } from '../UpdateField/UpdateField'
 import type { UpdateFieldProps } from '../UpdateField/UpdateField'
+import { VStack } from '@/shared/ui/Stack'
 
 interface UpdateFieldsProps {
     fields: UpdateFieldProps[]
@@ -15,7 +17,10 @@ export const UpdateFields = (props: UpdateFieldsProps) => {
         if (!fields) return
 
         return fields.map(({
+            id,
             label,
+            inputLabel,
+            inputPlaceholder,
             data,
             newData,
             editing,
@@ -23,10 +28,13 @@ export const UpdateFields = (props: UpdateFieldsProps) => {
             onChange,
             onSave,
             onCancel,
-        }, index) => (
+        }) => (
             <UpdateField
-                key={index}
+                id={id}
+                key={id}
                 label={label}
+                inputLabel={inputLabel}
+                inputPlaceholder={inputPlaceholder}
                 data={data}
                 newData={newData}
                 editing={editing}
@@ -39,8 +47,8 @@ export const UpdateFields = (props: UpdateFieldsProps) => {
     }, [fields])
 
     return (
-        <>
+        <VStack className={cls.UpdateFields}>
             { getUserFields() }
-        </>
+        </VStack>
     )
 }

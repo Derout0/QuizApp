@@ -4,7 +4,7 @@ import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import type { ProfileEntity } from '../../types/profile'
 
 interface ProfileDataRequest {
-    id: string
+    id: string | number
 }
 
 export const fetchProfileData = createAsyncThunk<ProfileEntity, ProfileDataRequest, ThunkConfig<string>>(

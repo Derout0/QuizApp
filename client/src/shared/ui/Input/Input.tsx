@@ -1,22 +1,21 @@
 import * as cls from './Input.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
-import type { Mods } from '@/shared/lib/classNames/classNames'
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react'
-import { useMemo } from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { useRef } from 'react'
-import { memo } from 'react'
+import { useMemo, useEffect, useState, useRef, memo } from 'react'
 
+import { classNames } from '@/shared/lib/classNames/classNames'
+import type { Mods } from '@/shared/lib/classNames/classNames'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
 import { Text } from '@/shared/ui/Text/Text'
 import { useHover } from '@/shared/lib/hooks/useHover/useHover'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
 
+type InputTheme = 'filled' | 'outlined' | 'border'
+
 interface InputProps extends HTMLInputProps {
     className?: string
+    theme?: InputTheme
     value?: string
     onChange?: (value: string) => void
     label?: string
@@ -27,6 +26,7 @@ interface InputProps extends HTMLInputProps {
 export const Input = memo((props: InputProps) => {
     const {
         className,
+        theme,
         value,
         onChange,
         label,
@@ -90,8 +90,13 @@ export const Input = memo((props: InputProps) => {
         [cls.hovered]: isHover,
     }
 
+    const additional: string[] = [
+        className,
+        (theme && cls[theme]),
+    ]
+
     return (
-        <div className={classNames(cls.Input, mods, [className])}>
+        <div className={classNames(cls.Input, mods, additional)}>
             <HStack gap="8" className={cls.fieldMain}>
                 <div ref={ref} className={cls.inner}>
                     {InputLabel}

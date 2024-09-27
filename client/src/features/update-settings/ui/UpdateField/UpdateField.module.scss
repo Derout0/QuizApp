@@ -1,0 +1,11 @@
+.UpdateField {
+  padding: var(--base-size-20);
+
+  &:not(:last-child) {
+    border-bottom: var(--base-border-variant);
+  }
+}
+
+.content {
+  max-width: 50rem;
+}

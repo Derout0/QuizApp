@@ -2,6 +2,7 @@ import type { Reducer, ReducersMapObject } from '@reduxjs/toolkit'
 import { configureStore } from '@reduxjs/toolkit'
 
 import { userReducer } from '@/entities/user'
+import { profileReducer } from '@/entities/profile'
 import $api from '@/shared/api/api'
 
 import type { StateSchema } from './StateSchema'
@@ -10,6 +11,7 @@ import { createReducerManager } from './reducerManager'
 export function createReduxStore(initialState?: StateSchema) {
     const rootReducers: ReducersMapObject<StateSchema> = {
         user: userReducer,
+        profile: profileReducer,
     }
 
     const reducerManager = createReducerManager(rootReducers)

@@ -8,11 +8,11 @@ import type { UpdateSettingsSchema } from '@/features/update-settings'
 
 export interface StateSchema {
     user: UserSchema
+    profile: ProfileSchema
 
     // Async
     loginForm?: LoginSchema
     registrationForm?: RegistrationSchema
-    profile?: ProfileSchema
 
     // Update
     updateSettings?: UpdateSettingsSchema
@@ -38,5 +38,6 @@ interface ThunkExtraArguments {
 
 export interface ThunkConfig<T> {
     rejectValue: T
+    state: StateSchema
     extra: ThunkExtraArguments
 }

@@ -50,8 +50,9 @@ export const CheckPasswordForm = (props: CheckPasswordFormProps) => {
 
         if (result.meta.requestStatus === 'fulfilled') {
             onSuccess()
+            onClose()
         }
-    }, [dispatch, password, onSuccess])
+    }, [dispatch, password, onSuccess, onClose])
 
     return (
         <AsyncReducerLoader reducers={reducers}>
@@ -62,6 +63,7 @@ export const CheckPasswordForm = (props: CheckPasswordFormProps) => {
                         <Text sx={{ fontSize: 'title-m', fontWeight: '500' }}>Что-бы подтвердить что это вы, введите свой пароль</Text>
                     </VStack>
                     <Input
+                        theme="filled"
                         label="Пароль"
                         type="password"
                         autoComplete="off"

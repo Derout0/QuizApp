@@ -39,6 +39,7 @@ export const updateSettingsSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(updateUserService.fulfilled, (state) => {
+            state.editableField = null
             state.isLoading = false
             state.error = undefined
             state.user = undefined
@@ -55,6 +56,7 @@ export const updateSettingsSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(updateProfileService.fulfilled, (state) => {
+            state.editableField = null
             state.isLoading = false
             state.error = undefined
             state.user = undefined

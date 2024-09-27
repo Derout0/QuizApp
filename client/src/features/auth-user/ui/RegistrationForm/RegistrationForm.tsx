@@ -13,7 +13,7 @@ import { useAppDispatch } from '@/shared/lib/hooks'
 import { AsyncReducerLoader, type ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 
 import { registrationActions, registrationReducer } from '../../model/slice/registrationSlice'
-import { registrationService } from '../../model/services/registration/registrationService'
+
 import {
     getRegistrationEmail, getRegistrationIsLoading,
     getRegistrationPassword,
@@ -71,9 +71,22 @@ const RegistrationForm = (props: RegistrationFormProps) => {
         <AsyncReducerLoader reducers={reducers}>
             <form onSubmit={onFormSubmit} className={classNames(cls.RegistrationForm, {}, [className])}>
                 <VStack gap="20">
-                    <Input value={username} onChange={onChangeUsername} placeholder="Введите username" label="Username" />
-                    <Input value={email} onChange={onChangeEmail} placeholder="Введите email" label="Email" />
                     <Input
+                        theme="filled"
+                        value={username}
+                        onChange={onChangeUsername}
+                        placeholder="Введите username"
+                        label="Username"
+                    />
+                    <Input
+                        theme="filled"
+                        value={email}
+                        onChange={onChangeEmail}
+                        placeholder="Введите email"
+                        label="Email"
+                    />
+                    <Input
+                        theme="filled"
                         value={password}
                         onChange={onChangePassword}
                         type="password"

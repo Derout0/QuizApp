@@ -1,6 +1,8 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
+import { updateProfileService } from '@/features/update-settings'
+
 import { getProfileData } from '@/entities/profile'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
@@ -9,7 +11,6 @@ import { useFieldManager } from '../../lib/hooks/useFieldManager/useFieldManager
 import { getUpdateProfileData } from '../../model/selectors/getUpdateSettingsSelectors'
 import { updateSettingsActions } from '../../model/slice/updateSettingsSlice'
 import { UpdateFields } from '../UpdateFields/UpdateFields'
-import { updateProfileService } from '@/features/update-settings'
 
 export const UpdateProfileForm = () => {
     const dispatch = useAppDispatch()
@@ -17,12 +18,18 @@ export const UpdateProfileForm = () => {
     const profile = useSelector(getProfileData)
     const updated = useSelector(getUpdateProfileData)
 
-    const onChangeFirstname = useCallback((value: string) => {
+    const onChangeFirstName = useCallback((value: string) => {
         dispatch(updateSettingsActions.updateProfile({ firstName: value }))
     }, [dispatch])
 
+    const onChangeLastName = useCallback((value: string) => {
+        dispatch(updateSettingsActions.updateProfile({ lastName: value }))
+    }, [dispatch])
+
     const onSaveEdit = useCallback(() => {
-        dispatch(updateProfileService(updated))
+        if (updated) {
+            dispatch(updateProfileService(updated))
+        }
     }, [dispatch, updated])
 
     const onCancelEdit = useCallback(() => {
@@ -33,14 +40,21 @@ export const UpdateProfileForm = () => {
     const userFields = [
         {
             id: 'firstName',
-            label: 'First name',
+            label: 'Имя',
             newData: updated?.firstName || '',
             data: profile?.firstName || '',
-            onChange: onChangeFirstname,
+            onChange: onChangeFirstName,
+        },
+        {
+            id: 'lastName',
+            label: 'Фамилия',
+            newData: updated?.lastName || '',
+            data: profile?.lastName || '',
+            onChange: onChangeLastName,
         },
     ]
 
-    const fields = useFieldManager({ initialFields: userFields, onSaveEdit, onCancelEdit })
+    const { fields } = useFieldManager({ initialFields: userFields, onSaveEdit, onCancelEdit })
 
     return (
         <UpdateFields fields={fields} />

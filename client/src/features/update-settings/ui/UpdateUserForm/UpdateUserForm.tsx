@@ -1,10 +1,13 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
+import { checkPasswordActions, CheckPasswordModal } from '@/features/check-password'
+
 import { getUserData } from '@/entities/user'
 
-import { useAppDispatch } from '@/shared/lib/hooks'
+import { useAppDispatch, useModal } from '@/shared/lib/hooks'
 
+import type { InitialField } from '../../lib/hooks/useFieldManager/useFieldManager'
 import { useFieldManager } from '../../lib/hooks/useFieldManager/useFieldManager'
 import { getUpdateUserData } from '../../model/selectors/getUpdateSettingsSelectors'
 import { updateUserService } from '../../model/service/updateUser/updateUserService'
@@ -30,7 +33,9 @@ export const UpdateUserForm = () => {
     }, [dispatch])
 
     const onSaveEdit = useCallback(() => {
-        dispatch(updateUserService(updated))
+        if (updated) {
+            dispatch(updateUserService(updated))
+        }
     }, [dispatch, updated])
 
     const onCancelEdit = useCallback(() => {
@@ -38,33 +43,52 @@ export const UpdateUserForm = () => {
         dispatch(updateSettingsActions.clearEditableField())
     }, [dispatch])
 
-    const userFields = [
+    const onCheckPasswordClose = useCallback(() => {
+        dispatch(checkPasswordActions.setPassword(''))
+    }, [dispatch])
+
+    const { visible, close, open } = useModal({ onClose: onCheckPasswordClose })
+
+    const userFields: InitialField[] = [
         {
             id: 'username',
-            label: 'Username',
+            onCheck: open,
+            label: 'Имя пользователя',
+            inputPlaceholder: 'Введите новое имя пользователя',
             newData: updated?.username || '',
             data: user?.username || '',
             onChange: onChangeUsername,
         },
         {
             id: 'email',
+            onCheck: open,
             label: 'Email',
+            inputPlaceholder: 'Введите новый email',
             newData: updated?.email || '',
             data: user?.email || '',
             onChange: onChangeEmail,
         },
         {
             id: 'password',
-            label: 'Password',
+            onCheck: open,
+            label: 'Пароль',
+            inputPlaceholder: 'Введите новый пароль',
             newData: updated?.password || '',
             data: '**********',
             onChange: onChangePassword,
         },
     ]
 
-    const fields = useFieldManager({ initialFields: userFields, onSaveEdit, onCancelEdit })
+    const { fields, setField } = useFieldManager({
+        initialFields: userFields,
+        onSaveEdit,
+        onCancelEdit,
+    })
 
     return (
-        <UpdateFields fields={fields} />
+        <>
+            <UpdateFields fields={fields} />
+            <CheckPasswordModal isOpen={visible} onClose={close} onSuccess={setField} />
+        </>
     )
 }

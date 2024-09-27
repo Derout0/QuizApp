@@ -1,20 +1,23 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { updateSettingsActions } from '@/features/update-settings'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { getUpdateEditableField } from '../../../model/selectors/getUpdateSettingsSelectors'
 
-interface InitialFields {
+export interface InitialField {
     id: string
     label: string
-    data: string
-    newData: string
+    inputLabel?: string
+    inputPlaceholder?: string
+    data: string | number
+    newData: string | number
+    onCheck?: () => void
     onChange: (value: string) => void
     onSave?: () => void
     onCancel?: () => void
 }
 
-interface ReturnedInitialFields extends InitialFields {
+interface ReturnedInitialField extends InitialField {
     editing: boolean
     onEdit: () => void
     onSave: () => void
@@ -22,33 +25,43 @@ interface ReturnedInitialFields extends InitialFields {
 }
 
 interface FieldManager {
-    initialFields: InitialFields[]
+    initialFields: InitialField[]
     onSaveEdit?: () => void
     onCancelEdit?: () => void
+}
+
+interface ReturnedFieldManager {
+    fields: ReturnedInitialField[]
+    setField: () => void
 }
 
 /**
  * Хук для управления полями формы, предоставляющий функциональность редактирования, сохранения и отмены изменений.
  *
- * @param {Array} props.initialFields - Список полей, которые нужно управлять.
- * @param {string} props.initialFields[].id - Уникальный идентификатор поля.
- * @param {string} props.initialFields[].label - Название поля (например, "Username").
- * @param {string} props.initialFields[].data - Исходное значение поля.
- * @param {string} props.initialFields[].newData - Новое значение поля (во время редактирования).
- * @param {Function} props.initialFields[].onChange - Функция для обработки изменений значения поля.
+ * @param {Object} props - Параметры.
+ * @param {Array<Object>} props.initialFields - Список полей для управления.
+ * @param {string} [props.initialFields[].id] - Уникальный идентификатор поля.
+ * @param {string} [props.initialFields[].label] - Название поля (например, "Username").
+ * @param {string} [props.initialFields[].inputLabel] - Кастомный label для поля ввода.
+ * @param {string} [props.initialFields[].inputPlaceholder] - Placeholder для поля ввода.
+ * @param {string} [props.initialFields[].data] - Исходное значение поля.
+ * @param {string} [props.initialFields[].newData] - Новое значение поля (во время редактирования).
+ * @param {Function} [props.initialFields[].onCheck] - Функция вызывываемая при редактировании. (например: для проверки пароля перед получением доступа к полу ввода).
+ * @param {Function} [props.initialFields[].onChange] - Функция для обработки изменений значения поля.
  * @param {Function} [props.initialFields[].onSave] - Функция для обработки сохранения изменений конкретного поля.
  * @param {Function} [props.initialFields[].onCancel] - Функция для обработки отмены изменений конкретного поля.
- * @param {Function} [props.onSaveEdit] - Функция для общего сохранения, вызываемая, если поле не имеет своего собственного обработчика сохранения.
- * @param {Function} [props.onCancelEdit] - Функция для общей отмены, вызываемая, если поле не имеет своего собственного обработчика отмены.
+ * @param {Function} [props.onSaveEdit] - Функция для общего сохранения, вызываемая, если поле не имеет собственного обработчика сохранения.
+ * @param {Function} [props.onCancelEdit] - Функция для общей отмены, вызываемая, если поле не имеет собственного обработчика отмены.
  *
- * @returns {Array} Массив объектов полей с дополнительными свойствами:
- *  - {boolean} editing - Флаг, показывающий, находится ли поле в режиме редактирования.
- *  - {Function} onEdit - Функция для активации режима редактирования.
- *  - {Function} onSave - Функция для сохранения изменений.
- *  - {Function} onCancel - Функция для отмены изменений.
+ * @returns {Object} - Объект, содержащий:
+ *  - {Array<Object>} fields - Массив объектов полей с дополнительными свойствами:
+ *      - {boolean} editing - Флаг, показывающий, находится ли поле в режиме редактирования.
+ *      - {Function} onEdit - Функция для активации режима редактирования.
+ *      - {Function} onSave - Функция для сохранения изменений.
+ *      - {Function} onCancel - Функция для отмены изменений.
+ *  - {Function} setField - Функция для установки редактируемого поля.
  *
- * @template
- * Пример использования:
+ * @example
  * const fields = useFieldManager({
  *   initialFields: [
  *     {
@@ -65,7 +78,7 @@ interface FieldManager {
  * });
  */
 
-export const useFieldManager = (props: FieldManager): ReturnedInitialFields[] => {
+export const useFieldManager = (props: FieldManager): ReturnedFieldManager => {
     const {
         initialFields,
         onSaveEdit,
@@ -73,19 +86,32 @@ export const useFieldManager = (props: FieldManager): ReturnedInitialFields[] =>
     } = props
 
     const dispatch = useAppDispatch()
+    const selectedID = useRef<string | null>(null)
 
     const editableField = useSelector(getUpdateEditableField)
 
-    const onEditHandler = useCallback((id: string) => {
+    const setField = useCallback(() => {
         dispatch(updateSettingsActions.clearEditableField())
-        dispatch(updateSettingsActions.setEditableField(id))
-    }, [dispatch])
+        dispatch(updateSettingsActions.setEditableField(selectedID.current))
+    }, [dispatch, selectedID])
 
-    const onSaveHandler = useCallback((field: InitialFields) => {
+    const onEditHandler = useCallback((field: InitialField) => {
+        const { id, onCheck } = field
+        selectedID.current = id
+
+        if (onCheck) {
+            onCheck?.()
+            return
+        }
+
+        setField()
+    }, [setField])
+
+    const onSaveHandler = useCallback((field: InitialField) => {
         field.onSave ? field.onSave() : onSaveEdit?.()
     }, [onSaveEdit])
 
-    const onCancelHandler = useCallback((field: InitialFields) => {
+    const onCancelHandler = useCallback((field: InitialField) => {
         field.onCancel ? field.onCancel() : onCancelEdit?.()
     }, [onCancelEdit])
 
@@ -98,12 +124,15 @@ export const useFieldManager = (props: FieldManager): ReturnedInitialFields[] =>
             return {
                 ...field,
                 editing,
-                onEdit: () => onEditHandler(id),
+                onEdit: () => onEditHandler(field),
                 onSave: () => onSaveHandler(field),
                 onCancel: () => onCancelHandler(field),
             }
         })
     }, [editableField, initialFields, onCancelHandler, onEditHandler, onSaveHandler])
 
-    return fields
+    return {
+        fields,
+        setField,
+    }
 }

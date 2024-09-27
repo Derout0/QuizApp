@@ -1,10 +1,6 @@
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/shared/ui/Button/Button'
-import { VStack } from '@/shared/ui/Stack/VStack/VStack'
-import { HStack } from '@/shared/ui/Stack/HStack/HStack'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
-import { Input } from '@/shared/ui/Input/Input'
 import { CheckPasswordModal } from '@/features/check-password/ui/CheckPasswordModal/CheckPasswordModal'
 
 const MainPage = () => {

@@ -104,17 +104,22 @@
   --sidebar-background-color: var(--surface-color);
 
   // Input
-  --primary-input-background-color: var(--surface-container-color-highest);
-  --primary-input-text-color: var(--on-surface-color);
-  --primary-input-label-color: var(--on-surface-color-variant);
-  --primary-input-border-color: var(--on-surface-color);
+  --filled-input-background-color: var(--surface-container-color-highest);
+  --filled-input-text-color: var(--on-surface-color);
+  --filled-input-label-color: var(--on-surface-color-variant);
+  --filled-input-border-color: var(--on-surface-color);
+  --border-input-background-color: transparent;
+  --border-input-text-color: var(--on-surface-color);
+  --border-input-label-color: var(--on-surface-color-variant);
+  --border-input-border-color: var(--outline-color-variant);
 
   // Input - focus
-  --primary-input-label-color-focus: var(--primary-color);
-  --primary-input-border-color-focus: var(--primary-color);
+  --filled-input-label-color-focus: var(--primary-color);
+  --filled-input-border-color-focus: var(--primary-color);
+  --border-input-border-color-focus: var(--primary-color);
 
   // Input - hover
-  --primary-input-background-color-hover: #D6D0D9;
+  --filled-input-background-color-hover: #D6D0D9;
 
   // Tabs
   --primary-tabs-divider-color: var(--primary-color);

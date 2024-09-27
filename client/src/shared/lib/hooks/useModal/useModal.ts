@@ -2,11 +2,13 @@ import { useCallback, useEffect, useState } from 'react'
 
 interface UseModalProps {
     defaultVisible?: boolean
+    onClose?: () => void
 }
 
 export const useModal = (props: UseModalProps = {}) => {
     const {
         defaultVisible = false,
+        onClose,
     } = props
 
     const [visible, setVisible] = useState(defaultVisible)
@@ -17,7 +19,8 @@ export const useModal = (props: UseModalProps = {}) => {
 
     const close = useCallback(() => {
         setVisible(false)
-    }, [])
+        onClose?.()
+    }, [onClose])
 
     const onKeyDown = useCallback((e: KeyboardEvent) => {
         if (e.key === 'Escape') {
