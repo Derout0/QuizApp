@@ -33,7 +33,7 @@
   }
 
   &.hovered {
-    background-color: var(--primary-tabs-background-color-hover);
+    background-color: var(--primary-tabs-background-color-hovered);
 
     &::after {
       transform: translateX(-50%) scaleX(1);
@@ -42,7 +42,7 @@
 
   &.selected {
     color: var(--primary-tabs-text-color-selected);
-    background-color: var(--primary-tabs-background-color-hover);
+    background-color: var(--primary-tabs-background-color-hovered);
 
     &::after {
       transform: translateX(-50%) scaleX(1);

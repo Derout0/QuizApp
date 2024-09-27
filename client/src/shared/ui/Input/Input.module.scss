@@ -125,7 +125,7 @@
   // Filled Theme
   &.filled {
     .fieldMain {
-      background: var(--filled-input-background-color-hover);
+      background: var(--filled-input-background-color-hovered);
     }
   }
 }
@@ -139,7 +139,7 @@
   // Filled Theme
   &.filled {
     .fieldMain {
-      background: var(--filled-input-background-color-hover);
+      background: var(--filled-input-background-color-hovered);
 
       &::before {
         opacity: 1;

@@ -40,7 +40,7 @@
 
       @media (any-hover: hover) {
         &:hover {
-          background-color: var(--primary-color-hov);
+          background-color: var(--primary-color-hovered);
         }
       }
     }
@@ -51,7 +51,7 @@
 
       @media (any-hover: hover) {
         &:hover {
-          background-color: var(--primary-container-color-hov);
+          background-color: var(--primary-container-color-hovered);
         }
       }
     }
@@ -62,7 +62,7 @@
 
       @media (any-hover: hover) {
         &:hover {
-          background-color: var(--secondary-color-hov);
+          background-color: var(--secondary-color-hovered);
         }
       }
     }
@@ -73,7 +73,7 @@
 
       @media (any-hover: hover) {
         &:hover {
-          background-color: var(--secondary-container-color-hov);
+          background-color: var(--secondary-container-color-hovered);
         }
       }
     }
@@ -171,7 +171,7 @@
     }
   }
 
-  // Size
+  // Sizes
   &.small {
     height: var(--button-height-s);
     padding: 0.3125rem 0.875rem;

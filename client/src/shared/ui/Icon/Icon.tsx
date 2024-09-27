@@ -1,7 +1,6 @@
 import * as cls from './Icon.module.scss'
 import type { CSSProperties, FC, SVGProps } from 'react'
-import { memo } from 'react'
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 
 type IconSize = 'small' | 'medium' | 'large'
@@ -18,7 +17,7 @@ export const Icon = memo((props: IconProps) => {
     const {
         className,
         SVG,
-        size = 'medium',
+        size,
         width,
         height,
         ...restProps

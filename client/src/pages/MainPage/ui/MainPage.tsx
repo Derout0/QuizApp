@@ -2,6 +2,9 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { useTranslation } from 'react-i18next'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { CheckPasswordModal } from '@/features/check-password/ui/CheckPasswordModal/CheckPasswordModal'
+import { IconButton } from '@/shared/ui/IconButton/IconButton'
+import Settings from '@/shared/assets/icons/Settings.svg'
+import { Icon } from '@/shared/ui/Icon/Icon'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
@@ -17,7 +20,18 @@ const MainPage = () => {
 
             <button onClick={open}>Открыть модалку</button>
             <CheckPasswordModal isOpen={visible} onClose={close} onSuccess={() => console.log('YES')} />
-
+            <IconButton theme="filled">
+                <Icon SVG={Settings} />
+            </IconButton>
+            <IconButton theme="standard">
+                <Icon SVG={Settings} />
+            </IconButton>
+            <IconButton theme="tonal">
+                <Icon SVG={Settings} />
+            </IconButton>
+            <IconButton theme="outlined">
+                <Icon SVG={Settings} />
+            </IconButton>
             {t('Тестовое предложение')}
         </div>
     )
