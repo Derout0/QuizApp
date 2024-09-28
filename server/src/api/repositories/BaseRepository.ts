@@ -125,7 +125,6 @@ export class BaseRepository<T> {
                 WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}
             `
             const result = await database.query(query, values)
-            console.log('RESULT', result.rows[0])
 
             return result.rows.length ? result.rows[0] : null
         }, null, where, returning)
