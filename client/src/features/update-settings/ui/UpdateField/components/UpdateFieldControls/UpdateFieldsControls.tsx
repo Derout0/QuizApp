@@ -1,13 +1,14 @@
-import * as cls from '../../UpdateField.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
 import { AnimatePresence, motion } from 'framer-motion'
-import { DefaultVariants } from '@/shared/consts/animation'
+
 import { animation } from '@/features/update-settings/lib/animation/animation'
-import { IconButton } from '@/shared/ui/IconButton/IconButton'
-import { Icon } from '@/shared/ui/Icon/Icon'
+
 import ConfirmIcon from '@/shared/assets/icons/Check.svg'
 import CancelIcon from '@/shared/assets/icons/Cross.svg'
 import EditIcon from '@/shared/assets/icons/Pencil.svg'
+
+import { DefaultVariants } from '@/shared/consts/animation'
+import { IconButton } from '@/shared/ui/IconButton/IconButton'
+import { Icon } from '@/shared/ui/Icon/Icon'
 
 interface UpdateFieldsControlsProps {
     editing: boolean

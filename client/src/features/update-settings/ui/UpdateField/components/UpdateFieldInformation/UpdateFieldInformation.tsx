@@ -1,6 +1,8 @@
 import * as cls from '../../UpdateField.module.scss'
 import { AnimatePresence, motion } from 'framer-motion'
+
 import { animation } from '@/features/update-settings/lib/animation/animation'
+
 import { DefaultVariants } from '@/shared/consts/animation'
 import { Input } from '@/shared/ui/Input/Input'
 import { Text } from '@/shared/ui/Text/Text'
