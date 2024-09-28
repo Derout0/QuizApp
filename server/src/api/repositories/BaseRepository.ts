@@ -167,7 +167,7 @@ export class BaseRepository<T> {
 
             const result = await database.query(query, [...updateValues, ...whereValues])
 
-            return result.rows
+            return result.rows[0]
         }, updates, where, returning)
     }
 
