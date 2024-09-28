@@ -50,7 +50,7 @@ export class UserService {
             }
         }
 
-        return await this.repository.update(data, { userId })
+        return await this.repository.update(data, { userId }, { exclude: ['password'] })
     }
 
     async getUserByUserId(id: number) {
@@ -58,6 +58,6 @@ export class UserService {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
 
-        return await this.repository.findBy({ userId: id })
+        return await this.repository.findBy({ userId: id }, { exclude: ['password'] })
     }
 }
