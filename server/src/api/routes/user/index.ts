@@ -1,10 +1,12 @@
 import { BaseRoute } from '@/api/routes/BaseRoute.js'
-import { GetAllUsersRoute } from '@/api/routes/user/GetAllUsersRoute.ts'
-import { UpdateUserRoute } from '@/api/routes/user/UpdateUserRoute.ts'
-import { CheckPasswordRoute } from '@/api/routes/user/CheckPasswordRoute.ts'
+import { GetAllUsersRoute } from './routes/GetAllUsersRoute.ts'
+import { UpdateUserRoute } from './routes/UpdateUserRoute.ts'
+import { CheckPasswordRoute } from './routes/CheckPasswordRoute.ts'
+import { GetUserRoute } from './routes/GetUserRoute.ts'
 
 export const UserRoutes: BaseRoute[] = [
-    new UpdateUserRoute(),
+    new GetUserRoute(),
     new GetAllUsersRoute(),
+    new UpdateUserRoute(),
     new CheckPasswordRoute(),
 ]
