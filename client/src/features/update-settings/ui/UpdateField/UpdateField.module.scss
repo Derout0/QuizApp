@@ -1,11 +1,37 @@
 .UpdateField {
   padding: var(--base-size-20);
+  transition: background-color .1s ease 0s;
 
   &:not(:last-child) {
     border-bottom: var(--base-border-variant);
   }
+
+  @media (any-hover: hover) {
+    &:hover {
+      background-color: var(--on-surface-color-variant-opacity-4);
+
+      .controls {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: visible;
+      }
+    }
+  }
+}
+
+.data {
+  background-color: var(--on-surface-color-variant-opacity-4);
+  border-radius: var(--border-radius-m);
+  padding: var(--base-size-12);
 }
 
 .content {
   max-width: 50rem;
+}
+
+.controls {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: opacity, transform, .2s ease 0s;
 }

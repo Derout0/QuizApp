@@ -1,10 +1,9 @@
 import type { Variants } from 'framer-motion'
 
-export enum BaseAnimationVariants {
-    hidden = 'hidden',
-    visible = 'visible',
-    exit = 'exit',
+export enum DefaultVariants {
+    HIDDEN = 'hidden',
+    VISIBLE = 'visible',
+    EXIT = 'exit',
 }
 
-type BaseVariantKeys = keyof typeof BaseAnimationVariants
-export type CommonAnimationVariants = Record<BaseVariantKeys, Variants[keyof Variants]>
+export type AnimationList<T extends keyof Variants = DefaultVariants> = Record<T, Variants[T]>

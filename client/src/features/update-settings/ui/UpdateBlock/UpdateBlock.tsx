@@ -1,4 +1,3 @@
-import * as cls from './UpdateBlock.module.scss'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import type { ReactNode } from 'react'
 import { Text } from '@/shared/ui/Text/Text'

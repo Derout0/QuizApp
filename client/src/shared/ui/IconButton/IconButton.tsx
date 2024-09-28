@@ -22,6 +22,7 @@ export const IconButton = (props: IconButtonProps) => {
         theme = 'standard',
         size,
         disabled,
+        ...other
     } = props
 
     const additional: string[] = [
@@ -35,7 +36,7 @@ export const IconButton = (props: IconButtonProps) => {
     }
 
     return (
-        <button className={classNames(cls.IconButton, mods, additional)}>
+        <button className={classNames(cls.IconButton, mods, additional)} {...other}>
             {children}
         </button>
     )

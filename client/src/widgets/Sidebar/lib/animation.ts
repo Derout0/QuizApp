@@ -1,12 +1,12 @@
-import type { Variants } from 'framer-motion'
+import type { AnimationList } from '@/shared/consts/animation'
 
 export enum SidebarVariants {
     VISIBLE = 'visible',
     COLLAPSED = 'collapsed',
 }
 
-export const sidebarAnimation: Variants = {
-    visible: {
+export const sidebarAnimation: AnimationList<SidebarVariants> = {
+    [SidebarVariants.VISIBLE]: {
         width: '18.75rem',
         flexBasis: '18.75rem',
         transition: {
@@ -14,7 +14,7 @@ export const sidebarAnimation: Variants = {
             duration: 0.25,
         },
     },
-    collapsed: {
+    [SidebarVariants.COLLAPSED]: {
         width: '3.75rem',
         flexBasis: '3.75rem',
         transition: {
@@ -24,15 +24,15 @@ export const sidebarAnimation: Variants = {
     },
 }
 
-export const titleAnimation: Variants = {
-    visible: {
+export const titleAnimation: AnimationList<SidebarVariants> = {
+    [SidebarVariants.VISIBLE]: {
         opacity: 1,
         height: 'auto',
         transform: 'translateY(0)',
         marginBottom: '0.625rem',
         display: 'block',
     },
-    collapsed: {
+    [SidebarVariants.COLLAPSED]: {
         opacity: 0,
         height: 0,
         transform: 'translateY(-10px)',

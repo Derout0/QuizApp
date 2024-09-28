@@ -8,14 +8,14 @@
   @include setRem(--font-size-headline-medium, 28);
   @include setRem(--font-size-headline-small, 24);
   @include setRem(--font-size-title-large, 22);
-  @include setRem(--font-size-title-medium, 16);
+  @include setRem(--font-size-title-medium, 18);
   @include setRem(--font-size-title-small, 14);
   @include setRem(--font-size-label-large, 14);
   @include setRem(--font-size-label-medium, 12);
   @include setRem(--font-size-label-small, 11);
-  @include setRem(--font-size-body-large, 14);
-  @include setRem(--font-size-body-medium, 12);
-  @include setRem(--font-size-body-small, 11);
+  @include setRem(--font-size-body-large, 16);
+  @include setRem(--font-size-body-medium, 14);
+  @include setRem(--font-size-body-small, 12);
 
   --text-line-height-100: 1;
   --text-line-height-110: 1.1;

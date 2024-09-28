@@ -7,7 +7,7 @@ import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Overlay } from '@/shared/ui/Overlay/Overlay'
 import { Portal } from '@/shared/ui/Portal/Portal'
-import { BaseAnimationVariants } from '@/shared/consts/animation'
+import { DefaultVariants } from '@/shared/consts/animation'
 
 import { baseModalVariants } from './animation'
 
@@ -43,9 +43,9 @@ export const Modal = (props: ModalProps) => {
                         <motion.div
                             className={cls.inner}
                             variants={animationVariants}
-                            initial={BaseAnimationVariants.hidden}
-                            animate={BaseAnimationVariants.visible}
-                            exit={BaseAnimationVariants.exit}
+                            initial={DefaultVariants.HIDDEN}
+                            animate={DefaultVariants.VISIBLE}
+                            exit={DefaultVariants.EXIT}
                         >
                             {children}
                         </motion.div>
