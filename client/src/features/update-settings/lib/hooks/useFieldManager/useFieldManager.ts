@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useRef, useState } from 'react'
+import type { HTMLInputTypeAttribute } from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { updateSettingsActions } from '@/features/update-settings'
 import { useAppDispatch } from '@/shared/lib/hooks'
@@ -9,6 +10,7 @@ export interface InitialField {
     label: string
     inputLabel?: string
     inputPlaceholder?: string
+    inputType?: HTMLInputTypeAttribute
     data: string | number
     newData: string | number
     onCheck?: () => void
@@ -91,7 +93,6 @@ export const useFieldManager = (props: FieldManager): ReturnedFieldManager => {
     const editableField = useSelector(getUpdateEditableField)
 
     const setField = useCallback(() => {
-        dispatch(updateSettingsActions.clearEditableField())
         dispatch(updateSettingsActions.setEditableField(selectedID.current))
     }, [dispatch, selectedID])
 
@@ -115,6 +116,7 @@ export const useFieldManager = (props: FieldManager): ReturnedFieldManager => {
         field.onCancel ? field.onCancel() : onCancelEdit?.()
     }, [onCancelEdit])
 
+    // TODO: исправить перерисовку fields
     const fields = useMemo(() => {
         return initialFields.map((field) => {
             const { id } = field

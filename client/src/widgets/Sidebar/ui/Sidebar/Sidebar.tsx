@@ -4,12 +4,11 @@ import React, { memo, useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-import Logo from '@/shared/assets/Logo.svg'
+import logo from '@/shared/assets/Logo.svg?url'
 
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { Icon } from '@/shared/ui/Icon/Icon'
 import { getRouteMain } from '@/shared/consts/router'
 import { Hamburger } from '@/shared/ui/Hamburger/Hamburger'
 
@@ -45,7 +44,7 @@ export const Sidebar = memo((props: SidebarProps) => {
             <VStack gap="20">
                 <HStack className={cls.header} justify="space-between" align="center">
                     <Link className={classNames(cls.logo)} to={getRouteMain()}>
-                        <Icon width="120px" SVG={Logo} />
+                        <img width={120} src={logo} alt="QuizApp" />
                     </Link>
                     <Hamburger onClick={onToggle} size="small" collapsed={collapsed} />
                 </HStack>

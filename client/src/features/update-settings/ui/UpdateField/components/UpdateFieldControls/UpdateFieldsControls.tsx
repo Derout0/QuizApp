@@ -1,3 +1,4 @@
+import * as cls from '../../UpdateField.module.scss'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { animation } from '@/features/update-settings/lib/animation/animation'
@@ -9,6 +10,8 @@ import EditIcon from '@/shared/assets/icons/Pencil.svg'
 import { DefaultVariants } from '@/shared/consts/animation'
 import { IconButton } from '@/shared/ui/IconButton/IconButton'
 import { Icon } from '@/shared/ui/Icon/Icon'
+import { HStack } from '@/shared/ui/Stack'
+import { memo } from 'react'
 
 interface UpdateFieldsControlsProps {
     editing: boolean
@@ -16,7 +19,7 @@ interface UpdateFieldsControlsProps {
     onCancel: () => void
 }
 
-export const UpdateFieldsControls = (props: UpdateFieldsControlsProps) => {
+export const UpdateFieldsControls = memo((props: UpdateFieldsControlsProps) => {
     const {
         editing,
         onEdit,
@@ -60,11 +63,13 @@ export const UpdateFieldsControls = (props: UpdateFieldsControlsProps) => {
                         exit={DefaultVariants.EXIT}
                         variants={animation}
                     >
-                        <IconButton onClick={onEdit}>
-                            <Icon SVG={EditIcon} />
-                        </IconButton>
+                        <HStack className={cls.controls}>
+                            <IconButton onClick={onEdit}>
+                                <Icon SVG={EditIcon} />
+                            </IconButton>
+                        </HStack>
                     </motion.div>
                 )}
         </AnimatePresence>
     )
-}
+})

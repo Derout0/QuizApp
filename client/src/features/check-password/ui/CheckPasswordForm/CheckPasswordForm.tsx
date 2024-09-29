@@ -64,6 +64,7 @@ export const CheckPasswordForm = (props: CheckPasswordFormProps) => {
                     </VStack>
                     <Input
                         theme="filled"
+                        autofocus
                         label="Пароль"
                         type="password"
                         autoComplete="off"

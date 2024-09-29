@@ -3,6 +3,7 @@ import { UpdateBlock } from '@/features/update-settings/ui/UpdateBlock/UpdateBlo
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { VStack } from '@/shared/ui/Stack'
+
 import { updateSettingsReducer } from '../../model/slice/updateSettingsSlice'
 import { UpdateProfileForm } from '../UpdateProfileForm/UpdateProfileForm'
 import { UpdateUserForm } from '../UpdateUserForm/UpdateUserForm'

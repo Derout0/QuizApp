@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { checkPasswordActions, CheckPasswordModal } from '@/features/check-password'
@@ -14,7 +14,7 @@ import { updateUserService } from '../../model/service/updateUser/updateUserServ
 import { updateSettingsActions } from '../../model/slice/updateSettingsSlice'
 import { UpdateFields } from '../UpdateFields/UpdateFields'
 
-export const UpdateUserForm = () => {
+export const UpdateUserForm = memo(() => {
     const dispatch = useAppDispatch()
 
     const user = useSelector(getUserData)
@@ -73,6 +73,7 @@ export const UpdateUserForm = () => {
             onCheck: open,
             label: 'Пароль',
             inputPlaceholder: 'Введите новый пароль',
+            inputType: 'password',
             newData: updated?.password || '',
             data: '**********',
             onChange: onChangePassword,
@@ -91,4 +92,4 @@ export const UpdateUserForm = () => {
             <CheckPasswordModal isOpen={visible} onClose={close} onSuccess={setField} />
         </>
     )
-}
+})

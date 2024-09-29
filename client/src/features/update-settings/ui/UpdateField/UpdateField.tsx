@@ -1,5 +1,5 @@
 import * as cls from './UpdateField.module.scss'
-import type { FormEvent } from 'react'
+import type { FormEvent, HTMLInputTypeAttribute } from 'react'
 import { memo } from 'react'
 
 import { HStack, VStack } from '@/shared/ui/Stack'
@@ -13,6 +13,7 @@ export interface UpdateFieldProps {
     label: string
     inputLabel?: string
     inputPlaceholder?: string
+    inputType?: HTMLInputTypeAttribute
     data: string | number
     newData: string | number
     editing: boolean
@@ -27,6 +28,7 @@ export const UpdateField = memo((props: UpdateFieldProps) => {
         label,
         inputLabel,
         inputPlaceholder,
+        inputType,
         data,
         newData,
         editing,
@@ -53,6 +55,7 @@ export const UpdateField = memo((props: UpdateFieldProps) => {
                         editing={editing}
                         inputLabel={inputLabel}
                         inputPlaceholder={inputPlaceholder}
+                        inputType={inputType}
                         data={data}
                         newData={newData}
                         onChange={onChange}

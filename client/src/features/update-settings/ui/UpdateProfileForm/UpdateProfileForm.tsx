@@ -7,6 +7,7 @@ import { getProfileData } from '@/entities/profile'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
 
+import type { InitialField } from '../../lib/hooks/useFieldManager/useFieldManager'
 import { useFieldManager } from '../../lib/hooks/useFieldManager/useFieldManager'
 import { getUpdateProfileData } from '../../model/selectors/getUpdateSettingsSelectors'
 import { updateSettingsActions } from '../../model/slice/updateSettingsSlice'
@@ -37,10 +38,11 @@ export const UpdateProfileForm = () => {
         dispatch(updateSettingsActions.clearEditableField())
     }, [dispatch])
 
-    const userFields = [
+    const userFields: InitialField[] = [
         {
             id: 'firstName',
             label: 'Имя',
+            inputPlaceholder: 'Введите новое имя',
             newData: updated?.firstName || '',
             data: profile?.firstName || '',
             onChange: onChangeFirstName,
@@ -48,6 +50,7 @@ export const UpdateProfileForm = () => {
         {
             id: 'lastName',
             label: 'Фамилия',
+            inputPlaceholder: 'Введите новую фамилию',
             newData: updated?.lastName || '',
             data: profile?.lastName || '',
             onChange: onChangeLastName,

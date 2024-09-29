@@ -19,7 +19,7 @@ export interface UpdateProfileSchema {
 export interface UpdateSettingsSchema {
     user?: UpdateUserSchema
     profile?: UpdateProfileSchema
-    editableField: string | null
+    editableFieldId: string | null
     isLoading: boolean
     error?: string
 }

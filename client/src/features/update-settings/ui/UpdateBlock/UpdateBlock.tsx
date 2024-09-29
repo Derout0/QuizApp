@@ -1,5 +1,6 @@
-import { classNames } from '@/shared/lib/classNames/classNames'
 import type { ReactNode } from 'react'
+import { memo } from 'react'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import { Text } from '@/shared/ui/Text/Text'
 import { VStack } from '@/shared/ui/Stack'
 

@@ -72,6 +72,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
             <form onSubmit={onFormSubmit} className={classNames(cls.RegistrationForm, {}, [className])}>
                 <VStack gap="20">
                     <Input
+                        autofocus
                         theme="filled"
                         value={username}
                         onChange={onChangeUsername}

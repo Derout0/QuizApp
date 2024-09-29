@@ -65,6 +65,7 @@ const LoginForm = (props: LoginFormProps) => {
             <form onSubmit={onFormSubmit} className={classNames(cls.LoginForm, {}, [className])}>
                 <VStack gap="12">
                     <Input
+                        autofocus
                         theme="filled"
                         value={email}
                         onChange={onChangeEmail}

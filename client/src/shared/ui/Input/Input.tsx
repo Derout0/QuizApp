@@ -8,6 +8,7 @@ import type { Mods } from '@/shared/lib/classNames/classNames'
 import { HStack } from '@/shared/ui/Stack/HStack/HStack'
 import { Text } from '@/shared/ui/Text/Text'
 import { useHover } from '@/shared/lib/hooks/useHover/useHover'
+import { useAutofocus } from '@/shared/lib/hooks'
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
 
@@ -19,6 +20,7 @@ interface InputProps extends HTMLInputProps {
     value?: string
     onChange?: (value: string) => void
     label?: string
+    autofocus?: boolean
     error?: string
     disabled?: boolean
 }
@@ -30,14 +32,17 @@ export const Input = memo((props: InputProps) => {
         value,
         onChange,
         label,
+        autofocus,
         error,
         type = 'text',
         disabled,
         ...other
     } = props
 
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
+    useAutofocus(inputRef, autofocus)
     const { isHover } = useHover(ref)
     const [isFocus, setIsFocus] = useState<boolean>(false)
 
@@ -102,6 +107,7 @@ export const Input = memo((props: InputProps) => {
                     {InputLabel}
                     <div className={cls.field}>
                         <input
+                            ref={inputRef}
                             className={cls.input}
                             onChange={onChangeHandler}
                             onFocus={onFocusHandler}

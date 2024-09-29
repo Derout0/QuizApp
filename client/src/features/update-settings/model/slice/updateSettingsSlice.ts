@@ -1,14 +1,18 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { UpdateProfileSchema, UpdateSettingsSchema, UpdateUserSchema } from '../types/updateSettingsSchema'
+import type {
+    UpdateProfileSchema,
+    UpdateSettingsSchema,
+    UpdateUserSchema,
+} from '../types/updateSettingsSchema'
 import { updateProfileService } from '../service/updateProfile/updateProfileService'
 import { updateUserService } from '../service/updateUser/updateUserService'
 
 const initialState: UpdateSettingsSchema = {
     user: undefined,
     profile: undefined,
-    editableField: null,
+    editableFieldId: null,
     isLoading: false,
     error: undefined,
 }
@@ -28,10 +32,10 @@ export const updateSettingsSlice = createSlice({
             state.profile = undefined
         },
         setEditableField(state, action: PayloadAction<string | null>) {
-            state.editableField = action.payload
+            state.editableFieldId = action.payload
         },
         clearEditableField(state) {
-            state.editableField = null
+            state.editableFieldId = null
         },
     },
     extraReducers: (builder) => {
@@ -39,7 +43,7 @@ export const updateSettingsSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(updateUserService.fulfilled, (state) => {
-            state.editableField = null
+            state.editableFieldId = null
             state.isLoading = false
             state.error = undefined
             state.user = undefined
@@ -56,7 +60,7 @@ export const updateSettingsSlice = createSlice({
             state.isLoading = true
         })
         builder.addCase(updateProfileService.fulfilled, (state) => {
-            state.editableField = null
+            state.editableFieldId = null
             state.isLoading = false
             state.error = undefined
             state.user = undefined

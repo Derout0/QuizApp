@@ -1,4 +1,6 @@
 import * as cls from '../../UpdateField.module.scss'
+import type { HTMLInputTypeAttribute } from 'react'
+import { memo } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { animation } from '@/features/update-settings/lib/animation/animation'
@@ -11,16 +13,18 @@ interface UpdateFieldInformationProps {
     editing: boolean
     inputLabel?: string
     inputPlaceholder?: string
+    inputType?: HTMLInputTypeAttribute
     data: string | number
     newData: string | number
     onChange: (value: string) => void
 }
 
-export const UpdateFieldInformation = (props: UpdateFieldInformationProps) => {
+export const UpdateFieldInformation = memo((props: UpdateFieldInformationProps) => {
     const {
         editing,
         inputLabel,
         inputPlaceholder,
+        inputType,
         data,
         newData,
         onChange,
@@ -39,8 +43,10 @@ export const UpdateFieldInformation = (props: UpdateFieldInformationProps) => {
                     >
                         <Input
                             theme="border"
+                            autofocus
                             label={inputLabel}
                             placeholder={inputPlaceholder}
+                            type={inputType}
                             value={String(newData)}
                             onChange={onChange}
                             autoComplete="off"
@@ -62,4 +68,4 @@ export const UpdateFieldInformation = (props: UpdateFieldInformationProps) => {
                 )}
         </AnimatePresence>
     )
-}
+})
