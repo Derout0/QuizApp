@@ -20,6 +20,7 @@ const MainPage = () => {
 
             <button onClick={open}>Открыть модалку</button>
             <CheckPasswordModal isOpen={visible} onClose={close} onSuccess={() => console.log('YES')} />
+            <img src="http://localhost:4000/static/avatars/default-avatar-1.png" />
             <IconButton theme="filled">
                 <Icon SVG={Settings} />
             </IconButton>

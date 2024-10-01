@@ -119,11 +119,8 @@ export class BaseRepository<T> {
 
             if (keys.length === 0) return null
 
-            const query = `
-                SELECT ${returningClause} 
-                FROM ${this.tableName} 
-                WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}
-            `
+            const query = `SELECT ${returningClause} FROM ${this.tableName} WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
+
             const result = await database.query(query, values)
 
             return result.rows.length ? result.rows[0] : null

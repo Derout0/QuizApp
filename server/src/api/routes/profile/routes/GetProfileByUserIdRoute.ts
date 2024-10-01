@@ -1,6 +1,6 @@
-import { BaseRoute } from '@/api/routes/BaseRoute.ts'
 import { NextFunction, Request, Response } from 'express'
-import { GetProfileByUserIdController } from '@/api/controllers/profile/GetProfileByUserIdController.ts'
+import { BaseRoute } from '@/api/routes/BaseRoute.ts'
+import { GetProfileByUserIdController } from '@/api/controllers/profile/GetProfileByUserIdController.js'
 
 export class GetProfileByUserIdRoute extends BaseRoute {
     private controller: GetProfileByUserIdController

@@ -4,6 +4,7 @@ import { CommonMiddleware } from '@/api/middleware/CommonMiddleware.ts'
 import { AuthMiddleware } from '@/api/middleware/AuthMiddleware.ts'
 import { ValidationDbKeysMiddleware } from '@/api/middleware/ValidationDbKeysMiddleware.ts'
 import { ValidationMiddleware } from '@/api/middleware/ValidationMiddleware.ts'
+import { UploadAvatarMiddleware } from '@/api/middleware/files/UploadAvatarMiddleware.js'
 
 export class InitializeMiddleware {
     public static async InitializeCommonMiddleware(app: Express) {
@@ -12,6 +13,7 @@ export class InitializeMiddleware {
         await commonMiddleware.useExpressJson()
         await commonMiddleware.useCookieParser()
         await commonMiddleware.useCors()
+        await commonMiddleware.usePublicFiles()
     }
 
     public static async InitializeErrorHandlingMiddleware(app: Express) {
@@ -36,5 +38,11 @@ export class InitializeMiddleware {
         const validationMiddleware = new ValidationMiddleware()
 
         return validationMiddleware.validate.bind(validationMiddleware)
+    }
+
+    public static InitializeUploadAvatarMiddleware(fieldName: string): RequestHandler {
+        const uploadAvatarMiddleware = new UploadAvatarMiddleware()
+
+        return uploadAvatarMiddleware.single(fieldName).bind(uploadAvatarMiddleware)
     }
 }
