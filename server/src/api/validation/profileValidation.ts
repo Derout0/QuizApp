@@ -4,7 +4,7 @@ import { ProfileModel } from '@/api/models/ProfileModel.ts'
 export const profileValidation: {
     [K in keyof Partial<ProfileModel>]: (field: K) => ValidationChain;
 } = {
-    avatarUrl: field => body(field).optional().isURL().withMessage(`${field} must be a valid URL`),
+    avatarUrl: field => body(field).optional().isLength({ min: 3, max: 256 }).withMessage(`${field} must be between 3 and 256 characters`),
     firstName: field => body(field).optional().isLength({ min: 3, max: 32 }).withMessage(`${field} must be between 3 and 32 characters`),
     lastName: field => body(field).optional().isLength({ min: 3, max: 32 }).withMessage(`${field} must be between 3 and 32 characters`),
     about: field => body(field).optional().isLength({ max: 500 }).withMessage(`${field} must not exceed 500 characters`),
