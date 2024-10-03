@@ -144,7 +144,7 @@ export class BaseRepository<T> {
         }, columns, null, returning)
     }
 
-    public async update(updates: Partial<T>, where: Partial<T>, returning?: ReturningOptions<T>): Promise<void> {
+    public async update(updates: Partial<T>, where: Partial<T>, returning?: ReturningOptions<T>): Promise<T> {
         return this.executeMapping(async (mappedUpdates, mappedWhere, returningClause) => {
             const updateKeys = Object.keys(mappedUpdates)
             const updateValues = Object.values(mappedUpdates)

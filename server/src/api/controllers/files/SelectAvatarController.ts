@@ -21,9 +21,9 @@ export class SelectAvatarController extends BaseController {
                 next(ApiError.BadRequest('Avatar URL is not found!'))
             }
 
-            await this.profileService.updateProfile({ avatarUrl: avatarUrl }, userId)
+            const result = await this.profileService.updateProfile({ avatarUrl: avatarUrl }, userId)
 
-            this.ok(res)
+            this.ok(res, result.avatarUrl)
         }
         catch (error: any) {
             next(error)
