@@ -3,6 +3,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
+import { Ripple } from '@/shared/ui/Ripple/Ripple'
 
 type ButtonTheme = 'standard' | 'filled' | 'tonal' | 'outlined'
 type ButtonSize = 'small' | 'medium' | 'large'
@@ -36,8 +37,8 @@ export const IconButton = (props: IconButtonProps) => {
     }
 
     return (
-        <button className={classNames(cls.IconButton, mods, additional)} {...other}>
+        <Ripple as="button" center className={classNames(cls.IconButton, mods, additional)} {...other}>
             {children}
-        </button>
+        </Ripple>
     )
 }
