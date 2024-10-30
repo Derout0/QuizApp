@@ -18,7 +18,7 @@ type ButtonColorsMap = {
     elevated: ButtonElevatedColors
 }
 
-type ButtonTheme = keyof ButtonColorsMap
+export type ButtonTheme = keyof ButtonColorsMap
 type ButtonColor<T extends ButtonTheme> = ButtonColorsMap[T]
 
 type ButtonSize = 'small' | 'medium' | 'large'
@@ -38,7 +38,7 @@ const rippleColorsMap: Record<ButtonTheme, Record<string, string>> = {
     text: {},
 }
 
-interface ButtonProps<Theme extends ButtonTheme> extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps<Theme extends ButtonTheme> extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
     children?: ReactNode
     theme?: Theme
@@ -78,7 +78,7 @@ export const Button = memo(<Theme extends ButtonTheme>(props: ButtonProps<Theme>
     }
 
     const component = (
-        <HStack align="center" gap="8">
+        <HStack align="center" justify="center" gap="8">
             {children}
             {loading && <span className={cls.loader} />}
         </HStack>

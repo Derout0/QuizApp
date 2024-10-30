@@ -31,3 +31,8 @@
     flex: 0 0 3.125rem;
   }
 }
+
+// Themes
+.outlined {
+  border: 2px solid var(--primary-color);
+}

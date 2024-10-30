@@ -1,4 +1,4 @@
-import * as cls from './Input.module.scss'
+import * as cls from '@/shared/ui/Input/Input/Input.module.scss'
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes } from 'react'
 import { useMemo, useEffect, useState, useRef, memo } from 'react'
@@ -14,7 +14,7 @@ type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onC
 
 type InputTheme = 'filled' | 'outlined' | 'border'
 
-interface InputProps extends HTMLInputProps {
+export interface InputProps extends HTMLInputProps {
     className?: string
     theme?: InputTheme
     value?: string

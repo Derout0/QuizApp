@@ -3,8 +3,19 @@ import { useTranslation } from 'react-i18next'
 import { useModal } from '@/shared/lib/hooks/useModal/useModal'
 import { CheckPasswordModal } from '@/features/check-password/ui/CheckPasswordModal/CheckPasswordModal'
 import { IconButton } from '@/shared/ui/IconButton/IconButton'
-import Settings from '@/shared/assets/icons/Settings.svg'
 import { Icon } from '@/shared/ui/Icon/Icon'
+import { FileUploader } from '@/entities/file-uploader/ui/FileUploader/FileUploader'
+import Settings from '@/shared/assets/icons/Settings.svg'
+
+const api = {
+    uploadFile({ timeout = 1500 }) {
+        return new Promise<void>((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, timeout)
+        })
+    },
+}
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
@@ -20,7 +31,6 @@ const MainPage = () => {
 
             <button onClick={open}>Открыть модалку</button>
             <CheckPasswordModal isOpen={visible} onClose={close} onSuccess={() => console.log('YES')} />
-            <img src="http://localhost:4000/static/avatars/default-avatar-1.png" />
             <IconButton theme="filled">
                 <Icon SVG={Settings} />
             </IconButton>
@@ -33,6 +43,7 @@ const MainPage = () => {
             <IconButton theme="outlined">
                 <Icon SVG={Settings} />
             </IconButton>
+            <FileUploader api={api.uploadFile} />
             {t('Тестовое предложение')}
         </div>
     )

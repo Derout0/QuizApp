@@ -6,7 +6,7 @@ import { useAuth } from '@/features/auth-user'
 
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { HStack } from '@/shared/ui/Stack'
 import { useAppDispatch } from '@/shared/lib/hooks'

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react'
+import { memo, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import { checkPasswordActions, CheckPasswordModal } from '@/features/check-password'

@@ -5,6 +5,7 @@ import type { CheckPasswordSchema } from '@/features/check-password'
 import type { UserSchema } from '@/entities/user'
 import type { ProfileSchema } from '@/entities/profile'
 import type { UpdateSettingsSchema } from '@/features/update-settings'
+import type { UpdateAvatarSchema } from '@/features/update-avatar'
 
 export interface StateSchema {
     user: UserSchema
@@ -13,9 +14,8 @@ export interface StateSchema {
     // Async
     loginForm?: LoginSchema
     registrationForm?: RegistrationSchema
-
-    // Update
     updateSettings?: UpdateSettingsSchema
+    updateAvatar?: UpdateAvatarSchema
     checkPasswordForm?: CheckPasswordSchema
 }
 

@@ -2,10 +2,11 @@ import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import { updateProfileService } from '@/features/update-settings'
+import { useAuth } from '@/features/auth-user'
 
-import { getProfileData } from '@/entities/profile'
+import { fetchProfileData, getProfileData } from '@/entities/profile'
 
-import { useAppDispatch } from '@/shared/lib/hooks'
+import { useAppDispatch, useEffectOnce } from '@/shared/lib/hooks'
 
 import type { InitialField } from '../../lib/hooks/useFieldManager/useFieldManager'
 import { useFieldManager } from '../../lib/hooks/useFieldManager/useFieldManager'
@@ -15,9 +16,16 @@ import { UpdateFields } from '../UpdateFields/UpdateFields'
 
 export const UpdateProfileForm = () => {
     const dispatch = useAppDispatch()
+    const { user } = useAuth()
 
     const profile = useSelector(getProfileData)
     const updated = useSelector(getUpdateProfileData)
+
+    useEffectOnce(() => {
+        if (user?.userId) {
+            dispatch(fetchProfileData({ id: user?.userId }))
+        }
+    })
 
     const onChangeFirstName = useCallback((value: string) => {
         dispatch(updateSettingsActions.updateProfile({ firstName: value }))

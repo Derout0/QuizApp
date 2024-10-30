@@ -12,7 +12,16 @@ const initialState: ProfileSchema = {
 const profileSlice = createSlice({
     name: 'profile/profileSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setData: (state, action: PayloadAction<ProfileEntity>) => {
+            state.data = action.payload
+        },
+        setAvatarURL: (state, action: PayloadAction<string>) => {
+            if (state.data) {
+                state.data.avatarUrl = action.payload
+            }
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchProfileData.pending, (state) => {
             state.isLoading = true

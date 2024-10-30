@@ -20,6 +20,7 @@ export const IconButton = (props: IconButtonProps) => {
     const {
         className,
         children,
+        type = 'button',
         theme = 'standard',
         size,
         disabled,
@@ -37,7 +38,7 @@ export const IconButton = (props: IconButtonProps) => {
     }
 
     return (
-        <Ripple as="button" center className={classNames(cls.IconButton, mods, additional)} {...other}>
+        <Ripple className={classNames(cls.IconButton, mods, additional)} as="button" type={type} center {...other}>
             {children}
         </Ripple>
     )

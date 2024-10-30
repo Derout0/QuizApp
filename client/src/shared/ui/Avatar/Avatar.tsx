@@ -1,42 +1,48 @@
 import * as cls from './Avatar.module.scss'
-import { classNames } from '@/shared/lib/classNames/classNames'
+import type { ComponentPropsWithoutRef, ElementType } from 'react'
 import DefaultAvatar from '@/shared/assets/icons/DefaultAvatar.svg?url'
-import { memo } from 'react'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 type AvatarColor = 'primary'
 type AvatarTheme = 'outlined'
 type AvatarSize = 'small' | 'medium' | 'large'
 
-interface AvatarProps {
+interface AvatarProps<T extends ElementType = 'div'> {
     className?: string
     src?: string
+    as?: T
     alt?: string
     color?: AvatarColor
     theme?: AvatarTheme
     size?: AvatarSize
 }
-export const Avatar = memo((props: AvatarProps) => {
+
+type Props<T extends ElementType> = AvatarProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof AvatarProps<T>>
+
+export const Avatar = <T extends ElementType = 'div'>(props: Props<T>) => {
     const {
         className,
+        as: Component = 'div',
         src,
         alt,
         color,
         theme,
-        size = 'medium',
+        size,
+        ...other
     } = props
 
-    const avatarSrc = src || DefaultAvatar
+    const initialSrc = src || DefaultAvatar
 
     const additional: string[] = [
         className,
-        (color ? cls[color] : null),
-        (theme ? cls[theme] : null),
-        cls[size],
+        color ? cls[color] : null,
+        theme ? cls[theme] : null,
+        size ? cls[size] : null,
     ]
 
     return (
-        <div className={classNames(cls.Avatar, {}, additional)}>
-            <img src={avatarSrc} alt={alt} />
-        </div>
+        <Component className={classNames(cls.Avatar, {}, additional)} {...other}>
+            <img src={initialSrc} alt={alt} />
+        </Component>
     )
-})
+}

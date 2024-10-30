@@ -1,11 +1,10 @@
-import * as cls from './CheckPasswordForm.module.scss'
 import { type FormEvent, useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { Text } from '@/shared/ui/Text/Text'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input/Input'
 import { Button } from '@/shared/ui/Button/Button'
 import { useAppDispatch } from '@/shared/lib/hooks'
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'

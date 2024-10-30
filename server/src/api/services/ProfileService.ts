@@ -37,7 +37,7 @@ export class ProfileService {
         })
     }
 
-    async updateProfile(data: Partial<ProfileModel>, id: number) {
+    async updateProfile(data: Partial<ProfileModel>, id: number): Promise<ProfileModel> {
         return await this.repository.update(data, { userId: id })
     }
 

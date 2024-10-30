@@ -1,0 +1,9 @@
+.avatar {
+  transition: box-shadow 0.2s;
+
+  @media (any-hover: hover) {
+    &:hover {
+      box-shadow: 0 0 0 2px var(--primary-color);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import * as cls from './Flex.module.scss'
 import { classNames, type Mods } from '@/shared/lib/classNames/classNames'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ElementType } from 'react'
 import { type DetailedHTMLProps, type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
 type DivProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
@@ -57,7 +57,7 @@ const gapClasses: Record<Gap, string> = {
 export interface FlexProps extends DivProps {
     className?: string
     children: ReactNode
-    as?: keyof JSX.IntrinsicElements
+    as?: ElementType
     justify?: FlexJustify
     align?: FlexAlign
     direction?: FlexDirection
@@ -89,6 +89,7 @@ export const Flex = (props: FlexProps) => {
         maxWidth,
         padding,
         margin,
+        ...other
     } = props
 
     const styles: CSSProperties = useMemo<CSSProperties>(() => {
@@ -113,7 +114,7 @@ export const Flex = (props: FlexProps) => {
     }
 
     return (
-        <Component className={classNames(cls.Flex, mods, additional)} style={{ ...styles }}>
+        <Component className={classNames(cls.Flex, mods, additional)} style={{ ...styles }} {...other}>
             {children}
         </Component>
     )

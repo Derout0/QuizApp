@@ -9,7 +9,7 @@ import { loginActions, loginReducer } from '../../model/slice/loginSlice'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { classNames } from '@/shared/lib/classNames/classNames'
-import { Input } from '@/shared/ui/Input/Input'
+import { Input } from '@/shared/ui/Input/Input/Input'
 import { VStack } from '@/shared/ui/Stack/VStack/VStack'
 import { Button } from '@/shared/ui/Button/Button'
 import { HStack } from '@/shared/ui/Stack'
