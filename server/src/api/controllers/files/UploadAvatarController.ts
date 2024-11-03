@@ -5,7 +5,7 @@ import { ApiError } from '@/api/utils/ApiError.js'
 import { FileService } from '@/api/services/FileService.js'
 import path from 'path'
 import * as fs from 'node:fs'
-import { PUBLIC_PATH } from '@/api/constants/paths.ts'
+import { PUBLIC_PATH, UPLOADS_AVATAR_PATH } from '@/api/constants/paths.ts'
 
 export class UploadAvatarController extends BaseController {
     private profileService: ProfileService
@@ -22,19 +22,20 @@ export class UploadAvatarController extends BaseController {
             const { userId } = res.locals.user
             const file = req.file
 
+            if (!file) {
+                return next(ApiError.BadRequest('No file uploaded!'))
+            }
+
             const existingProfile = await this.profileService.getProfileByUserId(userId)
 
             // Удаление существующего изображения
             if (existingProfile && existingProfile.avatarUrl) {
                 const existingAvatarPath = path.join(PUBLIC_PATH, existingProfile.avatarUrl)
 
-                if (fs.existsSync(existingAvatarPath)) {
+                // Удаляться должны только загружаемые (UPLOADS_AVATAR_PATH) аватарки
+                if (fs.existsSync(existingAvatarPath) && existingProfile.avatarUrl.startsWith(UPLOADS_AVATAR_PATH)) {
                     fs.unlinkSync(existingAvatarPath)
                 }
-            }
-
-            if (!file) {
-                return next(ApiError.BadRequest('No file uploaded!'))
             }
 
             const avatarURL = await this.fileService.getAvatarURL(file)
