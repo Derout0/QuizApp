@@ -1,13 +1,13 @@
-import type { ChangeEvent, HTMLAttributes, ReactElement, RefObject } from 'react'
+import type { ChangeEvent, HTMLAttributes, ReactElement, ReactNode, RefObject } from 'react'
+import { isValidElement } from 'react'
 import { cloneElement } from 'react'
 import { HiddenInput } from '@/shared/ui/Input'
-import type { MimeTypes } from '@/shared/consts/common'
 
 interface UploadButtonProps extends HTMLAttributes<HTMLInputElement> {
-    children: ReactElement
+    children: ReactNode
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
     multiple?: boolean
-    accept?: MimeTypes[]
+    accept?: string[]
     inputRef: RefObject<HTMLInputElement>
 }
 
@@ -25,11 +25,15 @@ export const UploadButton = (props: UploadButtonProps) => {
         inputRef?.current?.click()
     }
 
-    const mimeTypes = accept?.toString()
+    const mimeTypes = accept?.map(type => type.toString()).join(', ')
 
     return (
         <>
-            {cloneElement(children, { onClick: handleClick })}
+            {
+                isValidElement(children)
+                    ? cloneElement(children as ReactElement, { onClick: handleClick })
+                    : <button type="button" onClick={handleClick}>{children}</button>
+            }
             <HiddenInput ref={inputRef} onChange={onChange} type="file" accept={mimeTypes} multiple={multiple} {...other} />
         </>
     )

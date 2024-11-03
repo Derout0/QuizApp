@@ -1,118 +1,54 @@
-import type { ChangeEvent, FormEvent, RefObject } from 'react'
+import type { ChangeEvent, FormEvent } from 'react'
 import { useEffect } from 'react'
 import { useCallback, useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { convertBytes, convertToBytes } from '@/shared/lib/utils/fileUtils'
+
+import { convertToBytes } from '@/shared/lib/utils/fileUtils'
 import { MimeTypes } from '@/shared/consts/common'
 
-const MAX_FILES: number = 10
-const MIN_FILES: number = 1
-const MAX_FILE_SIZE_MB: number = 5
-const MAX_TOTAL_SIZE_MB: number = MAX_FILES * MAX_FILE_SIZE_MB
-
-export enum FileUploaderStatus {
-    LOADED = 'LOADED',
-    INIT = 'INIT',
-    PENDING = 'PENDING',
-    UPLOADED = 'UPLOADED',
-    ERROR = 'ERROR',
-}
-
-enum FileUploaderAction {
-    LOAD = 'LOAD',
-    SUBMIT = 'SUBMIT',
-    NEXT = 'NEXT',
-    REMOVE_FILE = 'REMOVE_FILE',
-    REMOVE_FILES = 'REMOVE_FILES',
-    FILE_UPLOADED = 'FILE_UPLOADED',
-    FILES_UPLOADED = 'FILES_UPLOADED',
-    UPDATE_UPLOADED_SIZE = 'UPDATE_UPLOADED_SIZE',
-    SET_ERROR = 'SET_ERROR',
-    RESET_ERROR = 'RESET_ERROR',
-}
-
-export interface FileItem {
-    id: string | number
-    src: string
-    file: File
-}
-
-interface FileAction {
-    type: FileUploaderAction
-    files?: FileItem[]
-    pending?: FileItem[]
-    next?: FileItem | null
-    prev?: { id: string | number, file: File }
-    uploadedSize?: number
-    fileId?: string | number
-    error?: string
-}
-
-interface FileUploaderState {
-    files?: FileItem[]
-    pending?: FileItem[]
-    status: FileUploaderStatus | null
-    next?: FileItem | null
-    isEditable: boolean
-    uploading: boolean
-    uploaded: Record<string, any>
-    uploadedSize: number
-    error?: string
-}
-
-interface RequiredOptions {
-    minFiles: number
-    maxFiles: number
-    maxFileSize: number
-    maxTotalSize: number
-    allowedFileTypes: string[]
-}
-
-type FileUploaderOptions = Partial<RequiredOptions>
-
-interface FileUploaderProps {
-    api: (arg: any) => Promise<any>
-    inputRef: RefObject<HTMLInputElement>
-    options?: FileUploaderOptions
-}
-
-interface FileUploaderReturned extends FileUploaderState {
-    minFiles: number
-    maxFiles: number
-    maxFileSize: number
-    maxTotalSize: number
-    allowedFileTypes: string[]
-    onSubmit: (event: FormEvent<HTMLFormElement>) => void
-    onChange: (arg: ChangeEvent<HTMLInputElement> | File[]) => void
-    onRemoveFile: (fileId: string | number) => void
-    onRemoveFiles: () => void
-}
+import { calculateUploadedSize, clearInput, useDisable } from '../../lib/utils/utils'
+import { MAX_FILE_SIZE_MB, MAX_FILES, MAX_TOTAL_SIZE_MB, MIN_FILES } from '../../model/const/default'
+import { FileUploaderAction, FileUploaderStatus } from '../../model/const/reducer'
+import type {
+    FileAction,
+    FileUploaderProps,
+    FileUploaderReturned,
+    FileUploaderState,
+    RequiredOptions,
+} from '../../model/types/fileUploader'
 
 const initialState: FileUploaderState = {
     files: [],
+    newFiles: [],
     pending: [],
     status: null,
     next: null,
-    isEditable: true,
     uploading: false,
     uploaded: {},
     uploadedSize: 0,
+    uploadedCount: 0,
     error: undefined,
 }
 
 const reducer = (state: FileUploaderState = initialState, action: FileAction): FileUploaderState => {
     switch (action.type) {
         case FileUploaderAction.LOAD:
-            return { ...state, status: FileUploaderStatus.LOADED, files: action.files, isEditable: true }
+            return {
+                ...state,
+                status: FileUploaderStatus.LOADED,
+                files: action.files,
+                newFiles: action.files,
+                uploadedCount: 0,
+            }
 
         case FileUploaderAction.SUBMIT:
             return {
                 ...state,
                 status: FileUploaderStatus.INIT,
                 uploading: true,
-                pending: state.files,
+                pending: state.newFiles,
                 error: undefined,
-                isEditable: false,
+                uploadedCount: 0,
             }
 
         case FileUploaderAction.NEXT:
@@ -123,11 +59,19 @@ const reducer = (state: FileUploaderState = initialState, action: FileAction): F
                 ...state,
                 status: state.files ? FileUploaderStatus.LOADED : null,
                 files: state.files?.filter(file => file.id !== action.fileId),
+                newFiles: state.newFiles?.filter(file => file.id !== action.fileId),
                 error: undefined,
             }
 
         case FileUploaderAction.REMOVE_FILES:
-            return { ...state, status: null, files: [], error: undefined }
+            return {
+                ...state,
+                status: null,
+                files: [],
+                newFiles: [],
+                error: undefined,
+                uploadedCount: 0,
+            }
 
         case FileUploaderAction.FILE_UPLOADED:
             if (action.prev) {
@@ -136,40 +80,32 @@ const reducer = (state: FileUploaderState = initialState, action: FileAction): F
                     next: null,
                     pending: action.pending,
                     uploaded: { ...state.uploaded, [action.prev.id]: action.prev.file },
+                    uploadedCount: Math.abs((action.pending?.length || 0) - (state.files?.length || 0)),
                 }
             }
 
             return { ...state, next: null, pending: action.pending }
 
         case FileUploaderAction.FILES_UPLOADED:
-            return { ...state, status: FileUploaderStatus.UPLOADED, uploading: false }
+            return { ...state, status: FileUploaderStatus.UPLOADED, uploading: false, newFiles: [] }
 
         case FileUploaderAction.UPDATE_UPLOADED_SIZE: {
             let uploadedSize = 0
 
-            if (state.files) {
-                uploadedSize = convertBytes(
-                    state.files.reduce((total, current) => total + current.file.size, 0),
-                    { returnAsNumber: true, unit: 'MB' },
-                )
+            if (state.newFiles) {
+                uploadedSize = calculateUploadedSize(state.newFiles)
             }
 
             return { ...state, uploadedSize }
         }
 
         case FileUploaderAction.SET_ERROR:
-            return { ...state, status: FileUploaderStatus.ERROR, error: action.error, isEditable: true }
+            return { ...state, status: FileUploaderStatus.ERROR, error: action.error }
 
         case FileUploaderAction.RESET_ERROR:
             return { ...state, status: state.files ? FileUploaderStatus.LOADED : null, error: undefined }
 
         default: return state
-    }
-}
-
-const clearInput = (ref: RefObject<HTMLInputElement>) => {
-    if (ref.current) {
-        ref.current.value = ''
     }
 }
 
@@ -181,6 +117,7 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
     } = props
 
     const defaultOptions: RequiredOptions = {
+        multiple: false,
         minFiles: MIN_FILES,
         maxFiles: MAX_FILES,
         maxFileSize: MAX_FILE_SIZE_MB,
@@ -208,11 +145,12 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
     const maxTotalSizeBytes = convertToBytes(maxTotalSize, 'MB')
 
     const [state, dispatch] = useReducer(reducer, initialState)
+    const disableOnExecution = useDisable(state.uploading)
 
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
 
-        if ((state.files?.length || 0) < minFiles) {
+        if ((state.newFiles?.length || 0) < minFiles) {
             dispatch({
                 type: FileUploaderAction.SET_ERROR,
                 error: `Необходимо загрузить как минимум ${minFiles} файл(ов).`,
@@ -220,10 +158,10 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
             return
         }
 
-        if (state.files?.length) dispatch({ type: FileUploaderAction.SUBMIT })
-    }, [state.files?.length])
+        if (state.newFiles?.length) dispatch({ type: FileUploaderAction.SUBMIT })
+    }, [minFiles, state.newFiles?.length])
 
-    const onChange = (arg: ChangeEvent<HTMLInputElement> | File[]) => {
+    const onChange = useCallback((arg: ChangeEvent<HTMLInputElement> | File[]) => {
         const fileList = Array.isArray(arg) ? arg : Array.from(arg.target.files || [])
         let totalSize = convertToBytes(state.uploadedSize, 'MB')
 
@@ -259,7 +197,7 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
             validFiles.push(file)
         }
 
-        if (maxFiles && validFiles.length + (state.files?.length || 0) > maxFiles) {
+        if (maxFiles && validFiles.length + (state.newFiles?.length || 0) > maxFiles) {
             dispatch({
                 type: FileUploaderAction.SET_ERROR,
                 error: `Не может быть загружено более ${maxFiles} файла(ов).`,
@@ -271,7 +209,7 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
             const filesArray = Array.from(validFiles)
 
             const files = filesArray
-                .filter(file => !state.files?.some(existing => existing.file.name === file.name))
+                .filter(file => !state.newFiles?.some(existing => existing.file.name === file.name))
                 .map((file) => {
                     const src = window.URL.createObjectURL(file)
                     const id = uuidv4()
@@ -279,24 +217,26 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
                     return { file, id, src }
                 })
 
-            const newFiles = [...(state.files || []), ...files]
+            const updatedFiles = [...(state.newFiles || []), ...files]
 
-            dispatch({ type: FileUploaderAction.LOAD, files: newFiles })
+            dispatch({ type: FileUploaderAction.LOAD, files: updatedFiles })
             dispatch({ type: FileUploaderAction.UPDATE_UPLOADED_SIZE })
         }
-    }
+    }, [allowedFileTypes, calculatedTotalSize, maxFileSizeBytes, maxFiles, maxTotalSizeBytes, state.files?.length, state.newFiles, state.uploadedSize])
 
-    const onRemoveFile = (fileId: string | number) => {
+    const onRemoveFile = useCallback((fileId: string | number) => {
+        if (state.uploading) return
+
         dispatch({ type: FileUploaderAction.REMOVE_FILE, fileId })
         dispatch({ type: FileUploaderAction.UPDATE_UPLOADED_SIZE })
         clearInput(inputRef)
-    }
+    }, [inputRef, state.uploading])
 
-    const onRemoveFiles = () => {
+    const onRemoveFiles = useCallback(() => {
         dispatch({ type: FileUploaderAction.REMOVE_FILES })
         dispatch({ type: FileUploaderAction.UPDATE_UPLOADED_SIZE })
         clearInput(inputRef)
-    }
+    }, [inputRef])
 
     useEffect(() => {
         if (state.pending?.length && state.next === null) {
@@ -310,7 +250,7 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
         if (state.pending?.length && state.next) {
             const { next } = state
 
-            api(next)
+            api(next.file)
                 .then(() => {
                     const prev = next
                     const pending = state.pending?.slice(1)
@@ -326,15 +266,22 @@ export const useFileUploader = (props: FileUploaderProps): FileUploaderReturned 
     useEffect(() => {
         if (!state.pending?.length && state.uploading) {
             dispatch({ type: FileUploaderAction.FILES_UPLOADED })
+            dispatch({ type: FileUploaderAction.UPDATE_UPLOADED_SIZE })
         }
     }, [state.pending?.length, state.uploading])
+
+    const onSafeSubmit = disableOnExecution(onSubmit)
+    const onSafeChange = disableOnExecution(onChange)
+    const onSafeRemoveFile = disableOnExecution(onRemoveFile)
+    const onSafeRemoveFiles = disableOnExecution(onRemoveFiles)
 
     return {
         ...state,
         ...resolvedOptions,
-        onSubmit,
-        onChange,
-        onRemoveFile,
-        onRemoveFiles,
+        onSubmit: onSafeSubmit,
+        onChange: onSafeChange,
+        onRemoveFile: onSafeRemoveFile,
+        onRemoveFiles: onSafeRemoveFiles,
+        inputRef,
     }
 }

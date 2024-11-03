@@ -1,11 +1,11 @@
 import * as cls from './Dropzone.module.scss'
+import type { ReactNode } from 'react'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import UploadFiles from '@/shared/assets/images/UploadFiles.svg?url'
 import { AppImage } from '@/shared/ui/AppImage/AppImage'
 import { Text } from '@/shared/ui/Text/Text'
 import { VStack } from '@/shared/ui/Stack'
-import type { ReactNode } from 'react'
 import { useDropzone } from '@/shared/lib/hooks'
 
 interface DropzoneProps {

@@ -19,6 +19,7 @@ interface UpdateFieldsControlsProps {
     onCancel: () => void
 }
 
+// TODO: Fix EditButton on mobile
 export const UpdateFieldsControls = memo((props: UpdateFieldsControlsProps) => {
     const {
         editing,

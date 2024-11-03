@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { ThunkConfig } from '@/app/providers/store-provider'
-import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 import { profileActions } from '@/entities/profile'
+import { thunkErrorHandler } from '@/shared/lib/service/thunkErrorHandler'
 
-export const uploadAvatar = createAsyncThunk<string | void, string, ThunkConfig<string>>(
+export const uploadAvatar = createAsyncThunk<string | void, File, ThunkConfig<string>>(
     'update-avatar/uploadAvatar',
     async (data, thunkAPI) => {
         const { extra, dispatch } = thunkAPI
@@ -11,7 +11,12 @@ export const uploadAvatar = createAsyncThunk<string | void, string, ThunkConfig<
         try {
             const formData = new FormData()
             formData.append('avatar', data)
-            const result = await extra.api.post<string>('/avatar/upload', { avatarUrl: data })
+
+            const result = await extra.api.post<string>('/avatar/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
 
             dispatch(profileActions.setAvatarURL(result.data))
 

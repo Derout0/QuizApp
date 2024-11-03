@@ -3,7 +3,7 @@ import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack } from '@/shared/ui/Stack'
 import { Text } from '@/shared/ui/Text/Text'
 
-type LinearProgressSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+export type LinearProgressSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
 
 interface ProgressInfo {
     value?: number
