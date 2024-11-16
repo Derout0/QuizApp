@@ -1,13 +1,13 @@
-import { UpdateBlock } from '@/features/update-settings/ui/UpdateBlock/UpdateBlock'
-
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { VStack } from '@/shared/ui/Stack'
 
+import { UpdateAvatar } from '@/features/update-avatar'
+
 import { updateSettingsReducer } from '../../model/slice/updateSettingsSlice'
+import { UpdateBlock } from '../UpdateBlock/UpdateBlock'
 import { UpdateProfileForm } from '../UpdateProfileForm/UpdateProfileForm'
 import { UpdateUserForm } from '../UpdateUserForm/UpdateUserForm'
-import { UpdateAvatar } from '@/features/update-avatar'
 
 const reducers: ReducersList = {
     updateSettings: updateSettingsReducer,

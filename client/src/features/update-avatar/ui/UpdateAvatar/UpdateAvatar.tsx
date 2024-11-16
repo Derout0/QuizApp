@@ -44,7 +44,7 @@ export const UpdateAvatar = (props: UpdateAvatarFormProps) => {
 
     return (
         <AsyncReducerLoader reducers={reducers}>
-            <VStack gap="20" className={classNames('', {}, [className])}>
+            <VStack gap="20" className={classNames(cls.UpdateAvatar, {}, [className])}>
                 <HStack gap="20" align="center">
                     <VStack className={cls.avatar}>
                         <Avatar src={src} className={cls['selected-avatar']} theme="outlined" />
@@ -52,7 +52,7 @@ export const UpdateAvatar = (props: UpdateAvatarFormProps) => {
                             <Icon SVG={UploadAvatarIcon} />
                         </IconButton>
                     </VStack>
-                    <SelectAvatar />
+                    <SelectAvatar className={cls['available-avatars']} />
                 </HStack>
                 <UploadAvatarModal isOpen={visible} onClose={close} />
             </VStack>

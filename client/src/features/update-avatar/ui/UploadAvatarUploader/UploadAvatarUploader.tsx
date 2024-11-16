@@ -25,9 +25,11 @@ export const UploadAvatarUploader = () => {
                     </FileUploader.Dropzone>
                     <FileUploader.Error />
                 </VStack>
-                <FileUploader.SubmitButton>
-                    <Button theme="filled" color="secondary">Отправить</Button>
-                </FileUploader.SubmitButton>
+                <HStack justify="center">
+                    <FileUploader.SubmitButton>
+                        <Button theme="filled" color="secondary">Загрузить</Button>
+                    </FileUploader.SubmitButton>
+                </HStack>
             </VStack>
         </FileUploader>
     )

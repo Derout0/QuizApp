@@ -1,3 +1,9 @@
+.UpdateAvatar {
+  border: var(--base-border-variant);
+  border-radius: var(--border-radius-s);
+  padding: var(--base-size-20);
+}
+
 .avatar {
   position: relative;
 
@@ -5,7 +11,6 @@
     &:hover {
       .select-button {
         pointer-events: visible;
-        visibility: visible;
         opacity: 1;
         transform: scale(1);
       }
@@ -26,9 +31,15 @@
 
   @media (any-hover: hover) {
     pointer-events: none;
-    visibility: hidden;
     opacity: 0;
     transform: scale(0.75);
-    transition: opacity, transform, .2s ease 0s
+    transition: opacity, transform, .2s ease 0s;
   }
+}
+
+.available-avatars {
+  align-self: stretch;
+  justify-content: center;
+  border-left: var(--base-border-variant);
+  padding-left: var(--base-size-20);
 }

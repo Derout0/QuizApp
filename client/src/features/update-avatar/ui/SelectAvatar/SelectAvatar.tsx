@@ -9,8 +9,9 @@ import { Text } from '@/shared/ui/Text/Text'
 
 import { getUpdateAvatarURLs } from '../../model/selectors/getUpdateAvatarSelectors'
 import { selectAvatar } from '../../model/service/selectAvatar/selectAvatar'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
-export const SelectAvatar = () => {
+export const SelectAvatar = ({ className }: { className?: string }) => {
     const dispatch = useAppDispatch()
     const avatarsURLs = useSelector(getUpdateAvatarURLs)
 
@@ -39,9 +40,9 @@ export const SelectAvatar = () => {
     }
 
     return (
-        <VStack gap="8">
+        <VStack className={classNames('', {}, [className])} flexGrow={1} gap="8">
             <Text sx={{ fontSize: 'body-s', fontWeight: '500' }}>Доступные:</Text>
-            <HStack gap="8">
+            <HStack flexWrap="wrap" gap="8">
                 {getAvailableAvatars()}
             </HStack>
         </VStack>

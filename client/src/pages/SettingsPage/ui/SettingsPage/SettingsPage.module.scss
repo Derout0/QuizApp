@@ -1,3 +1,4 @@
 .SettingsPage {
-  display: block;
+  max-width: var(--settings-page-width);
+  margin: 0 auto;
 }
