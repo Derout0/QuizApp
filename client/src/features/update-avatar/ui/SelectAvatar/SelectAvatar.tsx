@@ -1,4 +1,5 @@
 import * as cls from './SelectAvatar.module.scss'
+import { classNames } from '@/shared/lib/classNames/classNames'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -9,7 +10,6 @@ import { Text } from '@/shared/ui/Text/Text'
 
 import { getUpdateAvatarURLs } from '../../model/selectors/getUpdateAvatarSelectors'
 import { selectAvatar } from '../../model/service/selectAvatar/selectAvatar'
-import { classNames } from '@/shared/lib/classNames/classNames'
 
 export const SelectAvatar = ({ className }: { className?: string }) => {
     const dispatch = useAppDispatch()
