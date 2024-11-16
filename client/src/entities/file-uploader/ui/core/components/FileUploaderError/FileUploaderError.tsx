@@ -9,7 +9,7 @@ import { FileUploaderBaseComponent } from '../FileUploaderBaseComponent/FileUplo
 
 interface FileUploaderErrorProps {
     className?: string
-    children?: ReactNode | ((props: {
+    children?: ((props: {
         error: string | undefined
     }) => ReactElement)
 }
@@ -23,7 +23,10 @@ export const FileUploaderError = (props: FileUploaderErrorProps) => {
     )
 
     return (
-        <FileUploaderBaseComponent props={{ error }} component={defaultComponent}>
+        <FileUploaderBaseComponent
+            functionalProps={{ error }}
+            component={defaultComponent}
+        >
             {children}
         </FileUploaderBaseComponent>
     )

@@ -33,6 +33,7 @@ interface FileUploaderProps {
     }
 }
 
+// TODO: Возможно добавить кастомный компонент для описания в Dropzone
 export const FileUploader = (props: FileUploaderProps) => {
     const {
         className,
