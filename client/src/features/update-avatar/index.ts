@@ -1,2 +1,2 @@
 export { UpdateAvatarSchema } from './model/types/updateAvatarSchema'
-export { UpdateAvatarForm } from './ui/UpdateAvatarForm/UpdateAvatarForm'
+export { UpdateAvatar } from '@/features/update-avatar/ui/UpdateAvatar/UpdateAvatar'

@@ -16,7 +16,7 @@ const MainPage = () => {
             <button onClick={toggle}>Переключить</button>
             {t('Тестовое предложение')}
 
-            <BaseFileUploader api={arg => dispatch(uploadAvatar(arg))} options={{ maxFiles: 1 }} />
+            <BaseFileUploader api={arg => dispatch(uploadAvatar(arg))} options={{ maxFiles: 5, maxTotalSize: 20 }} />
         </div>
     )
 }

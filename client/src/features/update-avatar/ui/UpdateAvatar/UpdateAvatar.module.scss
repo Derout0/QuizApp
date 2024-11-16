@@ -1,0 +1,34 @@
+.avatar {
+  position: relative;
+
+  @media (any-hover: hover) {
+    &:hover {
+      .select-button {
+        pointer-events: visible;
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.selected-avatar {
+  width: 6.5rem;
+  height: 6.5rem;
+  flex-basis: 6.5rem;
+}
+
+.select-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  @media (any-hover: hover) {
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.75);
+    transition: opacity, transform, .2s ease 0s
+  }
+}

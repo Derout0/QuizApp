@@ -12,7 +12,7 @@ import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/A
 
 import { checkPasswordActions, checkPasswordReducer } from '../../model/slice/checkPasswordSlice'
 import { getError, getIsLoading, getPassword } from '../../model/selectors/getCheckPasswordSelectors'
-import { checkPasswordService } from '@/features/check-password'
+import { checkPasswordService } from '../../model/service/checkPassword/checkPasswordService'
 
 interface CheckPasswordFormProps {
     className?: string

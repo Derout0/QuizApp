@@ -5,14 +5,14 @@ import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Ripple } from '@/shared/ui/Ripple/Ripple'
 
-type ButtonTheme = 'standard' | 'filled' | 'tonal' | 'outlined'
-type ButtonSize = 'small' | 'medium' | 'large'
+type IconButtonTheme = 'standard' | 'filled' | 'tonal' | 'outlined'
+type IconButtonSize = 'small' | 'medium' | 'large'
 
 interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
     children: ReactNode
-    theme?: ButtonTheme
-    size?: ButtonSize
+    theme?: IconButtonTheme
+    size?: IconButtonSize
     disabled?: boolean
 }
 
@@ -21,7 +21,7 @@ export const IconButton = (props: IconButtonProps) => {
         className,
         children,
         type = 'button',
-        theme = 'standard',
+        theme,
         size,
         disabled,
         ...other

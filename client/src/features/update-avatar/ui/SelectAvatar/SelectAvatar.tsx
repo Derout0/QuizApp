@@ -1,8 +1,6 @@
-import * as cls from './AvailableAvatars.module.scss'
+import * as cls from './SelectAvatar.module.scss'
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
-
-import { selectAvatar } from '@/features/update-avatar/model/service/selectAvatar/selectAvatar'
 
 import { useAppDispatch } from '@/shared/lib/hooks'
 import { HStack, VStack } from '@/shared/ui/Stack'
@@ -10,8 +8,9 @@ import { Avatar } from '@/shared/ui/Avatar/Avatar'
 import { Text } from '@/shared/ui/Text/Text'
 
 import { getUpdateAvatarURLs } from '../../model/selectors/getUpdateAvatarSelectors'
+import { selectAvatar } from '../../model/service/selectAvatar/selectAvatar'
 
-export const AvailableAvatars = () => {
+export const SelectAvatar = () => {
     const dispatch = useAppDispatch()
     const avatarsURLs = useSelector(getUpdateAvatarURLs)
 

@@ -78,7 +78,7 @@ export const Button = memo(<Theme extends ButtonTheme>(props: ButtonProps<Theme>
     }
 
     const component = (
-        <HStack align="center" justify="center" gap="8">
+        <HStack as="span" align="center" justify="center" gap="8">
             {children}
             {loading && <span className={cls.loader} />}
         </HStack>

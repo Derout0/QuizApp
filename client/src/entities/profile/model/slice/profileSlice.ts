@@ -18,6 +18,7 @@ const profileSlice = createSlice({
         },
         setAvatarURL: (state, action: PayloadAction<string>) => {
             if (state.data) {
+                console.log(action.payload)
                 state.data.avatarUrl = action.payload
             }
         },
