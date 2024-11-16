@@ -39,9 +39,9 @@ export class UploadAvatarController extends BaseController {
             }
 
             const avatarURL = await this.fileService.getAvatarURL(file)
-            const result = await this.profileService.updateProfile({ avatarUrl: avatarURL }, userId)
+            const { avatarUrl } = await this.profileService.updateProfile({ avatarUrl: avatarURL }, userId)
 
-            return this.ok(res, result)
+            return this.ok(res, avatarUrl)
         }
         catch (error: any) {
             next(error)
