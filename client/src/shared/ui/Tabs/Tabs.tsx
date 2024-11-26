@@ -19,6 +19,33 @@ export interface TabsProps {
     defaultTabId?: string
 }
 
+const TabsList = ({ tabsData }: { tabsData: TabData[] }) => {
+    return tabsData.map((tab, index) => (
+        <Tab key={index} as={Fragment}>
+            {({ hover, selected }) => {
+                const mods: Mods = {
+                    [cls.hovered]: hover,
+                    [cls.selected]: selected,
+                }
+
+                return (
+                    <button className={classNames(cls.Tab, mods, [])}>
+                        {tab.name}
+                    </button>
+                )
+            }}
+        </Tab>
+    ))
+}
+
+const TabsPanel = ({ tabsData }: { tabsData: TabData[] }) => {
+    return tabsData.map((tab, index) => (
+        <TabPanel key={index}>
+            {tab.element}
+        </TabPanel>
+    ))
+}
+
 export const Tabs = (props: TabsProps) => {
     const {
         className,
@@ -32,33 +59,6 @@ export const Tabs = (props: TabsProps) => {
         return index !== -1 ? index : 0
     }, [defaultTabId, tabsData])
 
-    const initTabsList = () => {
-        return tabsData.map((tab, index) => (
-            <Tab key={index} as={Fragment}>
-                {({ hover, selected }) => {
-                    const mods: Mods = {
-                        [cls.hovered]: hover,
-                        [cls.selected]: selected,
-                    }
-
-                    return (
-                        <button className={classNames(cls.Tab, mods, [])}>
-                            {tab.name}
-                        </button>
-                    )
-                }}
-            </Tab>
-        ))
-    }
-
-    const initTabsPanels = () => {
-        return tabsData.map((tab, index) => (
-            <TabPanel key={index}>
-                {tab.element}
-            </TabPanel>
-        ))
-    }
-
     return (
         <TabGroup
             className={classNames(cls.Tabs, {}, [className])}
@@ -66,10 +66,10 @@ export const Tabs = (props: TabsProps) => {
             defaultIndex={defaultTabIndex}
         >
             <TabList className={cls.TabList}>
-                {initTabsList()}
+                <TabsList tabsData={tabsData} />
             </TabList>
             <TabPanels>
-                {initTabsPanels()}
+                <TabsPanel tabsData={tabsData} />
             </TabPanels>
         </TabGroup>
     )
