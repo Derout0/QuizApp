@@ -1,0 +1,6 @@
+export { ProfileRoutes } from '@/api/routes/profile'
+export { ModulesRoutes } from '@/api/routes/modules'
+export { FoldersRoutes } from '@/api/routes/folders'
+export { FileRoutes } from '@/api/routes/files'
+export { AuthRoutes } from '@/api/routes/auth'
+export { UserRoutes } from '@/api/routes/user'

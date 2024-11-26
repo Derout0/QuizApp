@@ -127,6 +127,23 @@ export class BaseRepository<T> {
         }, null, where, returning)
     }
 
+    public async findAll(where: Partial<T>, returning?: ReturningOptions<T>): Promise<T[]> {
+        return this.executeMapping(async (mappedColumns, mappedWhere, returningClause) => {
+            const keys = Object.keys(mappedWhere)
+            const values = Object.values(mappedWhere)
+
+            if (keys.length === 0) return null
+
+            const whereClause = `WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
+
+            const query = `SELECT ${returningClause} FROM ${this.tableName} ${whereClause}`
+
+            const result = await database.query(query, values)
+
+            return result.rows
+        }, null, where, returning)
+    }
+
     public async create(columns: Partial<T>, returning?: ReturningOptions<T>): Promise<T> {
         return this.executeMapping(async (mappedColumns, _, returningClause) => {
             const keys = Object.keys(mappedColumns)

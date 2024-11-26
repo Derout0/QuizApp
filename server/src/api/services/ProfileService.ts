@@ -24,10 +24,6 @@ export class ProfileService {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
 
-        if (age && (age < 0 || age > 100)) {
-            throw ApiError.BadRequest('Age must be between 0 and 100!')
-        }
-
         return await this.repository.create({
             userId,
             firstName,
