@@ -1,10 +1,7 @@
 export enum AppRoutes {
-    MAIN = 'main',
+    MAIN = '/',
     PROFILE = 'profile',
     SETTINGS = 'settings',
-    NOT_FOUND = 'not_found',
+    LIBRARY = 'library',
+    NOT_FOUND = '*',
 }
-
-export const getRouteMain = () => '/'
-export const getRouteProfile = () => '/profile'
-export const getRouteSettings = () => '/settings'

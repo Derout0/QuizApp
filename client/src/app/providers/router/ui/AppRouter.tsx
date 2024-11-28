@@ -1,39 +1,42 @@
-import { memo, Suspense, useCallback } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { memo } from 'react'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { RequireAuth } from '@/app/providers/router/ui/RequireAuth'
-import { PageLoader } from '@/widgets/PageLoader'
-import type { AppRouteProps } from '@/shared/types/router'
-import { routeConfig } from '../config/routeConfig'
+import type { AppRouteObject } from '@/shared/types/router'
+import { routes } from '../config/routeConfig'
+
+const wrapRoutes = (routes: AppRouteObject[]): AppRouteObject[] => {
+    return routes.map((route: AppRouteObject) => {
+        const { index, element, children, auth } = route
+
+        let wrappedElement = element
+
+        if (auth) {
+            wrappedElement = (
+                <RequireAuth>
+                    {element}
+                </RequireAuth>
+            )
+        }
+
+        // Without children (interface IndexRouteObject)
+        if (index) return {
+            ...route,
+            element: wrappedElement,
+        }
+
+        return {
+            ...route,
+            element: wrappedElement,
+            children: children ? wrapRoutes(children) : undefined,
+        }
+    })
+}
 
 const AppRouter = () => {
-    const renderRoute = useCallback((route: AppRouteProps) => {
-        const { element, path, auth } = route
-
-        const page = (
-            <Suspense fallback={<PageLoader />}>
-                <div className="Page">
-                    <div className="Container">
-                        {element}
-                    </div>
-                </div>
-            </Suspense>
-        )
-
-        const el = auth ? <RequireAuth>{page}</RequireAuth> : page
-
-        return (
-            <Route
-                key={path}
-                path={path}
-                element={el}
-            />
-        )
-    }, [])
+    const router = createBrowserRouter(wrapRoutes(routes))
 
     return (
-        <Routes>
-            {Object.values(routeConfig).map(renderRoute)}
-        </Routes>
+        <RouterProvider router={router} />
     )
 }
 

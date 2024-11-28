@@ -1,5 +1,6 @@
-import type { RouteProps } from 'react-router-dom'
+import type { RouteObject } from 'react-router/dist/lib/context'
 
-export type AppRouteProps = RouteProps & {
+export type AppRouteObject = RouteObject & {
     auth?: boolean
+    children?: AppRouteObject[]
 }

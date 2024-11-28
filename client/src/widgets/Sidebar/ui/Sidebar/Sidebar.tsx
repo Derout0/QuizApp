@@ -9,7 +9,7 @@ import logo from '@/shared/assets/Logo.svg?url'
 import type { Mods } from '@/shared/lib/classNames/classNames'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack, VStack } from '@/shared/ui/Stack'
-import { getRouteMain } from '@/shared/consts/router'
+import { AppRoutes } from '@/shared/consts/router'
 import { Hamburger } from '@/shared/ui/Hamburger/Hamburger'
 
 import { sidebarAnimation, SidebarVariants } from '../../lib/animation'
@@ -43,7 +43,7 @@ export const Sidebar = memo((props: SidebarProps) => {
         >
             <VStack gap="20">
                 <HStack className={cls.header} justify="space-between" align="center">
-                    <Link className={classNames(cls.logo)} to={getRouteMain()}>
+                    <Link className={classNames(cls.logo)} to={AppRoutes.MAIN}>
                         <img width={120} src={logo} alt="QuizApp" />
                     </Link>
                     <Hamburger onClick={onToggle} size="small" collapsed={collapsed} />

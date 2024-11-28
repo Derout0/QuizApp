@@ -15,7 +15,7 @@ export interface TabData {
 export interface TabsProps {
     className?: string
     tabsData: TabData[]
-    onTabChange?: () => void
+    onTabChange?: (args: any) => void
     defaultTabId?: string
 }
 

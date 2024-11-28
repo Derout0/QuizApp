@@ -1,8 +1,8 @@
-import { Suspense } from 'react'
-import { AppRouter } from '@/app/providers/router'
+import React, { Suspense } from 'react'
 import { Navbar } from '@/widgets/Navbar/ui/Navbar/Navbar'
-import { HStack, VStack } from '@/shared/ui/Stack'
 import { Sidebar } from '@/widgets/Sidebar/ui/Sidebar/Sidebar'
+import { HStack, VStack } from '@/shared/ui/Stack'
+import { AppPage } from './AppPage'
 
 const App = () => {
     return (
@@ -12,7 +12,7 @@ const App = () => {
                     <Sidebar />
                     <VStack as="main" className="AppMain">
                         <Navbar />
-                        <AppRouter />
+                        <AppPage />
                     </VStack>
                 </HStack>
             </VStack>

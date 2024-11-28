@@ -2,27 +2,47 @@ import { MainPage } from '@/pages/MainPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { SettingsPage } from '@/pages/SettingsPage'
+import { LibraryPage } from '@/pages/LibraryPage'
 
-import { AppRoutes, getRouteMain, getRouteProfile, getRouteSettings } from '@/shared/consts/router'
-import type { AppRouteProps } from '@/shared/types/router'
+import { AppRoutes } from '@/shared/consts/router'
+import type { AppRouteObject } from '@/shared/types/router'
+import Root from '@/Root'
 
-export const routeConfig: Record<AppRoutes, AppRouteProps> = {
-    [AppRoutes.MAIN]: {
-        path: getRouteMain(),
-        element: <MainPage />,
+export const routes: AppRouteObject[] = [
+    {
+        path: AppRoutes.MAIN,
+        element: <Root />,
+        children: [
+            {
+                index: true,
+                path: AppRoutes.MAIN,
+                element: <MainPage />,
+            },
+            {
+                path: AppRoutes.PROFILE,
+                element: <ProfilePage />,
+                auth: true,
+            },
+            {
+                path: AppRoutes.SETTINGS,
+                element: <SettingsPage />,
+                auth: true,
+            },
+            {
+                path: AppRoutes.LIBRARY,
+                element: <LibraryPage />,
+                auth: true,
+                children: [
+                    {
+                        path: 'modules',
+                        element: (<div>Модули</div>),
+                    },
+                ],
+            },
+        ],
     },
-    [AppRoutes.PROFILE]: {
-        path: `${getRouteProfile()}/:id`,
-        element: <ProfilePage />,
-        auth: true,
-    },
-    [AppRoutes.SETTINGS]: {
-        path: getRouteSettings(),
-        element: <SettingsPage />,
-        auth: true,
-    },
-    [AppRoutes.NOT_FOUND]: {
-        path: '*',
+    {
+        path: AppRoutes.NOT_FOUND,
         element: <NotFoundPage />,
     },
-}
+]
