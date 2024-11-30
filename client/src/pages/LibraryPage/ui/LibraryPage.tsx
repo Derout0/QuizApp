@@ -14,14 +14,6 @@ const LibraryPage = (props: ModulesProps) => {
         className,
     } = props
 
-    const tabsData: TabData[] = [
-        { id: 'modules', name: 'Модули', element: <div>Модули</div> },
-        { id: 'folders', name: 'Папки', element: <div>Папки</div> },
-    ]
-
-    const location = useLocation()
-    const navigate = useNavigate()
-
     return (
         <div className={classNames(cls.Library, {}, [className])}>
             <Text.HeadlineH1>Your Library</Text.HeadlineH1>

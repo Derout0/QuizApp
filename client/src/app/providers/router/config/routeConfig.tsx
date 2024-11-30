@@ -8,6 +8,7 @@ import { AppRoutes } from '@/shared/consts/router'
 import type { AppRouteObject } from '@/shared/types/router'
 import Root from '@/Root'
 
+// TODO: Rewrite Readme
 export const routes: AppRouteObject[] = [
     {
         path: AppRoutes.MAIN,
@@ -29,12 +30,12 @@ export const routes: AppRouteObject[] = [
                 auth: true,
             },
             {
-                path: AppRoutes.LIBRARY,
+                path: AppRoutes.LIBRARY.ROOT,
                 element: <LibraryPage />,
                 auth: true,
                 children: [
                     {
-                        path: 'modules',
+                        path: AppRoutes.LIBRARY.MODULES,
                         element: (<div>Модули</div>),
                     },
                 ],

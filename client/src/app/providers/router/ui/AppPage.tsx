@@ -4,12 +4,12 @@ import { PageLoader } from '@/widgets/PageLoader'
 
 export const AppPage = () => {
     return (
-        <Suspense fallback={<PageLoader />}>
-            <div className="Page">
+        <div className="Page">
+            <Suspense fallback={<PageLoader />}>
                 <div className="Container">
                     <Outlet />
                 </div>
-            </div>
-        </Suspense>
+            </Suspense>
+        </div>
     )
 }

@@ -3,7 +3,7 @@ import SettingsIcon from '@/shared/assets/icons/Settings.svg'
 import HomeIcon from '@/shared/assets/icons/Home.svg'
 import FolderIcon from '@/shared/assets/icons/Folder.svg'
 import NotificationIcon from '@/shared/assets/icons/Notification.svg'
-import { AppRoutes } from '@/shared/consts/router'
+import { AppPaths } from '@/shared/consts/router'
 
 export const SidebarNavigationItems: SidebarItemType[] = [
     {
@@ -13,7 +13,7 @@ export const SidebarNavigationItems: SidebarItemType[] = [
     },
     {
         name: 'Библиотека',
-        path: AppRoutes.LIBRARY,
+        path: AppPaths.LIBRARY,
         Icon: FolderIcon,
     },
     {
@@ -23,7 +23,7 @@ export const SidebarNavigationItems: SidebarItemType[] = [
     },
     {
         name: 'Настройки',
-        path: AppRoutes.SETTINGS,
+        path: AppPaths.SETTINGS,
         Icon: SettingsIcon,
     },
 ]
