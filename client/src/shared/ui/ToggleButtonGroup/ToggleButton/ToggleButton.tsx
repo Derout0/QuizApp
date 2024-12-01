@@ -14,7 +14,7 @@ interface ToggleButtonBase {
     children: ReactNode
 }
 
-type ToggleButtonProps = ToggleButtonBase & Omit<ComponentPropsWithoutRef<'button'>, keyof ToggleButtonBase>
+type ToggleButtonProps<T = string> = ToggleButtonBase & Omit<ComponentPropsWithoutRef<'button'>, keyof ToggleButtonBase>
 
 export const ToggleButton = (props: ToggleButtonProps) => {
     const {

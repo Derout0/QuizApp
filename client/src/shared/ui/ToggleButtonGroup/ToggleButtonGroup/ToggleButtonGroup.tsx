@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef, ReactNode, FocusEvent } from 'react'
 import { useMemo, useRef, useState, useCallback, createContext } from 'react'
 
-export const ToggleGroupContext = createContext<{
+interface ToggleGroupContextBase {
     value: string | null
     onChange: (value: string) => void
     register: (value: string, element: HTMLElement) => void
@@ -10,16 +10,18 @@ export const ToggleGroupContext = createContext<{
     setFocusedValue: (id: string) => void
     focusedValue: string | null
     onShiftTab: () => void
-}>({
-            value: null,
-            onChange: () => {},
-            register: () => {},
-            deregister: () => {},
-            getItems: () => [],
-            setFocusedValue: () => {},
-            focusedValue: null,
-            onShiftTab: () => {},
-        })
+}
+
+export const ToggleGroupContext = createContext<ToggleGroupContextBase>({
+    value: null,
+    onChange: () => {},
+    register: () => {},
+    deregister: () => {},
+    getItems: () => [],
+    setFocusedValue: () => {},
+    focusedValue: null,
+    onShiftTab: () => {},
+})
 
 type PropsWithLabelBy = {
     ['aria-labelledby']: string
