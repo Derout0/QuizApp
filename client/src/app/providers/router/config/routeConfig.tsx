@@ -38,6 +38,10 @@ export const routes: AppRouteObject[] = [
                         path: AppRoutes.LIBRARY.MODULES,
                         element: (<div>Модули</div>),
                     },
+                    {
+                        path: AppRoutes.LIBRARY.FOLDERS,
+                        element: (<div>Папки</div>),
+                    },
                 ],
             },
         ],

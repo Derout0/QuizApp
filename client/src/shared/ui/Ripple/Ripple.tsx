@@ -1,5 +1,6 @@
 import * as cls from './Ripple.module.scss'
-import type { ReactNode, ElementType, SyntheticEvent, ComponentPropsWithoutRef } from 'react'
+import type { ReactNode, ElementType, SyntheticEvent, ComponentPropsWithoutRef, Ref, MutableRefObject } from 'react'
+import { forwardRef } from 'react'
 import { useRef, useState } from 'react'
 import { TransitionGroup } from 'react-transition-group'
 import { classNames } from '@/shared/lib/classNames/classNames'
@@ -16,7 +17,7 @@ interface RippleProps<T extends ElementType = 'div'> {
 
 type Props<T extends ElementType> = RippleProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof RippleProps<T>>
 
-export const Ripple = <T extends ElementType = 'div'>(props: Props<T>) => {
+export const Ripple = forwardRef(<T extends ElementType = 'div'>(props: Props<T>, ref: Ref<Element>) => {
     const {
         className,
         children,
@@ -41,6 +42,15 @@ export const Ripple = <T extends ElementType = 'div'>(props: Props<T>) => {
     const onTouchStart = (event: SyntheticEvent) => start(event)
     const onTouchEnd = (event: SyntheticEvent) => stop(event)
     const onTouchMove = (event: SyntheticEvent) => stop(event)
+
+    const mergedRef = (node: any) => {
+        elementRef.current = node
+        if (typeof ref === 'function') {
+            ref(node)
+        } else if (ref) {
+            (ref as MutableRefObject<any>).current = node
+        }
+    }
 
     const start = (event: SyntheticEvent) => {
         if (event.type === 'mousedown' && ignoreMouseDown.current) {
@@ -143,7 +153,7 @@ export const Ripple = <T extends ElementType = 'div'>(props: Props<T>) => {
 
     return (
         <Component
-            ref={elementRef}
+            ref={mergedRef}
             className={classNames(cls.Ripple, {}, [className])}
             onMouseDown={onMouseDown}
             onMouseUp={onMouseUp}
@@ -159,4 +169,4 @@ export const Ripple = <T extends ElementType = 'div'>(props: Props<T>) => {
             </TransitionGroup>
         </Component>
     )
-}
+})

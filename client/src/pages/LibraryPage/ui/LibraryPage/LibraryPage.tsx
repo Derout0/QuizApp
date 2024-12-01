@@ -1,9 +1,9 @@
 import * as cls from './LibraryPage.module.scss'
-import { useNavigate } from 'react-router'
-import { useLocation, Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { Text } from '@/shared/ui/Text/Text'
-import type { TabData } from '@/shared/ui/Tabs/Tabs'
+import { AppLink } from '@/shared/ui/AppLink/AppLink'
+import { AppPaths } from '@/shared/consts/router'
 
 interface ModulesProps {
     className?: string
@@ -17,6 +17,8 @@ const LibraryPage = (props: ModulesProps) => {
     return (
         <div className={classNames(cls.Library, {}, [className])}>
             <Text.HeadlineH1>Your Library</Text.HeadlineH1>
+            <AppLink to={AppPaths.LIBRARY_MODULES}>Модули</AppLink>
+            <AppLink to={AppPaths.LIBRARY_FOLDERS}>Папки</AppLink>
             <Outlet />
         </div>
     )

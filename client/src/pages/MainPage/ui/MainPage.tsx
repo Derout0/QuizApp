@@ -1,10 +1,9 @@
-import { classNames } from '@/shared/lib/classNames/classNames'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from '@/shared/lib/hooks'
+import { classNames } from '@/shared/lib/classNames/classNames'
 
 const MainPage = () => {
     const { t, i18n } = useTranslation('pages/main')
-    const dispatch = useAppDispatch()
+
     const toggle = () => {
         i18n.changeLanguage(i18n.language === 'ru' ? 'en' : 'ru')
     }
