@@ -1,18 +1,18 @@
 import type { ComponentPropsWithoutRef, ReactNode, FocusEvent } from 'react'
 import { useMemo, useRef, useState, useCallback, createContext } from 'react'
 
-interface ToggleGroupContextBase {
-    value: string | null
-    onChange: (value: string) => void
-    register: (value: string, element: HTMLElement) => void
-    deregister: (value: string) => void
+interface ToggleGroupContextBase<T extends string> {
+    value: T | null
+    onChange: (value: T) => void
+    register: (value: T, element: HTMLElement) => void
+    deregister: (value: T) => void
     getItems: () => ButtonItem[]
-    setFocusedValue: (id: string) => void
-    focusedValue: string | null
+    setFocusedValue: (id: T) => void
+    focusedValue: T | null
     onShiftTab: () => void
 }
 
-export const ToggleGroupContext = createContext<ToggleGroupContextBase>({
+export const ToggleGroupContext = createContext<ToggleGroupContextBase<string>>({
     value: null,
     onChange: () => {},
     register: () => {},
@@ -33,17 +33,17 @@ type PropsWithLabel = {
 
 export type ButtonItem = { value: string, element: HTMLElement }
 
-interface ToggleGroupRootBase {
+interface ToggleGroupRootBase<T extends string> {
     children: ReactNode | ReactNode[]
-    value: string | null
-    onChange: (value: string) => void
+    value: T | null
+    onChange: (value: T) => void
 }
 
-type ToggleGroupRootProps = (PropsWithLabel | PropsWithLabelBy)
-  & ToggleGroupRootBase
-  & Omit<ComponentPropsWithoutRef<'div'>, keyof ToggleGroupRootBase>
+type ToggleGroupRootProps<T extends string> = (PropsWithLabel | PropsWithLabelBy)
+  & ToggleGroupRootBase<T>
+  & Omit<ComponentPropsWithoutRef<'div'>, keyof ToggleGroupRootBase<T>>
 
-export const ToggleButtonGroup = (props: ToggleGroupRootProps) => {
+export const ToggleButtonGroup = <T extends string>(props: ToggleGroupRootProps<T>) => {
     const {
         children,
         value,
@@ -68,7 +68,7 @@ export const ToggleButtonGroup = (props: ToggleGroupRootProps) => {
 
     const providerValue = useMemo(() => ({
         value,
-        onChange,
+        onChange: onChange as (value: string) => void,
         getItems,
         focusedValue,
         register: (value: string, element: HTMLElement) => {
