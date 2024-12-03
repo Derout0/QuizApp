@@ -8,6 +8,10 @@ export class TermsService {
         this.termsRepository = new TermsRepository()
     }
 
+    async getTermsByModuleId(moduleId: number): Promise<TermModel[]> {
+        return await this.termsRepository.findAll({ moduleId })
+    }
+
     async createTerms(terms: RequestTermModel[], moduleId: number): Promise<TermModel[]> {
         const result: TermModel[] = []
 

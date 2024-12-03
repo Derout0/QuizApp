@@ -1,4 +1,4 @@
-import { RequestTermModel } from '@/api/models/TermModel.ts'
+import { RequestTermModel, TermModel } from '@/api/models/TermModel.ts'
 
 export interface BaseModuleModel {
     userId: number
@@ -14,6 +14,7 @@ export interface RequestModuleModel extends BaseModuleModel {
 
 export interface ModuleModel extends BaseModuleModel {
     moduleId: number
+    terms: TermModel[]
     createdAt: Date
     updatedAt: Date
 }
