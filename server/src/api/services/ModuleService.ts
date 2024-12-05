@@ -49,9 +49,10 @@ export class ModuleService {
 
         for (const module of modules) {
             module.terms = await this.termsService.getTermsByModuleId(module.moduleId)
+            module.author = user?.username || ''
         }
 
-        return { modules, user }
+        return { modules }
     }
 
     async updateModule(userId: number, moduleId: number, updateData: RequestModuleModel) {

@@ -14,6 +14,7 @@ export interface RequestModuleModel extends BaseModuleModel {
 
 export interface ModuleModel extends BaseModuleModel {
     moduleId: number
+    author: string
     terms: TermModel[]
     createdAt: Date
     updatedAt: Date
