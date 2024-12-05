@@ -52,7 +52,7 @@ export class ModuleService {
             module.author = user?.username || ''
         }
 
-        return { modules }
+        return [...modules]
     }
 
     async updateModule(userId: number, moduleId: number, updateData: RequestModuleModel) {
