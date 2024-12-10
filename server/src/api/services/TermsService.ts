@@ -9,7 +9,7 @@ export class TermsService {
     }
 
     async getTermsByModuleId(moduleId: number): Promise<TermModel[]> {
-        return await this.termsRepository.findAll({ moduleId })
+        return await this.termsRepository.findAll({ where: { moduleId } })
     }
 
     async createTerms(terms: RequestTermModel[], moduleId: number): Promise<TermModel[]> {

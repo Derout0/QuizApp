@@ -1,6 +1,13 @@
 import database from '@/config/DatabaseConfig.ts'
 import { camelToSnakeCase, snakeToCamelCase } from '@/api/utils/utils.ts'
 
+interface FindOptions<T> {
+    where?: Partial<T>
+    returning?: ReturningOptions<T>
+    limit?: number
+    offset?: number
+}
+
 export type FieldMapping<T> = {
     [key in keyof T]?: string
 }
@@ -104,6 +111,34 @@ export class BaseRepository<T> {
         return mapped as T
     }
 
+    private buildFindQuery(
+        where: Record<string, any>,
+        returning?: string,
+        limit?: number,
+        offset?: number,
+    ): { whereClause: string, queryRows: string, queryCount: string, values: any[] } {
+        const keys = Object.keys(where)
+        const values = Object.values(where)
+
+        const whereClause = `WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
+        const limitClause = limit ? `LIMIT ${limit}` : ''
+        const offsetClause = offset ? `OFFSET ${offset}` : ''
+
+        const queryRows = `
+            SELECT ${returning} FROM ${this.tableName}
+            ${whereClause}
+            ${limitClause}
+            ${offsetClause}
+        `.trim()
+
+        const queryCount = `
+            SELECT COUNT(*) AS count FROM ${this.tableName}
+            ${whereClause}
+        `.trim()
+
+        return { whereClause, queryRows, queryCount, values }
+    }
+
     public async getAll(): Promise<T[]> {
         return this.executeMapping(async () => {
             const result = await database.query(`SELECT * FROM ${this.tableName}`)
@@ -112,7 +147,10 @@ export class BaseRepository<T> {
         })
     }
 
-    public async findBy(where: Partial<T>, returning?: ReturningOptions<T>): Promise<T | null> {
+    public async findBy(
+        where: Partial<T>,
+        returning?: ReturningOptions<T>,
+    ): Promise<T | null> {
         return this.executeMapping(async (mappedColumns, mappedWhere, returningClause) => {
             const keys = Object.keys(mappedWhere)
             const values = Object.values(mappedWhere)
@@ -127,21 +165,38 @@ export class BaseRepository<T> {
         }, null, where, returning)
     }
 
-    public async findAll(where: Partial<T>, returning?: ReturningOptions<T>): Promise<T[]> {
-        return this.executeMapping(async (mappedColumns, mappedWhere, returningClause) => {
-            const keys = Object.keys(mappedWhere)
-            const values = Object.values(mappedWhere)
+    public async findAll(options: FindOptions<T> = {}): Promise<T[]> {
+        const { where = {}, returning, limit, offset } = options
 
-            if (keys.length === 0) return null
+        return this.executeMapping(async (_, mappedWhere, returningClause) => {
+            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset)
 
-            const whereClause = `WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
-
-            const query = `SELECT ${returningClause} FROM ${this.tableName} ${whereClause}`
-
-            const result = await database.query(query, values)
+            const result = await database.query(queryRows, values)
 
             return result.rows
         }, null, where, returning)
+    }
+
+    public async findAndCountAll(options: FindOptions<T> = {}): Promise<{ rows: T[], count: number }> {
+        const { where = {}, returning, limit, offset } = options
+
+        const rowsPromise = this.executeMapping(async (_, mappedWhere, returningClause) => {
+            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset)
+
+            const result = await database.query(queryRows, values)
+
+            return result.rows
+        }, null, where, returning)
+
+        const countPromise = (async () => {
+            const { queryCount, values } = this.buildFindQuery(this.mapFieldsToSnakeCase(where), '*', undefined, undefined)
+            const result = await database.query(queryCount, values)
+            return parseInt(result.rows[0].count, 10)
+        })()
+
+        const [rows, count] = await Promise.all([rowsPromise, countPromise])
+
+        return { rows, count }
     }
 
     public async create(columns: Partial<T>, returning?: ReturningOptions<T>): Promise<T> {

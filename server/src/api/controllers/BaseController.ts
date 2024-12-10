@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
 import { StatusConstants } from '@/api/constants/StatusConstants.js'
+import { TypedRequest } from '@/api/types/types.ts'
 
 export abstract class BaseController {
-    protected abstract executeImplement(req: Request, res: Response, next: NextFunction): Promise<void | any>
+    protected abstract executeImplement(req: TypedRequest<any, any>, res: Response, next: NextFunction): Promise<void | any>
 
     public async execute(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {

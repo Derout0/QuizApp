@@ -4,6 +4,7 @@ import { TermsService } from '@/api/services/TermsService.ts'
 import { UserService } from '@/api/services/UserService.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 import { StatusConstants } from '@/api/constants/StatusConstants.ts'
+import { getPagination } from '@/api/utils/pagination.ts'
 
 export class ModuleService {
     private moduleRepository: ModuleRepository
@@ -39,12 +40,19 @@ export class ModuleService {
         return result
     }
 
-    async getUserModules(userId: number) {
+    async getUserModules(userId: number, page: number, size: number) {
         if (!userId) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
 
-        const modules = await this.moduleRepository.findAll({ userId: userId })
+        const { limit, offset } = getPagination(page, size)
+
+        const { rows: modules, count: modulesCount } = await this.moduleRepository.findAndCountAll({
+            where: { userId: userId },
+            limit,
+            offset,
+        })
+
         const user = await this.userService.getUserByUserId(userId)
 
         for (const module of modules) {
@@ -52,7 +60,7 @@ export class ModuleService {
             module.author = user?.username || ''
         }
 
-        return [...modules]
+        return { count: modulesCount, rows: modules }
     }
 
     async updateModule(userId: number, moduleId: number, updateData: RequestModuleModel) {
