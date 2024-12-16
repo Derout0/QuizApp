@@ -14,20 +14,20 @@ export class GetUserModulesController extends BaseController {
         this.service = new ModuleService()
     }
 
-    protected async executeImplement(req: TypedRequestQuery<{ page: string, size: string, search: string }>, res: Response, next: NextFunction) {
+    protected async executeImplement(req: TypedRequestQuery<{ page: string, limit: string, search: string }>, res: Response, next: NextFunction) {
         const { userId } = res.locals.user
-        const size = parseInt(req.query.size, 10) || 10
+        const limit = parseInt(req.query.limit, 10) || 10
         const page = parseInt(req.query.page, 10) || 0
         const search = req.query.search || ''
 
         try {
-            const data = await this.service.getUserModules(userId, page, size, search)
+            const data = await this.service.getUserModules(userId, page, limit, search)
 
             if (!data) {
                 return next(ApiError.NotFound(StatusConstants.NOT_FOUND_RESOURCE_MSG))
             }
 
-            const result = getPagingData(data, page, size)
+            const result = getPagingData(data, page, limit)
 
             return this.ok(res, result)
         }

@@ -9,6 +9,7 @@ export const getPagingData = (data: { count: number, rows: any[] }, page: number
     const { count, rows } = data
     const currentPage = page ? +page : 0
     const totalPages = Math.ceil(count / limit)
+    const hasMore = currentPage + 1 < totalPages
 
-    return { count, rows, totalPages, currentPage }
+    return { data: rows, count, limit, currentPage, totalPages, hasMore }
 }
