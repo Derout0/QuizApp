@@ -40,7 +40,7 @@ export class ModuleService {
         return result
     }
 
-    async getUserModules(userId: number, page: number, size: number) {
+    async getUserModules(userId: number, page: number, size: number, searchQuery: string) {
         if (!userId) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
@@ -51,6 +51,7 @@ export class ModuleService {
             where: { userId: userId },
             limit,
             offset,
+            search: { field: 'name', query: searchQuery },
         })
 
         const user = await this.userService.getUserByUserId(userId)

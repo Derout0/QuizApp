@@ -6,6 +6,10 @@ interface FindOptions<T> {
     returning?: ReturningOptions<T>
     limit?: number
     offset?: number
+    search?: {
+        field: keyof T
+        query: string
+    }
 }
 
 export type FieldMapping<T> = {
@@ -116,11 +120,27 @@ export class BaseRepository<T> {
         returning?: string,
         limit?: number,
         offset?: number,
+        search?: { field: keyof T, query: string },
     ): { whereClause: string, queryRows: string, queryCount: string, values: any[] } {
         const keys = Object.keys(where)
         const values = Object.values(where)
 
-        const whereClause = `WHERE ${keys.map((key, index) => `${key} = $${index + 1}`).join(' AND ')}`
+        const searchConditions: string[] = []
+
+        if (search) {
+            const searchField = search.field
+            const searchQuery = `%${search.query}%`
+
+            searchConditions.push(`${String(searchField)} ILIKE $${keys.length + searchConditions.length + 1}`)
+            values.push(searchQuery)
+        }
+
+        const conditions = [
+            ...keys.map((key, index) => `${key} = $${index + 1}`),
+            ...searchConditions, // Добавляем поиск
+        ]
+
+        const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : ''
         const limitClause = limit ? `LIMIT ${limit}` : ''
         const offsetClause = offset ? `OFFSET ${offset}` : ''
 
@@ -166,10 +186,10 @@ export class BaseRepository<T> {
     }
 
     public async findAll(options: FindOptions<T> = {}): Promise<T[]> {
-        const { where = {}, returning, limit, offset } = options
+        const { where = {}, returning, limit, offset, search } = options
 
         return this.executeMapping(async (_, mappedWhere, returningClause) => {
-            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset)
+            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset, search)
 
             const result = await database.query(queryRows, values)
 
@@ -178,10 +198,10 @@ export class BaseRepository<T> {
     }
 
     public async findAndCountAll(options: FindOptions<T> = {}): Promise<{ rows: T[], count: number }> {
-        const { where = {}, returning, limit, offset } = options
+        const { where = {}, returning, limit, offset, search } = options
 
         const rowsPromise = this.executeMapping(async (_, mappedWhere, returningClause) => {
-            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset)
+            const { queryRows, values } = this.buildFindQuery(mappedWhere, returningClause, limit, offset, search)
 
             const result = await database.query(queryRows, values)
 
