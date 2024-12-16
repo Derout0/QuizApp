@@ -1,7 +1,9 @@
 /client/build/
 /server/build/
 /server/public/
+/server/.env
 /reports
 /storybook-static
 node_modules
 .idea
+
