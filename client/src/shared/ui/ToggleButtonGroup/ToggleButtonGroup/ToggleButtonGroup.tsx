@@ -6,13 +6,13 @@ interface ToggleGroupContextBase<T extends string> {
     onChange: (value: T) => void
     register: (value: T, element: HTMLElement) => void
     deregister: (value: T) => void
-    getItems: () => ButtonItem[]
+    getItems: () => ButtonItem<T>[]
     setFocusedValue: (id: T) => void
     focusedValue: T | null
     onShiftTab: () => void
 }
 
-export const ToggleGroupContext = createContext<ToggleGroupContextBase<string>>({
+export const ToggleGroupContext = createContext<ToggleGroupContextBase<any>>({
     value: null,
     onChange: () => {},
     register: () => {},
@@ -31,7 +31,7 @@ type PropsWithLabel = {
     ['aria-label']: string
 }
 
-export type ButtonItem = { value: string, element: HTMLElement }
+export type ButtonItem<T extends string> = { value: T, element: HTMLElement }
 
 interface ToggleGroupRootBase<T extends string> {
     children: ReactNode | ReactNode[]
@@ -52,8 +52,8 @@ export const ToggleButtonGroup = <T extends string>(props: ToggleGroupRootProps<
     } = props
 
     const ref = useRef<HTMLDivElement>(null)
-    const elements = useRef<Map<string, HTMLElement>>(new Map())
-    const [focusedValue, setFocusedValue] = useState<string | null>(value)
+    const elements = useRef<Map<T, HTMLElement>>(new Map())
+    const [focusedValue, setFocusedValue] = useState<T | null>(value)
     const [isShiftTabbing, setIsShiftTabbing] = useState<boolean>(false)
 
     const getItems = useCallback(() => {
@@ -68,16 +68,16 @@ export const ToggleButtonGroup = <T extends string>(props: ToggleGroupRootProps<
 
     const providerValue = useMemo(() => ({
         value,
-        onChange: onChange as (value: string) => void,
+        onChange: onChange as (value: T) => void,
         getItems,
         focusedValue,
-        register: (value: string, element: HTMLElement) => {
+        register: (value: T, element: HTMLElement) => {
             elements.current.set(value, element)
         },
-        deregister: (value: string) => {
+        deregister: (value: T) => {
             elements.current.delete(value)
         },
-        setFocusedValue: (id: string) => {
+        setFocusedValue: (id: T) => {
             setFocusedValue(id)
         },
         onShiftTab: () => {

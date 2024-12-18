@@ -8,15 +8,15 @@ import { Ripple } from '@/shared/ui/Ripple/Ripple'
 import type { ButtonItem } from '../ToggleButtonGroup/ToggleButtonGroup'
 import { ToggleGroupContext } from '../ToggleButtonGroup/ToggleButtonGroup'
 
-interface ToggleButtonBase {
+interface ToggleButtonBase<T extends string> {
     className?: string
-    value: string
+    value: T
     children: ReactNode
 }
 
-type ToggleButtonProps<T = string> = ToggleButtonBase & Omit<ComponentPropsWithoutRef<'button'>, keyof ToggleButtonBase>
+type ToggleButtonProps<T extends string> = ToggleButtonBase<T> & Omit<ComponentPropsWithoutRef<'button'>, keyof ToggleButtonBase<T>>
 
-export const ToggleButton = (props: ToggleButtonProps) => {
+export const ToggleButton = <T extends string>(props: ToggleButtonProps<T>) => {
     const {
         className,
         value,
@@ -54,7 +54,7 @@ export const ToggleButton = (props: ToggleButtonProps) => {
         }
 
         const items = getItems()
-        let nextItem: ButtonItem | undefined
+        let nextItem: ButtonItem<T> | undefined
         const currIndex = items.findIndex(item => item.value === value)
 
         if (currIndex === -1) {
