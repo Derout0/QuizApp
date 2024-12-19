@@ -6,6 +6,7 @@ import type { UserSchema } from '@/entities/user'
 import type { ProfileSchema } from '@/entities/profile'
 import type { UpdateSettingsSchema } from '@/features/update-settings'
 import type { UpdateAvatarSchema } from '@/features/update-avatar'
+import type { ModulesSchema } from '@/pages/LibraryPage'
 
 export interface StateSchema {
     user: UserSchema
@@ -16,6 +17,7 @@ export interface StateSchema {
     registrationForm?: RegistrationSchema
     updateSettings?: UpdateSettingsSchema
     updateAvatar?: UpdateAvatarSchema
+    modules?: ModulesSchema
     checkPasswordForm?: CheckPasswordSchema
 }
 

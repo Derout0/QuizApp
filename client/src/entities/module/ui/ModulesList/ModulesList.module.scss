@@ -1,0 +1,12 @@
+.ModulesList {
+  position: relative;
+  display: grid;
+}
+
+.single {
+  grid-template-columns: 1fr;
+}
+
+.compact {
+  grid-template-columns: repeat(2, 1fr);
+}

@@ -13,10 +13,10 @@ export const AppRoutes = {
 
 // For use in the App
 export const AppPaths = {
-    MAIN: AppRoutes.MAIN,
+    MAIN: `${AppRoutes.MAIN}`,
     PROFILE: (id: string | number) => `/${AppRoutes.PROFILE}/${id}`,
-    SETTINGS: AppRoutes.SETTINGS,
-    LIBRARY: AppRoutes.LIBRARY.ROOT,
+    SETTINGS: `/${AppRoutes.SETTINGS}`,
+    LIBRARY: `/${AppRoutes.LIBRARY.ROOT}`,
     LIBRARY_MODULE: (id: string | number) => `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.MODULES}/${id}`,
     LIBRARY_MODULES: `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.MODULES}`,
     LIBRARY_FOLDER: (id: string | number) => `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.FOLDERS}/${id}`,

@@ -13,7 +13,7 @@ export const SidebarNavigationItems: SidebarItemType[] = [
     },
     {
         name: 'Библиотека',
-        path: AppPaths.LIBRARY,
+        path: AppPaths.LIBRARY_MODULES,
         Icon: FolderIcon,
     },
     {

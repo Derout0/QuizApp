@@ -2,7 +2,7 @@ import { MainPage } from '@/pages/MainPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { SettingsPage } from '@/pages/SettingsPage'
-import { LibraryPage } from '@/pages/LibraryPage'
+import { LibraryPage, ModulesPage } from '@/pages/LibraryPage'
 
 import { AppRoutes } from '@/shared/consts/router'
 import type { AppRouteObject } from '@/shared/types/router'
@@ -36,7 +36,7 @@ export const routes: AppRouteObject[] = [
                 children: [
                     {
                         path: AppRoutes.LIBRARY.MODULES,
-                        element: (<div>Модули</div>),
+                        element: <ModulesPage />,
                     },
                     {
                         path: AppRoutes.LIBRARY.FOLDERS,
