@@ -1,4 +1,5 @@
 import * as cls from './ModulesList.module.scss'
+import { memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { VStack } from '@/shared/ui/Stack'
 import { ModuleDisplay } from '../../model/consts/module'
@@ -22,7 +23,7 @@ const ModuleItems = ({ modules, display }: { modules: ModuleEntity[], display: M
     return modules.map(render)
 }
 
-export const ModulesList = (props: ModuleListProps) => {
+export const ModulesList = memo((props: ModuleListProps) => {
     const {
         className,
         modules,
@@ -35,4 +36,4 @@ export const ModulesList = (props: ModuleListProps) => {
             <ModuleItems modules={modules} display={display} />
         </VStack>
     )
-}
+})

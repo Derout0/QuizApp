@@ -1,4 +1,4 @@
 export enum ModuleDisplay {
-    SINGLE = 'single',
-    COMPACT = 'compact',
+    SINGLE = 'SINGLE',
+    COMPACT = 'COMPACT',
 }

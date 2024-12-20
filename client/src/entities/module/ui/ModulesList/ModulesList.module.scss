@@ -3,10 +3,10 @@
   display: grid;
 }
 
-.single {
+.SINGLE {
   grid-template-columns: 1fr;
 }
 
-.compact {
+.COMPACT {
   grid-template-columns: repeat(2, 1fr);
 }

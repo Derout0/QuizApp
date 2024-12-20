@@ -9,8 +9,9 @@ export interface FetchModulesByUserResponse {
     hasMore: boolean
 }
 
+// TODO: Remove?
 export interface FetchModulesByUserParams {
-    page?: number
+    page: number
     limit?: number
     search?: string
 }

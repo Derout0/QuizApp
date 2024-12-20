@@ -1,4 +1,5 @@
 import * as cls from './ModuleItem.module.scss'
+import { memo } from 'react'
 import { classNames } from '@/shared/lib/classNames/classNames'
 import { HStack, VStack } from '@/shared/ui/Stack'
 import { Text } from '@/shared/ui/Text/Text'
@@ -12,7 +13,7 @@ interface ModuleItemProps {
     display: ModuleDisplay
 }
 
-export const ModuleItem = (props: ModuleItemProps) => {
+export const ModuleItem = memo((props: ModuleItemProps) => {
     const {
         className,
         module,
@@ -42,4 +43,4 @@ export const ModuleItem = (props: ModuleItemProps) => {
             </VStack>
         </Ripple>
     )
-}
+})
