@@ -152,12 +152,12 @@
   --border-input-label-color: var(--on-surface-color-variant);
   --border-input-border-color: var(--outline-color-variant);
 
-  // Input - focus
+  // _focus
   --filled-input-label-color-focus: var(--primary-color);
   --filled-input-border-color-focus: var(--primary-color);
   --border-input-border-color-focus: var(--primary-color);
 
-  // Input - hover
+  // _hover
   --filled-input-background-color-hovered: #D6D0D9;
 
   // Tabs
@@ -165,7 +165,11 @@
   --primary-tabs-text-color: var(--on-surface-color-variant);
   --primary-tabs-border-color: var(--surface-container-color-highest);
 
-  // Tabs - hover
+  // _hover
   --primary-tabs-background-color-hovered: var(--surface-container-color);
   --primary-tabs-text-color-selected: var(--primary-color);
+
+  // Skeleton
+  --primary-skeleton-color: #f1f1f1;
+  --on-primary-skeleton-color: #e1e1e1;
 }

@@ -1,4 +1,5 @@
 export type Mods = Record<string, boolean | string | undefined>
+export type Additional = Array<any | undefined>
 
 /**
  * Генерирует строку классов на основе основного класса, модификаторов и дополнительных классов.

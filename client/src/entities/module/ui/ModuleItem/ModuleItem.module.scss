@@ -1,4 +1,5 @@
 .ModuleItem {
+  cursor: pointer;
   position: relative;
   padding: var(--base-size-20);
   border-radius: var(--border-radius-s);
@@ -33,4 +34,10 @@
 .author {
   border-left: 2px solid var(--outline-color-variant);
   padding-left: var(--base-size-12);
+}
+
+.skeleton {
+  &::after {
+    display: none;
+  }
 }

@@ -5,12 +5,22 @@ import { VStack } from '@/shared/ui/Stack'
 import { ModuleDisplay } from '../../model/consts/module'
 import type { ModuleEntity } from '../../model/types/module'
 import { ModuleItem } from '../ModuleItem/ModuleItem'
+import { LoaderHandler } from '@/shared/lib/components/LoaderHandler/LoaderHandler'
+import { ModuleItemSkeleton } from '@/entities/module/ui/ModuleItem/ModuleItemSkeleton'
 
 interface ModuleListProps {
     className?: string
     modules: ModuleEntity[]
-    isLoading: boolean
     display: ModuleDisplay
+    isLoading: boolean
+}
+
+const ModuleSkeletonItems = ({ display }: { display: ModuleDisplay }) => {
+    return new Array(display === ModuleDisplay.SINGLE ? 3 : 6).fill(0).map((_, index) => {
+        return (
+            <ModuleItemSkeleton key={index} />
+        )
+    })
 }
 
 const ModuleItems = ({ modules, display }: { modules: ModuleEntity[], display: ModuleDisplay }) => {
@@ -33,7 +43,13 @@ export const ModulesList = memo((props: ModuleListProps) => {
 
     return (
         <VStack gap="12" className={classNames(cls.ModulesList, {}, [className, cls[display]])}>
-            <ModuleItems modules={modules} display={display} />
+            <LoaderHandler
+                loaderComponent={<ModuleSkeletonItems display={display} />}
+                isLoading={isLoading}
+                preserveContent={true}
+            >
+                <ModuleItems modules={modules} display={display} />
+            </LoaderHandler>
         </VStack>
     )
 })

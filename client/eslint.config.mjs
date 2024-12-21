@@ -21,7 +21,8 @@ export default [
       'react/display-name': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
-      '@stylistic/brace-style': 'off'
+      '@stylistic/brace-style': 'off',
+      '@stylistic/jsx-one-expression-per-line': 'off'
     },
   },
   {

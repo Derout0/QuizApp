@@ -1,4 +1,5 @@
 import type { StateSchema } from '@/app/providers/store-provider'
 
-export const getModuleError = (state: StateSchema) => state.modules?.error || undefined
-export const getModuleIsLoading = (state: StateSchema) => state.modules?.isLoading || false
+export const getModuleDetailsData = (state: StateSchema) => state.moduleDetails?.data
+export const getModuleDetailsError = (state: StateSchema) => state.moduleDetails?.error ?? undefined
+export const getModuleDetailsIsLoading = (state: StateSchema) => state.moduleDetails?.isLoading ?? false

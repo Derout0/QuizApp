@@ -1,5 +1,3 @@
-import type { EntityState } from '@reduxjs/toolkit'
-
 export interface TermEntity {
     termId: string | number
     term: string
@@ -19,7 +17,8 @@ export interface ModuleEntity {
     updatedAt: Date
 }
 
-export interface ModuleSchema extends EntityState<ModuleEntity, string | number> {
+export interface ModuleDetailsSchema {
+    data?: ModuleEntity
     isLoading: boolean
     error?: string
 }

@@ -11,14 +11,16 @@ import { useAppDispatch, useEffectOnce, useInfiniteScroll } from '@/shared/lib/h
 import { classNames } from '@/shared/lib/classNames/classNames'
 import type { ReducersList } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
 import { AsyncReducerLoader } from '@/shared/lib/components/AsyncReducerLoader/AsyncReducerLoader'
+import { LoaderHandler } from '@/shared/lib/components/LoaderHandler/LoaderHandler'
 
 import { fetchModulesByUser } from '../../model/services/fetchModulesByUser/fetchModulesByUser'
 import { fetchNextModulesPage } from '../../model/services/fetchNextModulesPage/fetchNextModulesPage'
 import { getModulesSelector, modulesActions, modulesReducer } from '../../model/slices/modulesSlice'
 import {
-    getModulesPageDisplay,
+    getModulesPageDisplay, getModulesPageError,
     getModulesPageIsLoading, getModulesPagePaginationHasMore,
 } from '../../model/selectors/modulesPageSelectors'
+import { Outlet } from 'react-router-dom'
 
 interface ModulesPageProps {
     className?: string
@@ -38,7 +40,7 @@ const ModulesPage = (props: ModulesPageProps) => {
     const modules = useSelector(getModulesSelector.selectAll)
     const isLoading = useSelector(getModulesPageIsLoading)
     const hasMore = useSelector(getModulesPagePaginationHasMore)
-    const error = useSelector(getModulesPageIsLoading)
+    const error = useSelector(getModulesPageError)
 
     const onChangeDisplay = useCallback((display: ModuleDisplay) => {
         dispatch(modulesActions.setDisplay(display))
@@ -57,7 +59,7 @@ const ModulesPage = (props: ModulesPageProps) => {
         if (hasMore && !isLoading && document.body.scrollHeight <= document.body.clientHeight) {
             onLoadNextModules()
         }
-    }, [dispatch, isLoading, hasMore, onLoadNextModules])
+    }, [dispatch, isLoading, hasMore, onLoadNextModules, display])
 
     useInfiniteScroll(window, onLoadNextModules, { distance: 10 })
 
@@ -65,8 +67,11 @@ const ModulesPage = (props: ModulesPageProps) => {
         <AsyncReducerLoader reducers={reducers} removeAfterUnmount={false}>
             <div className={classNames(cls.ModulesPage, {}, [className])}>
                 <ModuleDisplaySelector selected={display} onChange={onChangeDisplay} />
-                <ModulesList display={display} modules={modules} isLoading={isLoading} />
+                <LoaderHandler error={error}>
+                    <ModulesList display={display} modules={modules} isLoading={isLoading} />
+                </LoaderHandler>
             </div>
+            <Outlet />
         </AsyncReducerLoader>
     )
 }

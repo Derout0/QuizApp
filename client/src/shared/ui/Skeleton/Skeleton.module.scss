@@ -1,0 +1,170 @@
+.Skeleton {
+  display: block;
+  width: 100%;
+  background-color: var(--primary-skeleton-color);
+  border-radius: var(--border-radius-m);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "\00a0";
+    display: none;
+  }
+}
+
+// Animations
+
+.pulse {
+  animation: skeleton 1.2s ease-in-out forwards infinite;
+  animation-direction: alternate;
+}
+
+// Colors
+
+.primary {
+  background-color: var(--primary-skeleton-color);
+}
+
+.on-primary {
+  background-color: var(--on-primary-skeleton-color);
+}
+
+// Themes
+
+.theme-circular {
+  border-radius: var(--border-radius-full);
+}
+
+.theme-rectangular {
+  border-radius: 0;
+}
+
+.theme-display-l {
+  font-size: var(--font-size-display-large);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-display-m {
+  font-size: var(--font-size-display-medium);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-display-s {
+  font-size: var(--font-size-display-small);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-headline-l {
+  font-size: var(--font-size-headline-large);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-headline-m {
+  font-size: var(--font-size-headline-medium);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-headline-s {
+  font-size: var(--font-size-headline-small);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-title-l {
+  font-size: var(--font-size-title-large);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-title-m {
+  font-size: var(--font-size-title-medium);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-title-s {
+  font-size: var(--font-size-title-small);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-label-l {
+  font-size: var(--font-size-label-large);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-label-m {
+  font-size: var(--font-size-label-medium);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-label-s {
+  font-size: var(--font-size-label-small);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-body-l {
+  font-size: var(--font-size-body-large);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-body-m {
+  font-size: var(--font-size-body-medium);
+
+  &::before {
+    display: block
+  };
+}
+
+.theme-body-s {
+  font-size: var(--font-size-body-small);
+
+  &::before {
+    display: block
+  };
+}
+
+@keyframes skeleton {
+  0%  {
+    transform: translateY(2px) scale(0.99)
+  }
+
+  100% {
+    transform: translateY(0) scale(1)
+  }
+}

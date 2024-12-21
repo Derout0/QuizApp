@@ -8,6 +8,7 @@ export const AppRoutes = {
         MODULES: 'modules',
         FOLDERS: 'folders',
     },
+    MODULE_DETAIL: 'library/modules/:id',
     NOT_FOUND: '*',
 }
 
@@ -17,8 +18,8 @@ export const AppPaths = {
     PROFILE: (id: string | number) => `/${AppRoutes.PROFILE}/${id}`,
     SETTINGS: `/${AppRoutes.SETTINGS}`,
     LIBRARY: `/${AppRoutes.LIBRARY.ROOT}`,
-    LIBRARY_MODULE: (id: string | number) => `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.MODULES}/${id}`,
     LIBRARY_MODULES: `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.MODULES}`,
+    LIBRARY_MODULE_DETAILS: (id: string | number) => `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.MODULES}/${id}`,
     LIBRARY_FOLDER: (id: string | number) => `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.FOLDERS}/${id}`,
     LIBRARY_FOLDERS: `/${AppRoutes.LIBRARY.ROOT}/${AppRoutes.LIBRARY.FOLDERS}`,
 }

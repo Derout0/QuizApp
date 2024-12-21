@@ -1,14 +1,14 @@
+import Root from '@/Root'
 import { MainPage } from '@/pages/MainPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { ProfilePage } from '@/pages/ProfilePage'
 import { SettingsPage } from '@/pages/SettingsPage'
 import { LibraryPage, ModulesPage } from '@/pages/LibraryPage'
+import { ModuleDetailsPage } from '@/pages/ModuleDetailsPage'
 
 import { AppRoutes } from '@/shared/consts/router'
 import type { AppRouteObject } from '@/shared/types/router'
-import Root from '@/Root'
 
-// TODO: Rewrite Readme
 export const routes: AppRouteObject[] = [
     {
         path: AppRoutes.MAIN,
@@ -43,6 +43,10 @@ export const routes: AppRouteObject[] = [
                         element: (<div>Папки</div>),
                     },
                 ],
+            },
+            {
+                path: AppRoutes.MODULE_DETAIL,
+                element: <ModuleDetailsPage />,
             },
         ],
     },
