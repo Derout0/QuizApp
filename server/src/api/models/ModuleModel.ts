@@ -1,8 +1,8 @@
 import { RequestTermModel, TermModel } from '@/api/models/TermModel.ts'
 
 export interface BaseModuleModel {
-    userId: number
-    folderId: number
+    userId: string | number
+    folderId: string | number
     name: string
     description?: string
     isPublic: boolean
@@ -13,7 +13,7 @@ export interface RequestModuleModel extends BaseModuleModel {
 }
 
 export interface ModuleModel extends BaseModuleModel {
-    moduleId: number
+    moduleId: string | number
     author: string
     terms: TermModel[]
     createdAt: Date

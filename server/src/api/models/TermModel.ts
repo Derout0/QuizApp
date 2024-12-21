@@ -4,6 +4,6 @@ export interface RequestTermModel {
 }
 
 export interface TermModel extends RequestTermModel {
-    termId: number
-    moduleId: number
+    termId: string | number
+    moduleId: string | number
 }

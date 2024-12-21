@@ -40,6 +40,24 @@ export class ModuleService {
         return result
     }
 
+    async getUserModule(userId: number | string, moduleId: number | string) {
+        if (!moduleId) {
+            throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
+        }
+
+        const user = await this.userService.getUserByUserId(userId)
+        const module = await this.moduleRepository.findBy({ moduleId: moduleId })
+
+        if (!module) {
+            throw ApiError.NotFound(StatusConstants.DATA_NOT_FOUND_MSG)
+        }
+
+        module.terms = await this.termsService.getTermsByModuleId(module.moduleId)
+        module.author = user?.username || ''
+
+        return module
+    }
+
     async getUserModules(userId: number, page: number, size: number, searchQuery: string) {
         if (!userId) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)

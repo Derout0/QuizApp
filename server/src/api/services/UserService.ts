@@ -53,7 +53,7 @@ export class UserService {
         return await this.repository.update(data, { userId }, { exclude: ['password'] })
     }
 
-    async getUserByUserId(id: number) {
+    async getUserByUserId(id: string | number) {
         if (!id) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
