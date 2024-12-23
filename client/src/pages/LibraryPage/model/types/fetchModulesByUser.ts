@@ -8,10 +8,3 @@ export interface FetchModulesByUserResponse {
     totalPages: number
     hasMore: boolean
 }
-
-// TODO: Remove?
-export interface FetchModulesByUserParams {
-    page: number
-    limit?: number
-    search?: string
-}

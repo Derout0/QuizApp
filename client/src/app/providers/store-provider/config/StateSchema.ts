@@ -9,7 +9,7 @@ import type { UpdateAvatarSchema } from '@/features/update-avatar'
 import type { LoginSchema, RegistrationSchema } from '@/features/auth-user'
 import type { CheckPasswordSchema } from '@/features/check-password'
 
-import type { ModulesSchema } from '@/pages/LibraryPage'
+import type { ModulesPageSchema } from '@/pages/LibraryPage'
 
 export interface StateSchema {
     user: UserSchema
@@ -20,7 +20,7 @@ export interface StateSchema {
     registrationForm?: RegistrationSchema
     updateSettings?: UpdateSettingsSchema
     updateAvatar?: UpdateAvatarSchema
-    modules?: ModulesSchema
+    modulesPage?: ModulesPageSchema
     moduleDetails?: ModuleDetailsSchema
     checkPasswordForm?: CheckPasswordSchema
 }

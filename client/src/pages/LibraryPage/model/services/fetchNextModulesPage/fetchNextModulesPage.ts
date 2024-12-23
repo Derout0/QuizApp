@@ -5,11 +5,11 @@ import {
     getModulesPagePaginationHasMore,
     getModulesPagePaginationPage,
 } from '../../selectors/modulesPageSelectors'
-import { modulesActions } from '@/pages/LibraryPage'
-import { fetchModulesByUser } from '@/pages/LibraryPage/model/services/fetchModulesByUser/fetchModulesByUser'
+import { modulesPageActions } from '../../slices/modulesPageSlice'
+import { fetchModulesByUser } from '../../services/fetchModulesByUser/fetchModulesByUser'
 
 export const fetchNextModulesPage = createAsyncThunk<void, void, ThunkConfig<string>>(
-    'module/fetchNextModulesPage',
+    'modulesPage/fetchNextModulesPage',
     async (data, thunkAPI) => {
         const { getState, dispatch } = thunkAPI
 
@@ -19,8 +19,8 @@ export const fetchNextModulesPage = createAsyncThunk<void, void, ThunkConfig<str
 
         if (hasMore && !isLoading) {
             const newPage = page + 1
-            dispatch(modulesActions.setPage(newPage))
-            dispatch(fetchModulesByUser({ page: newPage }))
+            dispatch(modulesPageActions.setPage(newPage))
+            dispatch(fetchModulesByUser())
         }
     },
 )
