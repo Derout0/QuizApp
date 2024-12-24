@@ -1,5 +1,6 @@
 @import 'fonts/fonts';
 @import 'reset';
+@import 'lib/slick';
 @import 'mixins/mixins';
 @import 'variables/global';
 @import 'variables/typography';
@@ -28,6 +29,7 @@ body {
 
 .AppMain {
   flex: 1 1 auto;
+  min-width: 0;
 }
 
 .Page {

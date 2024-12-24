@@ -1,4 +1,4 @@
-export { ModuleEntity } from './model/types/module'
+export { ModuleEntity, TermEntity } from './model/types/module'
 export { ModuleDisplay } from './model/consts/module'
 export { getModuleDetailsError, getModuleDetailsIsLoading, getModuleDetailsData } from './model/selectors/getModuleSelectors'
 export { moduleDetailsActions, moduleDetailsReducer } from './model/slice/moduleDetailsSlice'

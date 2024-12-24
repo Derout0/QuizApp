@@ -14,7 +14,7 @@ import { Input } from '@/shared/ui/Input'
 import { HStack } from '@/shared/ui/Stack'
 
 import { getModulesPageDisplay, getModulesPageSearch } from '../../../model/selectors/modulesPageSelectors'
-import { fetchModulesByUser } from '@/pages/LibraryPage/model/services/fetchModulesByUser/fetchModulesByUser'
+import { fetchModulesByUser } from '../../../model/services/fetchModulesByUser/fetchModulesByUser'
 
 interface ModulesPageFiltersProps {
     className?: string

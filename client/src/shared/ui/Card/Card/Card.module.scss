@@ -1,0 +1,18 @@
+.Card {
+  border-radius: var(--border-radius-m);
+
+  // Themes
+  &.filled {
+    background-color: var(--surface-container-color-highest);
+  }
+
+  &.outlined {
+    background-color: var(--surface-color);
+    border: var(--base-border-variant);
+  }
+
+  &.elevated {
+    background-color: var(--surface-container-color-low);
+    box-shadow: var(--base-shadow-1);
+  }
+}
