@@ -185,7 +185,9 @@ export class BaseRepository<T> {
         }, null, where, returning)
     }
 
-    public async findAll(options: FindOptions<T> = {}): Promise<T[]> {
+    public async findAll(
+        options: FindOptions<T> = {},
+    ): Promise<T[]> {
         const { where = {}, returning, limit, offset, search } = options
 
         return this.executeMapping(async (_, mappedWhere, returningClause) => {
@@ -197,7 +199,9 @@ export class BaseRepository<T> {
         }, null, where, returning)
     }
 
-    public async findAndCountAll(options: FindOptions<T> = {}): Promise<{ rows: T[], count: number }> {
+    public async findAndCountAll(
+        options: FindOptions<T> = {},
+    ): Promise<{ rows: T[], count: number }> {
         const { where = {}, returning, limit, offset, search } = options
 
         const rowsPromise = this.executeMapping(async (_, mappedWhere, returningClause) => {
@@ -219,7 +223,10 @@ export class BaseRepository<T> {
         return { rows, count }
     }
 
-    public async create(columns: Partial<T>, returning?: ReturningOptions<T>): Promise<T> {
+    public async create(
+        columns: Partial<T>,
+        returning?: ReturningOptions<T>,
+    ): Promise<T> {
         return this.executeMapping(async (mappedColumns, _, returningClause) => {
             const keys = Object.keys(mappedColumns)
             const values = Object.values(mappedColumns)
@@ -236,7 +243,46 @@ export class BaseRepository<T> {
         }, columns, null, returning)
     }
 
-    public async update(updates: Partial<T>, where: Partial<T>, returning?: ReturningOptions<T>): Promise<T> {
+    public async upsert(
+        columns: Partial<T>,
+        conflictKeys: Array<keyof T>,
+        updatesOnConflict: Partial<T>,
+        returning?: ReturningOptions<T>,
+    ) {
+        return this.executeMapping(async (mappedColumns, _, returningClause) => {
+            const columnsKeys = Object.keys(mappedColumns)
+            const columnsPlaceholders = columnsKeys.map((_, index) => `$${index + 1}`)
+            const conflictColumns = conflictKeys
+                .map(key => this.fieldMapping[key] || camelToSnakeCase(key as string))
+                .join(', ')
+            const updateClause = Object.entries(this.mapFieldsToSnakeCase(updatesOnConflict))
+                .map(([key, value], index) => {
+                    const placeholder = `$${columnsKeys.length + index + 1}`
+                    return `${key} = ${typeof value === 'string' && value.includes('(') ? value : placeholder}`
+                })
+                .join(', ')
+
+            const query = `
+                INSERT INTO ${this.tableName} (${columnsKeys.join(', ')})
+                VALUES (${columnsPlaceholders.join(', ')})
+                ON CONFLICT (${conflictColumns})
+                DO UPDATE SET ${updateClause}
+                RETURNING ${returningClause}
+            `
+
+            const queryParams = [...Object.values(mappedColumns), ...Object.values(updatesOnConflict)]
+
+            const result = await database.query(query, queryParams)
+
+            return result.rows[0]
+        }, columns, null, returning)
+    }
+
+    public async update(
+        updates: Partial<T>,
+        where: Partial<T>,
+        returning?: ReturningOptions<T>,
+    ): Promise<T> {
         return this.executeMapping(async (mappedUpdates, mappedWhere, returningClause) => {
             const updateKeys = Object.keys(mappedUpdates)
             const updateValues = Object.values(mappedUpdates)
@@ -260,7 +306,10 @@ export class BaseRepository<T> {
         }, updates, where, returning)
     }
 
-    public async delete(where: Partial<T>, returning?: ReturningOptions<T>): Promise<void> {
+    public async delete(
+        where: Partial<T>,
+        returning?: ReturningOptions<T>,
+    ): Promise<void> {
         return this.executeMapping(async (_, mappedWhere, returningClause) => {
             const whereKeys = Object.keys(mappedWhere)
             const whereValues = Object.values(mappedWhere)

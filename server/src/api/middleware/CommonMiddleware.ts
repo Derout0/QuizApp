@@ -29,8 +29,7 @@ export class CommonMiddleware {
     }
 
     public async usePublicFiles() {
-        this.app.use('/static', express.static(path.join(__projectRoot, 'public/static')),
-        )
+        this.app.use('/static', express.static(path.join(__projectRoot, 'public/static')))
         this.app.use('/uploads', express.static(path.join(__projectRoot, 'public/uploads')))
     }
 }

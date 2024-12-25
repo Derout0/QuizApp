@@ -5,11 +5,11 @@ export interface TypedRequestBody<T> extends Request {
     body: T
 }
 
-export interface TypedRequestQuery<T extends Query> extends Express.Request {
+export interface TypedRequestQuery<T extends Query> extends Request {
     query: T
 }
 
-export interface TypedRequest<T extends Query, U> extends Express.Request {
-    body: U
-    query: T
+export interface TypedRequest<T, U extends Query> extends Request {
+    body: T
+    query: U
 }

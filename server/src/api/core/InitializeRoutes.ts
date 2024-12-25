@@ -1,6 +1,14 @@
 import { Express } from 'express'
 import { BaseRoute } from '@/api/routes/BaseRoute.ts'
-import { AuthRoutes, FileRoutes, FoldersRoutes, ModulesRoutes, ProfileRoutes, UserRoutes } from '@/api/routes'
+import {
+    AuthRoutes,
+    FileRoutes,
+    FoldersRoutes,
+    ModulesRoutes,
+    ProfileRoutes,
+    UserRoutes,
+    GameProgressRoutes,
+} from '@/api/routes'
 
 export class InitializeRoutes {
     public static async Initialize(app: Express) {
@@ -19,6 +27,7 @@ export class InitializeRoutes {
             ...FileRoutes,
             ...FoldersRoutes,
             ...ModulesRoutes,
+            ...GameProgressRoutes,
         )
 
         return Promise.resolve(routes)

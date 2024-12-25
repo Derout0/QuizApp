@@ -5,6 +5,7 @@ import { UserService } from '@/api/services/UserService.ts'
 import { ApiError } from '@/api/utils/ApiError.ts'
 import { StatusConstants } from '@/api/constants/StatusConstants.ts'
 import { getPagination } from '@/api/utils/pagination.ts'
+import { ID } from '@/api/constants/base.ts'
 
 export class ModuleService {
     private moduleRepository: ModuleRepository
@@ -40,7 +41,7 @@ export class ModuleService {
         return result
     }
 
-    async getUserModule(userId: number | string, moduleId: number | string) {
+    async getUserModule(userId: ID, moduleId: ID) {
         if (!moduleId) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
@@ -58,7 +59,7 @@ export class ModuleService {
         return module
     }
 
-    async getUserModules(userId: number, page: number, size: number, searchQuery: string) {
+    async getUserModules(userId: ID, page: number, size: number, searchQuery: string) {
         if (!userId) {
             throw ApiError.BadRequest(StatusConstants.ID_NOT_FOUND_MSG)
         }
@@ -82,7 +83,7 @@ export class ModuleService {
         return { count: modulesCount, rows: modules }
     }
 
-    async updateModule(userId: number, moduleId: number, updateData: RequestModuleModel) {
+    async updateModule(userId: ID, moduleId: ID, updateData: RequestModuleModel) {
         const existingModule = await this.moduleRepository.findBy({ userId, moduleId })
         const { terms, ...updateModuleData } = updateData
 
@@ -100,7 +101,7 @@ export class ModuleService {
         return updatedModule
     }
 
-    async deleteModule(userId: number, moduleId: number) {
+    async deleteModule(userId: ID, moduleId: ID) {
         const existingModule = await this.moduleRepository.findBy({ userId: userId, moduleId: moduleId })
 
         if (!existingModule) {
